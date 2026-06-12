@@ -153,8 +153,7 @@
         transform: none !important;
         animation: none !important;
         opacity: 1 !important;
-        -webkit-mask-image: none !important;
-        mask-image: none !important;
+        filter: grayscale(0.15) contrast(1.05) !important;
       }
 
       .hero-bg::after {
@@ -436,29 +435,20 @@
       height: 100%;
       object-fit: cover;
       object-position: center 20%;
-      filter: grayscale(0.15) contrast(1.05);
       transform-origin: 50% 30%;
       will-change: transform, opacity;
       animation: hero-ken-burns 32s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+      /* Fade cinematografico: l'immagine emerge da una foschia luminosa,
+         come una stampa in camera oscura. Nessuna direzione, puro fade. */
       opacity: 0;
-      /* Painter's wipe: pennellata diagonale morbida che rivela l'immagine */
-      -webkit-mask-image: linear-gradient(115deg, #000 42%, transparent 58%);
-      mask-image: linear-gradient(115deg, #000 42%, transparent 58%);
-      -webkit-mask-size: 300% 100%;
-      mask-size: 300% 100%;
-      -webkit-mask-position: 100% 0;
-      mask-position: 100% 0;
-      -webkit-mask-repeat: no-repeat;
-      mask-repeat: no-repeat;
-      transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-        -webkit-mask-position 1.7s cubic-bezier(0.22, 1, 0.36, 1),
-        mask-position 1.7s cubic-bezier(0.22, 1, 0.36, 1);
+      filter: grayscale(0.15) contrast(1.05) blur(14px) brightness(1.06);
+      transition: opacity 2.2s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 2.6s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     body.hero-ready .hero-bg img {
       opacity: 1;
-      -webkit-mask-position: 0% 0;
-      mask-position: 0% 0;
+      filter: grayscale(0.15) contrast(1.05) blur(0) brightness(1);
     }
 
     @keyframes hero-ken-burns {
@@ -480,7 +470,7 @@
           oklch(8% 0 0 / 0.25) 45%,
           transparent 70%);
       opacity: 0;
-      transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.9s;
+      transition: opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
     }
 
     body.hero-ready .hero-bg::after {
@@ -516,11 +506,11 @@
         clip-path 1.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    /* Il testo segue la pennellata: la punta attraversa la zona testo nella prima metà del wipe */
+    /* Il testo arriva mentre l'immagine si schiarisce ancora */
     body.hero-ready .hero-overline {
       opacity: 1;
       transform: none;
-      transition-delay: 0.55s;
+      transition-delay: 0.25s;
     }
 
     body.hero-ready .hero-title {
@@ -528,25 +518,25 @@
       transform: none;
       filter: blur(0);
       clip-path: inset(0 0 0 0);
-      transition-delay: 0.7s;
+      transition-delay: 0.4s;
     }
 
     body.hero-ready .hero-subtitle {
       opacity: 1;
       transform: none;
-      transition-delay: 1.15s;
+      transition-delay: 0.85s;
     }
 
     body.hero-ready .hero-cta {
       opacity: 1;
       transform: none;
-      transition-delay: 1.35s;
+      transition-delay: 1.05s;
     }
 
     body.hero-ready .hero-scroll {
       opacity: 1;
       transform: none;
-      transition-delay: 1.5s;
+      transition-delay: 1.2s;
     }
 
     .hero-overline {
