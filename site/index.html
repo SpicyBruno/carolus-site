@@ -56,9 +56,10 @@
       --ink: oklch(96% 0.004 75);
       --ink2: oklch(90% 0.006 75);
       --ink3: oklch(76% 0.008 75);
-      --terra: oklch(82% 0.04 240);
-      --terra-lt: oklch(91% 0.025 240);
-      --ambra: oklch(82% 0.04 240);
+      /* Accento 10%: terracotta bruciata, coerente con i neutri caldi (60/30) */
+      --terra: oklch(72% 0.11 55);
+      --terra-lt: oklch(80% 0.08 58);
+      --ambra: oklch(72% 0.11 55);
       --white: oklch(100% 0 0);
       --line: oklch(28% 0.005 60);
       --shadow-strong: 0 10px 30px oklch(0% 0 0 / 0.35);
@@ -79,20 +80,21 @@
       --ink: oklch(25% 0.014 55);
       --ink2: oklch(36% 0.012 55);
       --ink3: oklch(47% 0.012 55);
-      --terra: oklch(42% 0.07 245);
-      --terra-lt: oklch(58% 0.05 245);
-      --ambra: oklch(42% 0.07 245);
+      --terra: oklch(48% 0.11 50);
+      --terra-lt: oklch(58% 0.09 52);
+      --ambra: oklch(48% 0.11 50);
       --line: oklch(85% 0.01 72);
       --nav-hero: oklch(98% 0.004 75);
-      --nav-solid: oklch(24% 0.03 245);
+      --nav-solid: oklch(24% 0.02 55);
     }
 
     /* L'hero resta un contesto fotografico scuro in entrambi i temi */
     [data-theme="light"] .hero {
+      --ink: oklch(96% 0.004 75);
       --ink2: oklch(90% 0.006 75);
       --ink3: oklch(76% 0.008 75);
-      --terra: oklch(82% 0.04 240);
-      --ambra: oklch(82% 0.04 240);
+      --terra: oklch(80% 0.09 58);
+      --ambra: oklch(80% 0.09 58);
     }
 
     /* Transizione morbida solo durante il cambio tema manuale */
@@ -555,7 +557,7 @@
       font-weight: 300;
       line-height: 0.9;
       letter-spacing: -0.02em;
-      color: var(--terra);
+      color: var(--ink);
       margin-bottom: 28px;
     }
 
@@ -695,7 +697,7 @@
       font-weight: 300;
       line-height: 1.1;
       letter-spacing: -0.01em;
-      color: var(--terra);
+      color: var(--ink);
       margin-bottom: 16px;
     }
 
@@ -1108,7 +1110,7 @@
       font-family: var(--f-display);
       font-size: 2.5rem;
       font-weight: 300;
-      color: var(--ambra);
+      color: var(--ink);
       line-height: 1;
     }
 
