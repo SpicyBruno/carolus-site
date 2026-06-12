@@ -1728,101 +1728,11 @@
       }
     }
 
-    /* Preloader FX (React): barra + tende */
     .preloader-static {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 28px;
-    }
-
-    #preloader.fx .preloader-static {
-      display: none;
-    }
-
-    #preloader.fx {
-      background: transparent;
-      pointer-events: none;
-    }
-
-    #preloader-react {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 18px;
-      z-index: 2;
-    }
-
-    .preloader-curtains {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      z-index: 1;
-    }
-
-    .curtain-panel {
-      flex: 1;
-      background: var(--bg);
-      will-change: transform;
-    }
-
-    /* Evita la cucitura subpixel tra i pannelli */
-    .curtain-panel + .curtain-panel {
-      margin-left: -1px;
-    }
-
-    .preloader-fx-mark.logo-dark {
-      display: none;
-    }
-
-    [data-theme="light"] .preloader-fx-mark.logo-white {
-      display: none;
-    }
-
-    [data-theme="light"] .preloader-fx-mark.logo-dark {
-      display: block;
-    }
-
-    .preloader-progress-wrap {
-      width: min(260px, 58vw);
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      align-items: stretch;
-    }
-
-    .preloader-progress-track {
-      height: 2px;
-      background: oklch(35% 0.005 60);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .preloader-progress-fill {
-      position: absolute;
-      inset: 0;
-      background: var(--terra);
-      transform: scaleX(0);
-      transform-origin: left;
-      will-change: transform;
-    }
-
-    .preloader-tagline {
-      font-family: var(--f-body);
-      font-size: 0.72rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--ink);
-      opacity: 0.55;
-    }
-
-    .preloader-fx-mark {
-      width: clamp(120px, 18vw, 180px);
-      height: auto;
-      display: block;
     }
 
     .gi,
@@ -2027,7 +1937,6 @@
       <img class="preloader-mark logo-dark" src="assets/logo-dark.png" alt="" />
       <div class="preloader-bar"></div>
     </div>
-    <div id="preloader-react"></div>
   </div>
 
   <!-- NAV -->
@@ -2468,7 +2377,6 @@
   <!-- LIGHTBOX -->
   <!-- TWEAKS -->
   <div id="tweaks-root"></div>
-  <div id="fx-root" hidden></div>
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
     <button class="lightbox-close" id="lb-close" aria-label="Chiudi">&#x2715;</button>
@@ -2481,13 +2389,12 @@
 
   <script>
     // ─── PRELOADER ───
-    // Fallback se il modulo React/CDN non parte: sblocca comunque la pagina
+    // Al load la pagina dissolve il preloader e avvia la cascata hero
     window.addEventListener('load', () => {
       setTimeout(() => {
-        if (window.__carolusFX) return;
         document.getElementById('preloader')?.classList.add('hidden');
         document.body.classList.add('hero-ready');
-      }, 2500);
+      }, 400);
     });
 
     // ─── TEMA CHIARO / SCURO (React + Framer Motion) ───
@@ -2881,128 +2788,6 @@
     if (mount) createRoot(mount).render(React.createElement(ThemeToggle));
   </script>
 
-  <!-- ─── PREMIUM FX: preloader con barra + tende e reveal gallerie (React + Framer Motion) ─── -->
-  <script type="module">
-    import React, { useState, useEffect } from 'react';
-    import { createRoot } from 'react-dom/client';
-    import { createPortal } from 'react-dom';
-    import { motion, useReducedMotion } from 'framer-motion';
-
-    const h = React.createElement;
-
-    // Il watchdog vanilla cede il controllo al modulo React
-    window.__carolusFX = true;
-
-    const EASE_CURTAIN = [0.76, 0, 0.24, 1];
-
-    function PreloaderFX() {
-      const reduce = useReducedMotion();
-      const [pct, setPct] = useState(0);
-      const [phase, setPhase] = useState('load'); // load -> reveal -> done
-      const pre = document.getElementById('preloader');
-      const portalTarget = document.getElementById('preloader-react');
-
-      useEffect(() => {
-        if (!pre) return;
-        if (reduce) {
-          pre.classList.add('hidden');
-          pre.style.display = 'none';
-          document.body.classList.add('hero-ready');
-          setPhase('done');
-          return;
-        }
-        pre.classList.add('fx');
-      }, []);
-
-      // Barra: sale verso 90 simulato, chiude quando la pagina ha caricato
-      useEffect(() => {
-        if (reduce || phase !== 'load') return;
-        let raf;
-        let loaded = document.readyState === 'complete';
-        const onLoad = () => { loaded = true; };
-        window.addEventListener('load', onLoad, { once: true });
-        const start = performance.now();
-        let value = 0;
-        const tick = (now) => {
-          const t = (now - start) / 1400;
-          const target = loaded ? 100 : Math.min(90, t * 90);
-          value += (target - value) * (loaded ? 0.18 : 0.12);
-          if (loaded && value > 99.2) value = 100;
-          setPct(Math.round(value));
-          if (value >= 100) {
-            setTimeout(() => setPhase('reveal'), 350);
-            return;
-          }
-          raf = requestAnimationFrame(tick);
-        };
-        raf = requestAnimationFrame(tick);
-        return () => {
-          cancelAnimationFrame(raf);
-          window.removeEventListener('load', onLoad);
-        };
-      }, [phase, reduce]);
-
-      // La cascata hero parte mentre le tende si alzano
-      useEffect(() => {
-        if (phase !== 'reveal') return;
-        const t = setTimeout(() => document.body.classList.add('hero-ready'), 450);
-        return () => clearTimeout(t);
-      }, [phase]);
-
-      if (reduce || phase === 'done' || !pre || !portalTarget) return null;
-
-      const hiding = phase === 'reveal';
-
-      const panels = [0, 1, 2, 3].map(i =>
-        h(motion.div, {
-          key: i,
-          className: 'curtain-panel',
-          initial: { y: 0 },
-          animate: hiding ? { y: '-101%' } : { y: 0 },
-          transition: { duration: 0.9, ease: EASE_CURTAIN, delay: hiding ? 0.35 + 0.08 * i : 0 },
-          onAnimationComplete: () => {
-            if (hiding && i === 3) {
-              pre.classList.add('hidden');
-              pre.style.display = 'none';
-              setPhase('done');
-            }
-          },
-        })
-      );
-
-      const content = h(React.Fragment, null,
-        h('div', { className: 'preloader-curtains' }, panels),
-        h(motion.div, {
-          style: { position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18 },
-          initial: { opacity: 1 },
-          animate: hiding ? { opacity: 0, y: -14 } : { opacity: 1, y: 0 },
-          transition: { duration: 0.35, ease: 'easeOut' },
-        },
-          h('img', { className: 'preloader-fx-mark logo-white', src: 'assets/logo-white.png', alt: '' }),
-          h('img', { className: 'preloader-fx-mark logo-dark', src: 'assets/logo-dark.png', alt: '' }),
-          h('div', { className: 'preloader-progress-wrap' },
-            h('div', { className: 'preloader-progress-track' },
-              h(motion.div, {
-                className: 'preloader-progress-fill',
-                animate: { scaleX: pct / 100 },
-                transition: { duration: 0.22, ease: 'easeOut' },
-              })
-            )
-          ),
-          h('div', { className: 'preloader-tagline' }, 'Caricamento')
-        )
-      );
-
-      return createPortal(content, portalTarget);
-    }
-
-    function App() {
-      return h(React.Fragment, null, h(PreloaderFX));
-    }
-
-    const fxRoot = document.getElementById('fx-root');
-    if (fxRoot) createRoot(fxRoot).render(h(App));
-  </script>
 
   <script>
     // Tweaks panel: caricato solo in modalità sviluppo (?dev=1)
