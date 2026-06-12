@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+
+# Local verification artifacts
+.playwright-mcp/
+**/.playwright-mcp/
+
+# Local editor files
+.vscode/
+.idea/
+
+# Raw source archive, not served by the public website
+FOTO-SITO NONNO/

@@ -1,0 +1,3167 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>Carolus · Carlo Chiavegato · Pittore e Fotografo (1923–2015)</title>
+  <meta name="description"
+    content="Archivio dell'opera di Carlo Chiavegato, in arte Carolus (Padova, 1923–2015). Pittura, fotografia e opere su carta: un viaggio nel cuore del Novecento italiano." />
+  <meta name="author" content="Carlo Chiavegato" />
+  <meta name="theme-color" content="#1f1c18" />
+  <link rel="icon" type="image/png" href="assets/logo-dark.png" />
+
+  <script>
+    // Imposta il tema prima del primo paint per evitare il flash
+    (function () {
+      try {
+        var stored = localStorage.getItem('carolus-theme');
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Carolus · Carlo Chiavegato (1923–2015)" />
+  <meta property="og:description"
+    content="Pittura, fotografia e opere su carta. Un viaggio intimo nel cuore del Novecento italiano." />
+  <meta property="og:image" content="assets/dsc-9.jpg" />
+  <meta property="og:locale" content="it_IT" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Josefin+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: oklch(18% 0.008 60);
+      --bg2: oklch(13% 0.006 60);
+      --ink: oklch(96% 0.004 75);
+      --ink2: oklch(90% 0.006 75);
+      --ink3: oklch(76% 0.008 75);
+      --terra: oklch(82% 0.04 240);
+      --terra-lt: oklch(91% 0.025 240);
+      --ambra: oklch(82% 0.04 240);
+      --white: oklch(100% 0 0);
+      --line: oklch(28% 0.005 60);
+      --shadow-strong: 0 10px 30px oklch(0% 0 0 / 0.35);
+      --shadow-soft: 0 2px 12px oklch(0% 0 0 / 0.18);
+      --overlay-dark: oklch(0% 0 0 / 0.55);
+      --overlay-soft: oklch(0% 0 0 / 0.25);
+      --nav-hero: oklch(98% 0.004 75);
+      --nav-solid: oklch(94% 0.008 75);
+      --f-display: 'Cormorant Garamond', Georgia, serif;
+      --f-body: 'Josefin Sans', system-ui, sans-serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ─── TEMA CHIARO (carta avorio) ─── */
+    :root[data-theme="light"] {
+      --bg: oklch(96.5% 0.008 75);
+      --bg2: oklch(92.5% 0.009 72);
+      --ink: oklch(25% 0.014 55);
+      --ink2: oklch(36% 0.012 55);
+      --ink3: oklch(47% 0.012 55);
+      --terra: oklch(42% 0.07 245);
+      --terra-lt: oklch(58% 0.05 245);
+      --ambra: oklch(42% 0.07 245);
+      --line: oklch(85% 0.01 72);
+      --nav-hero: oklch(98% 0.004 75);
+      --nav-solid: oklch(24% 0.03 245);
+    }
+
+    /* L'hero resta un contesto fotografico scuro in entrambi i temi */
+    [data-theme="light"] .hero {
+      --ink2: oklch(90% 0.006 75);
+      --ink3: oklch(76% 0.008 75);
+      --terra: oklch(82% 0.04 240);
+      --ambra: oklch(82% 0.04 240);
+    }
+
+    /* Transizione morbida solo durante il cambio tema manuale */
+    html.theme-anim,
+    html.theme-anim body,
+    html.theme-anim nav,
+    html.theme-anim section,
+    html.theme-anim footer {
+      transition: background-color 0.4s var(--ease), color 0.4s var(--ease),
+        border-color 0.4s var(--ease);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--f-body);
+      font-size: 17px;
+      line-height: 1.75;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* A11y: focus ring visibile su tutti gli interattivi */
+    :focus {
+      outline: none;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--terra);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .gi:focus-visible,
+    .photo-item:focus-visible {
+      outline-offset: -2px;
+    }
+
+    /* A11y: rispetta prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .hero-bg img {
+        transform: none !important;
+        animation: none !important;
+        opacity: 1 !important;
+      }
+
+      .hero-overline,
+      .hero-title,
+      .hero-subtitle,
+      .hero-cta,
+      .hero-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        clip-path: none !important;
+      }
+
+      [data-anim],
+      .gi,
+      .photo-item {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+      }
+
+      .preloader-mark {
+        animation: none !important;
+        opacity: 1 !important;
+      }
+
+      .preloader-bar::after {
+        animation: none !important;
+        transform: scaleX(0.6) !important;
+      }
+
+      .hero-scroll::after {
+        animation: none !important;
+        opacity: 0.6 !important;
+        transform: scaleY(1) !important;
+      }
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 56px;
+      height: 72px;
+      transition: background 0.4s var(--ease), box-shadow 0.4s var(--ease);
+    }
+
+    /* Scrim keeps the transparent nav legible over the hero image */
+    nav::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(to bottom, oklch(8% 0 0 / 0.55), oklch(8% 0 0 / 0));
+      pointer-events: none;
+      transition: opacity 0.4s var(--ease);
+    }
+
+    nav.scrolled::before {
+      opacity: 0;
+    }
+
+    nav.scrolled {
+      background: var(--bg);
+      box-shadow: 0 1px 0 oklch(30% 0.01 70);
+    }
+
+    .nav-logo {
+      display: block;
+      text-decoration: none;
+      height: 36px;
+      position: relative;
+      width: 120px;
+    }
+
+    .nav-logo img {
+      height: 100%;
+      width: auto;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: opacity 0.35s;
+    }
+
+    .nav-logo .logo-dark {
+      opacity: 0;
+    }
+
+    .nav-logo .logo-white {
+      opacity: 1;
+    }
+
+    nav.scrolled .nav-logo .logo-dark {
+      opacity: 0;
+    }
+
+    nav.scrolled .nav-logo .logo-white {
+      opacity: 1;
+    }
+
+    /* Tema chiaro: logo scuro quando la nav ha sfondo, bianco sull'hero */
+    [data-theme="light"] nav.scrolled .nav-logo .logo-white,
+    [data-theme="light"] body.nav-open .nav-logo .logo-white {
+      opacity: 0;
+    }
+
+    [data-theme="light"] nav.scrolled .nav-logo .logo-dark,
+    [data-theme="light"] body.nav-open .nav-logo .logo-dark {
+      opacity: 1;
+    }
+
+    [data-theme="light"] nav.scrolled {
+      box-shadow: 0 1px 0 oklch(86% 0.01 72);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--nav-hero);
+      text-decoration: none;
+      transition: color 0.2s;
+      text-shadow: 0 1px 2px oklch(0% 0 0 / 0.5), 0 2px 10px oklch(0% 0 0 / 0.35);
+    }
+
+    nav.scrolled .nav-links a {
+      color: var(--nav-solid);
+      text-shadow: none;
+    }
+
+    :root[data-theme="light"] nav.scrolled .nav-links a {
+      color: var(--nav-solid);
+      text-shadow: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--terra) !important;
+    }
+
+    /* Hamburger toggle (visible only on mobile) */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      width: 44px;
+      height: 44px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      z-index: 60;
+      position: relative;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--nav-hero);
+      transition: transform 0.35s var(--ease), opacity 0.25s var(--ease), background 0.25s;
+      transform-origin: center;
+    }
+
+    nav.scrolled .nav-toggle span,
+    body.nav-open .nav-toggle span {
+      background: var(--nav-solid);
+    }
+
+    body.nav-open .nav-toggle span:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+
+    body.nav-open .nav-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    body.nav-open .nav-toggle span:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
+
+    /* Gruppo controlli a destra nella nav */
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    /* Pulsante cambio tema chiaro/scuro */
+    .theme-toggle {
+      position: relative;
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--nav-hero);
+      transition: color 0.2s;
+      filter: drop-shadow(0 1px 3px oklch(0% 0 0 / 0.5));
+    }
+
+    nav.scrolled .theme-toggle,
+    body.nav-open .theme-toggle {
+      color: var(--nav-solid);
+      filter: none;
+    }
+
+    .theme-toggle:hover {
+      color: var(--terra);
+    }
+
+    .theme-toggle:focus-visible {
+      outline: 2px solid var(--terra);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .theme-toggle svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
+
+    .theme-toggle .icon-wrap {
+      position: relative;
+      width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+    }
+
+    .theme-toggle .icon-wrap > svg {
+      grid-area: 1 / 1;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100svh;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      filter: grayscale(0.15) contrast(1.05);
+      transform-origin: 50% 30%;
+      will-change: transform, opacity;
+      animation: hero-ken-burns 32s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+      opacity: 0;
+      transition: opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    body.hero-ready .hero-bg img {
+      opacity: 1;
+    }
+
+    @keyframes hero-ken-burns {
+      0% {
+        transform: scale(1.08) translate3d(-0.6%, -0.4%, 0);
+      }
+
+      100% {
+        transform: scale(1.02) translate3d(0.6%, 0.4%, 0);
+      }
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top,
+          oklch(8% 0 0 / 0.75) 0%,
+          oklch(8% 0 0 / 0.25) 45%,
+          transparent 70%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 72px 80px;
+      max-width: 760px;
+    }
+
+    /* Hero entrance — orchestrated reveal after preloader */
+    .hero-overline,
+    .hero-subtitle,
+    .hero-cta,
+    .hero-scroll {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-title {
+      opacity: 0;
+      transform: translateY(28px);
+      filter: blur(6px);
+      clip-path: inset(0 100% 0 0);
+      transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+        filter 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+        clip-path 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    body.hero-ready .hero-overline {
+      opacity: 1;
+      transform: none;
+      transition-delay: 0.05s;
+    }
+
+    body.hero-ready .hero-title {
+      opacity: 1;
+      transform: none;
+      filter: blur(0);
+      clip-path: inset(0 0 0 0);
+      transition-delay: 0.18s;
+    }
+
+    body.hero-ready .hero-subtitle {
+      opacity: 1;
+      transform: none;
+      transition-delay: 0.62s;
+    }
+
+    body.hero-ready .hero-cta {
+      opacity: 1;
+      transform: none;
+      transition-delay: 0.82s;
+    }
+
+    body.hero-ready .hero-scroll {
+      opacity: 1;
+      transform: none;
+      transition-delay: 1s;
+    }
+
+    .hero-overline {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ambra);
+      margin-bottom: 20px;
+      text-shadow: 0 1px 2px oklch(0% 0 0 / 0.7), 0 2px 12px oklch(0% 0 0 / 0.55);
+    }
+
+    .hero-title {
+      font-family: var(--f-display);
+      font-size: clamp(4rem, 9vw, 8rem);
+      font-weight: 300;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      color: var(--terra);
+      margin-bottom: 28px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--terra);
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: var(--ink2);
+      line-height: 1.75;
+      max-width: 400px;
+      margin-bottom: 44px;
+      text-shadow: 0 1px 6px oklch(0% 0 0 / 0.5);
+    }
+
+    .hero-cta {
+      display: inline-block;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink2);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink2);
+      padding-bottom: 3px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .hero-cta:hover {
+      color: var(--terra);
+      border-color: var(--terra);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      right: 56px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink3);
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+
+    .hero-scroll {
+      animation: scroll-bob 4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    }
+
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 56px;
+      background: var(--ink3);
+      animation: scrollLine 2.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    }
+
+    @keyframes scroll-bob {
+
+      0%,
+      100% {
+        translate: 0 0;
+      }
+
+      50% {
+        translate: 0 5px;
+      }
+    }
+
+    @keyframes scrollLine {
+      0% {
+        transform: scaleY(0);
+        transform-origin: top;
+        opacity: 0;
+      }
+
+      35% {
+        transform: scaleY(1);
+        transform-origin: top;
+        opacity: 1;
+      }
+
+      55% {
+        transform: scaleY(1);
+        transform-origin: bottom;
+        opacity: 1;
+      }
+
+      90%,
+      100% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+        opacity: 0;
+      }
+    }
+
+    /* ─── SECTION COMMON ─── */
+    section {
+      padding: 120px 56px;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 56px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--terra);
+    }
+
+    .section-title {
+      font-family: var(--f-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--terra);
+      margin-bottom: 16px;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--terra);
+    }
+
+    .section-desc {
+      font-size: 0.95rem;
+      color: var(--ink3);
+      line-height: 1.8;
+      max-width: 520px;
+      margin-bottom: 64px;
+    }
+
+    .pittura-tabs {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 48px;
+      border-bottom: 1px solid var(--line);
+      flex-wrap: wrap;
+    }
+
+    .pittura-tab {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0 0 16px;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+
+    .pittura-tab.active {
+      color: var(--terra);
+      border-bottom-color: var(--terra);
+    }
+
+    .pittura-tab:hover {
+      color: var(--ink);
+    }
+
+    .pittura-panel {
+      display: none;
+    }
+
+    .pittura-panel.active {
+      display: block;
+    }
+
+    /* ─── PITTURA ─── */
+
+    /* Painting grid — uguale alla photo-grid, ma con opere intere centrate */
+    .painting-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+
+    .painting-grid .gi {
+      aspect-ratio: 3/4;
+      background: var(--bg2);
+    }
+
+    .painting-grid .gi img {
+      object-fit: contain;
+      object-position: center center;
+      padding: 14px;
+      filter: none;
+    }
+
+    .painting-grid .gi:hover img {
+      filter: none;
+    }
+
+    /* Gallery item shared */
+    .gi {
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      background: var(--bg2);
+    }
+
+    .gi img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: sepia(0.04);
+      transition: scale 0.6s var(--ease), filter 0.4s;
+    }
+
+    .gi:hover img {
+      scale: 1.04;
+      filter: sepia(0);
+    }
+
+    .gi::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: oklch(14% 0 0 / 0);
+      transition: background 0.35s;
+    }
+
+    .gi:hover::after {
+      background: oklch(14% 0 0 / 0.15);
+    }
+
+    .gi-label {
+      position: absolute;
+      bottom: 16px;
+      left: 20px;
+      z-index: 2;
+      font-family: var(--f-display);
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--white);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.3s, transform 0.3s;
+      text-shadow: 0 1px 4px oklch(0% 0 0 / 0.5);
+    }
+
+    .gi:hover .gi-label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── SCROLL ANIMATIONS ─── */
+    [data-anim] {
+      opacity: 0;
+      transition: opacity var(--anim-dur, 1.2s) var(--anim-ease, cubic-bezier(0.16, 1, 0.3, 1)),
+        transform var(--anim-dur, 1.2s) var(--anim-ease, cubic-bezier(0.16, 1, 0.3, 1));
+    }
+
+    [data-anim="fade"] {
+      transform: translateY(20px);
+    }
+
+    [data-anim="slide-left"] {
+      transform: translateX(-48px);
+    }
+
+    [data-anim="slide-right"] {
+      transform: translateX(48px);
+    }
+
+    [data-anim="scale"] {
+      transform: scale(0.93);
+    }
+
+    [data-anim="flip"] {
+      transform: perspective(600px) rotateX(12deg) translateY(20px);
+    }
+
+    [data-anim].anim-done {
+      opacity: 1;
+      transform: none;
+    }
+
+    [data-anim-delay="1"] {
+      transition-delay: 0.15s;
+    }
+
+    [data-anim-delay="2"] {
+      transition-delay: 0.30s;
+    }
+
+    [data-anim-delay="3"] {
+      transition-delay: 0.45s;
+    }
+
+    [data-anim-delay="4"] {
+      transition-delay: 0.60s;
+    }
+
+    [data-anim-delay="5"] {
+      transition-delay: 0.75s;
+    }
+
+    body.anim-off [data-anim] {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+
+    /* ─── FOTOGRAFIA ─── */
+    #fotografia {
+      background: var(--bg);
+    }
+
+    .photo-tabs {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 48px;
+      border-bottom: 1px solid oklch(25% 0 0);
+      padding-bottom: 0;
+    }
+
+    .photo-tab {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0 0 16px;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .photo-tab.active {
+      color: var(--terra);
+      border-bottom-color: var(--terra);
+    }
+
+    .photo-tab:hover {
+      color: var(--ink);
+    }
+
+    .photo-panel {
+      display: none;
+    }
+
+    .photo-panel.active {
+      display: block;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+
+    .photo-item {
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      aspect-ratio: 3/4;
+    }
+
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(1) contrast(1.06);
+      transition: scale 0.6s var(--ease), filter 0.4s;
+    }
+
+    .photo-item:hover img {
+      scale: 1.03;
+      filter: grayscale(0.7) contrast(1.1);
+    }
+
+    .photo-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 48px 20px 18px;
+      background: linear-gradient(to top, oklch(5% 0 0 / 0.75), transparent);
+      font-family: var(--f-display);
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--white);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .photo-item:hover .photo-caption {
+      opacity: 1;
+    }
+
+    /* Touch devices have no hover: keep captions permanently visible */
+    @media (hover: none) {
+
+      .gi-label,
+      .photo-caption {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* ─── BIOGRAFIA ─── */
+    #biografia {
+      background: var(--bg2);
+    }
+
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .bio-portrait {
+      position: sticky;
+      top: 112px;
+    }
+
+    .bio-portrait img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+      filter: sepia(0.15) contrast(1.02);
+    }
+
+    .bio-portrait-caption {
+      margin-top: 12px;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink3);
+    }
+
+    .bio-content {
+      padding-top: 8px;
+    }
+
+    .bio-content p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--ink2);
+      margin-bottom: 28px;
+      text-wrap: pretty;
+    }
+
+    .bio-content p:first-of-type {
+      font-family: var(--f-display);
+      font-size: 1.45rem;
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    .bio-years {
+      display: flex;
+      gap: 48px;
+      margin-top: 56px;
+      padding-top: 40px;
+      border-top: 1px solid var(--line);
+    }
+
+    .bio-year-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .bio-year-num {
+      font-family: var(--f-display);
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--ambra);
+      line-height: 1;
+    }
+
+    .bio-year-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink3);
+    }
+
+    /* ─── VOCI DELLA CRITICA ─── */
+    #critica {
+      background: var(--bg);
+    }
+
+    .critica-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px 80px;
+      max-width: 1080px;
+    }
+
+    .critica-quote {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      border-left: 1px solid var(--line);
+      padding-left: 28px;
+    }
+
+    .critica-quote blockquote {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 1.35rem;
+      line-height: 1.5;
+      color: var(--ink);
+      font-weight: 300;
+      text-wrap: pretty;
+    }
+
+    .critica-quote blockquote::before {
+      content: '«';
+      color: var(--ambra);
+      margin-right: 4px;
+    }
+
+    .critica-quote blockquote::after {
+      content: '»';
+      color: var(--ambra);
+      margin-left: 4px;
+    }
+
+    .critica-attr {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ambra);
+    }
+
+    .critica-source {
+      font-size: 0.85rem;
+      color: var(--ink3);
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .critica-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    /* ─── CONTATTI ─── */
+    #contatti {
+      background: var(--bg);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-info {
+      padding-top: 8px;
+    }
+
+    .contact-info p {
+      font-size: 0.95rem;
+      color: var(--ink3);
+      line-height: 1.8;
+      margin-bottom: 40px;
+      max-width: 380px;
+    }
+
+    .contact-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 20px;
+    }
+
+    .contact-detail-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--terra);
+    }
+
+    .contact-detail-value {
+      font-size: 0.95rem;
+      color: var(--ink2);
+    }
+
+    /* Form */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 28px;
+    }
+
+    .form-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 10px;
+    }
+
+    .form-field.required .form-label::after {
+      content: ' *';
+      color: var(--terra);
+    }
+
+    .form-input,
+    .form-textarea {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--line);
+      padding: 14px 0;
+      min-height: 46px;
+      font-family: var(--f-body);
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .form-input:focus-visible,
+    .form-textarea:focus-visible {
+      outline: none;
+      border-bottom-color: var(--terra);
+      box-shadow: 0 1px 0 0 var(--terra);
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: var(--ink3);
+      opacity: 0.7;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      border-bottom-color: var(--terra);
+    }
+
+    .form-input.error,
+    .form-textarea.error,
+    .form-input:not(:placeholder-shown):invalid,
+    .form-textarea:not(:placeholder-shown):invalid {
+      border-bottom-color: oklch(52% 0.1 25);
+    }
+
+    .form-textarea {
+      resize: none;
+      min-height: 110px;
+      line-height: 1.7;
+    }
+
+    .form-error {
+      font-size: 0.78rem;
+      color: oklch(48% 0.1 25);
+      margin-top: 6px;
+      display: none;
+    }
+
+    .form-error.visible {
+      display: block;
+    }
+
+    .btn-submit {
+      align-self: flex-start;
+      margin-top: 12px;
+      background: var(--ink);
+      color: var(--bg);
+      border: none;
+      padding: 16px 40px;
+      font-family: var(--f-body);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.15s;
+    }
+
+    .btn-submit:hover {
+      background: var(--terra);
+    }
+
+    .btn-submit:active {
+      transform: scale(0.98);
+    }
+
+    .form-success {
+      display: none;
+      font-family: var(--f-display);
+      font-size: 1.4rem;
+      font-style: italic;
+      color: var(--terra);
+      padding: 32px 0;
+    }
+
+    .form-success.visible {
+      display: block;
+    }
+
+    .form-reset {
+      display: inline-block;
+      margin-top: 22px;
+      background: none;
+      border: none;
+      border-bottom: 1px solid var(--terra);
+      padding: 0 0 3px;
+      font-family: var(--f-body);
+      font-size: 0.8rem;
+      font-style: normal;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--terra);
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .form-reset:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--bg2);
+      color: var(--ink3);
+      border-top: 1px solid var(--line);
+      padding: 48px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      display: inline-block;
+      line-height: 0;
+      transition: opacity 0.25s var(--ease);
+    }
+
+    .footer-logo img {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+
+    .footer-logo .logo-dark {
+      display: none;
+    }
+
+    [data-theme="light"] .footer-logo .logo-white {
+      display: none;
+    }
+
+    [data-theme="light"] .footer-logo .logo-dark {
+      display: block;
+    }
+
+    .footer-logo:hover {
+      opacity: 0.7;
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-nav a {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-nav a:hover {
+      color: var(--terra);
+    }
+
+    .footer-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .footer-email {
+      font-size: 0.85rem;
+      color: var(--ink2);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    .footer-email:hover {
+      color: var(--terra);
+    }
+
+    .footer-note {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: var(--ink3);
+    }
+
+    @media (max-width: 1024px) {
+      .footer-meta {
+        align-items: center;
+        text-align: center;
+      }
+    }
+
+    /* ─── LIGHTBOX ─── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: oklch(5% 0 0 / 0.94);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s;
+    }
+
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox img {
+      max-width: 88vw;
+      max-height: 90vh;
+      object-fit: contain;
+      box-shadow: 0 32px 80px oklch(0% 0 0 / 0.5);
+      transform: scale(0.96);
+      opacity: 0;
+      transition: transform 0.35s var(--ease), opacity 0.3s var(--ease);
+    }
+
+    .lightbox.open img.loaded {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    /* While the full image loads, show a quiet spinner */
+    .lightbox::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 38px;
+      height: 38px;
+      margin: -19px 0 0 -19px;
+      border: 2px solid oklch(70% 0 0 / 0.25);
+      border-top-color: var(--terra);
+      border-radius: 50%;
+      opacity: 0;
+      animation: lb-spin 0.8s linear infinite;
+    }
+
+    .lightbox.open:not(.lb-ready)::after {
+      opacity: 1;
+    }
+
+    @keyframes lb-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .lightbox::after {
+        animation: none !important;
+      }
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 32px;
+      right: 40px;
+      background: none;
+      border: none;
+      color: oklch(70% 0 0);
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .lightbox-close:hover {
+      color: var(--white);
+    }
+
+    .lightbox-close:focus-visible {
+      outline: 2px solid var(--terra);
+      outline-offset: 4px;
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 1rem;
+      color: oklch(60% 0 0);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: oklch(15% 0 0 / 0.55);
+      border: 1px solid oklch(100% 0 0 / 0.12);
+      color: oklch(80% 0 0);
+      font-size: 2.2rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: color 0.2s, background 0.25s;
+    }
+
+    .lb-prev {
+      left: 32px;
+    }
+
+    .lb-next {
+      right: 32px;
+    }
+
+    .lightbox-nav:hover {
+      color: var(--white);
+      background: oklch(22% 0 0 / 0.8);
+    }
+
+    .lightbox-nav:focus-visible {
+      outline: 2px solid var(--terra);
+      outline-offset: 3px;
+    }
+
+    .lightbox-count {
+      position: absolute;
+      top: 36px;
+      left: 40px;
+      font-family: var(--f-body);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      color: oklch(60% 0 0);
+    }
+
+    @media (max-width: 640px) {
+      .lightbox-nav {
+        width: 44px;
+        height: 44px;
+        font-size: 1.7rem;
+      }
+
+      .lb-prev {
+        left: 12px;
+      }
+
+      .lb-next {
+        right: 12px;
+      }
+
+      .lightbox-count {
+        top: 28px;
+        left: 20px;
+      }
+    }
+
+    /* ─── PRELOADER ─── */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 150;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      transition: opacity 0.6s var(--ease), visibility 0.6s var(--ease);
+    }
+
+    #preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .preloader-mark {
+      width: clamp(140px, 22vw, 220px);
+      height: auto;
+      display: block;
+      animation: preloader-pulse 1.4s var(--ease) infinite;
+    }
+
+    .preloader-mark.logo-dark {
+      display: none;
+    }
+
+    [data-theme="light"] .preloader-mark.logo-white {
+      display: none;
+    }
+
+    [data-theme="light"] .preloader-mark.logo-dark {
+      display: block;
+    }
+
+    .preloader-bar {
+      width: 160px;
+      height: 1px;
+      background: oklch(35% 0.005 60);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .preloader-bar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--terra);
+      transform-origin: left;
+      animation: preloader-fill 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes preloader-pulse {
+
+      0%,
+      100% {
+        opacity: 0.55;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes preloader-fill {
+      0% {
+        transform: scaleX(0);
+      }
+
+      50% {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+
+      51% {
+        transform: scaleX(1);
+        transform-origin: right;
+      }
+
+      100% {
+        transform: scaleX(0);
+        transform-origin: right;
+      }
+    }
+
+    /* Preloader FX (React): barra + tende */
+    .preloader-static {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    #preloader.fx .preloader-static {
+      display: none;
+    }
+
+    #preloader.fx {
+      background: transparent;
+      pointer-events: none;
+    }
+
+    #preloader-react {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      z-index: 2;
+    }
+
+    .preloader-curtains {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      z-index: 1;
+    }
+
+    .curtain-panel {
+      flex: 1;
+      background: var(--bg);
+      will-change: transform;
+    }
+
+    /* Evita la cucitura subpixel tra i pannelli */
+    .curtain-panel + .curtain-panel {
+      margin-left: -1px;
+    }
+
+    .preloader-fx-mark.logo-dark {
+      display: none;
+    }
+
+    [data-theme="light"] .preloader-fx-mark.logo-white {
+      display: none;
+    }
+
+    [data-theme="light"] .preloader-fx-mark.logo-dark {
+      display: block;
+    }
+
+    .preloader-progress-wrap {
+      width: min(260px, 58vw);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .preloader-progress-track {
+      height: 2px;
+      background: oklch(35% 0.005 60);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .preloader-progress-fill {
+      position: absolute;
+      inset: 0;
+      background: var(--terra);
+      transform: scaleX(0);
+      transform-origin: left;
+      will-change: transform;
+    }
+
+    .preloader-tagline {
+      font-family: var(--f-body);
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ink);
+      opacity: 0.55;
+    }
+
+    .preloader-fx-mark {
+      width: clamp(120px, 18vw, 180px);
+      height: auto;
+      display: block;
+    }
+
+    .gi,
+    .photo-item {
+      opacity: 0;
+      transform: translate3d(0, 16px, 0) scale(0.985);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .gi.in-view,
+    .photo-item.in-view {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+      will-change: auto;
+    }
+
+    body.anim-off .gi,
+    body.anim-off .photo-item {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+      will-change: auto !important;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      nav {
+        padding: 0 32px;
+      }
+
+      section {
+        padding: 80px 32px;
+      }
+
+      .hero-content {
+        padding: 0 32px 72px;
+      }
+
+      .hero-scroll {
+        display: none;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .gallery-item:nth-child(1) {
+        grid-column: span 2;
+        min-height: 360px;
+      }
+
+      .gallery-item:not(:nth-child(1)) {
+        aspect-ratio: 1;
+      }
+
+      .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .painting-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .bio-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .bio-portrait {
+        position: static;
+        max-width: 480px;
+      }
+
+      .bio-portrait img {
+        aspect-ratio: 4/5;
+        object-position: center 15%;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        inset: 0;
+        background: var(--bg);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 36px;
+        padding: 0;
+        margin: 0;
+        transform: translateX(100%);
+        transition: transform 0.45s var(--ease);
+        z-index: 50;
+      }
+
+      body.nav-open .nav-links {
+        transform: translateX(0);
+      }
+
+      .nav-links a {
+        font-size: 1.05rem;
+        font-family: var(--f-body);
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--nav-solid) !important;
+        text-shadow: none;
+      }
+
+      body.nav-open {
+        overflow: hidden;
+      }
+    }
+
+    @media (max-width: 640px) {
+      nav {
+        padding: 0 20px;
+      }
+
+      section {
+        padding: 64px 20px;
+      }
+
+      .hero-content {
+        padding: 0 20px 60px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-item:nth-child(1) {
+        grid-column: auto;
+      }
+
+      .gallery-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+      }
+
+      .photo-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .painting-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .painting-grid .gi img {
+        padding: 8px;
+      }
+
+      .photo-tabs {
+        gap: 20px;
+      }
+
+      .pittura-tabs {
+        gap: 18px;
+      }
+
+      .bio-portrait img {
+        aspect-ratio: 16/10;
+        object-position: center 20%;
+      }
+
+      .bio-years {
+        flex-wrap: wrap;
+        gap: 32px;
+      }
+
+      footer {
+        padding: 36px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PRELOADER -->
+  <div id="preloader" aria-hidden="true">
+    <div class="preloader-static">
+      <img class="preloader-mark logo-white" src="assets/logo-white.png" alt="Carolus" />
+      <img class="preloader-mark logo-dark" src="assets/logo-dark.png" alt="" />
+      <div class="preloader-bar"></div>
+    </div>
+    <div id="preloader-react"></div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a class="nav-logo" href="#">
+      <img class="logo-white" src="assets/logo-white.png" alt="Carolus" />
+      <img class="logo-dark" src="assets/logo-dark.png" alt="Carolus" />
+    </a>
+    <div class="nav-controls">
+      <ul class="nav-links">
+        <li><a href="#pittura">Pittura</a></li>
+        <li><a href="#fotografia">Fotografia</a></li>
+        <li><a href="#biografia">Biografia</a></li>
+        <li><a href="#critica">Critica</a></li>
+        <li><a href="#contatti">Contatti</a></li>
+      </ul>
+      <div id="theme-toggle-root"></div>
+      <button class="nav-toggle" aria-label="Apri menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home" aria-label="Introduzione">
+    <div class="hero-bg">
+      <img src="assets/dsc-9.jpg" alt="Spirale, fotografia astratta di Carolus" width="1920" height="1280"
+        fetchpriority="high" decoding="async" />
+    </div>
+    <div class="hero-content">
+      <p class="hero-overline">Carlo Chiavegato · 1923–2015 · Padova</p>
+      <h1 class="hero-title">Ca<em>ro</em>lus</h1>
+      <p class="hero-subtitle">Un viaggio intimo nel cuore del Novecento: pittura, fotografia e opere su carta, dalla
+        bottega veneziana di Arturo Martini agli anni della maturità monumentale.</p>
+      <a class="hero-cta" href="#pittura">Scopri le opere</a>
+    </div>
+    <div class="hero-scroll">Scorri</div>
+  </section>
+
+  <!-- PITTURA -->
+  <section id="pittura" aria-label="Pittura">
+    <div data-anim="fade">
+      <div class="section-label">Pittura</div>
+      <h2 class="section-title">Le <em>opere</em></h2>
+      <p class="section-desc">Olio su tela, acquerello, inchiostro, collage. Volti idealizzati dal mento appuntito e dal
+        naso grecizzato, maternità, scene di circo, riferimenti alla Commedia dell'Arte veneziana, paesaggi metafisici.
+        Una poetica di "forma, equilibrio e misura", come scrisse Massimo Carrà, radicata nella cultura figurativa
+        italiana del Novecento.</p>
+    </div>
+
+    <div class="pittura-tabs" data-anim="fade">
+      <button class="pittura-tab active" data-panel="figure">Figure &amp; Ritratti</button>
+      <button class="pittura-tab" data-panel="natura">Natura Morta &amp; Fiori</button>
+      <button class="pittura-tab" data-panel="paesaggi">Paesaggi &amp; Architetture</button>
+      <button class="pittura-tab" data-panel="astratto">Astratto &amp; Collage</button>
+    </div>
+
+    <!-- Figure & Ritratti -->
+    <div class="pittura-panel active" id="panel-figure">
+      <div class="painting-grid">
+        <div class="gi" data-img="assets/autoritratto.jpg" data-caption="Autoritratto, olio su tela">
+          <img src="assets/autoritratto.jpg" alt="Autoritratto, olio su tela" loading="lazy" /><span
+            class="gi-label">Autoritratto</span>
+        </div>
+        <div class="gi" data-img="assets/maternita.jpg" data-caption="Maternità, olio su tela">
+          <img src="assets/maternita.jpg" alt="Maternità, olio su tela" loading="lazy" /><span class="gi-label">Maternità</span>
+        </div>
+        <div class="gi" data-img="assets/t3977.jpg" data-caption="Coppia con fiore, olio su tela">
+          <img src="assets/t3977.jpg" alt="Coppia con fiore, olio su tela" loading="lazy" /><span class="gi-label">Coppia con
+            fiore</span>
+        </div>
+        <div class="gi" data-img="assets/t3943.jpg" data-caption="Anziano con carrozza, 1960">
+          <img src="assets/t3943.jpg" alt="Anziano con carrozza, 1960" loading="lazy" /><span class="gi-label">Anziano con
+            carrozza, 1960</span>
+        </div>
+        <div class="gi" data-img="assets/t3952.jpg" data-caption="Tre uomini al tavolo, 1960">
+          <img src="assets/t3952.jpg" alt="Tre uomini al tavolo, 1960" loading="lazy" /><span class="gi-label">Tre uomini al
+            tavolo</span>
+        </div>
+        <div class="gi" data-img="assets/t3968.jpg" data-caption="Ufficio, olio su tela, 1960">
+          <img src="assets/t3968.jpg" alt="Ufficio, 1960" loading="lazy" /><span class="gi-label">Ufficio, 1960</span>
+        </div>
+        <div class="gi" data-img="assets/t3976.jpg" data-caption="Lavoratori, olio su tela">
+          <img src="assets/t3976.jpg" alt="Lavoratori, olio su tela" loading="lazy" /><span class="gi-label">Lavoratori</span>
+        </div>
+        <div class="gi" data-img="assets/PAPER2.jpg" data-caption="Due figure con pianta, inchiostro, 1986">
+          <img src="assets/PAPER2.jpg" alt="Due figure con pianta, inchiostro, 1986" loading="lazy" /><span class="gi-label">Due figure, 1986</span>
+        </div>
+        <div class="gi" data-img="assets/PAPER4.jpg" data-caption="Donna con cesta, acquerello, 1981">
+          <img src="assets/PAPER4.jpg" alt="Donna con cesta, acquerello, 1981" loading="lazy" /><span class="gi-label">Donna con cesta,
+            1981</span>
+        </div>
+        <div class="gi" data-img="assets/PAPER5.jpg" data-caption="Donna con cappello, acquerello">
+          <img src="assets/PAPER5.jpg" alt="Donna con cappello, acquerello" loading="lazy" /><span class="gi-label">Donna con
+            cappello</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Natura Morta & Fiori -->
+    <div class="pittura-panel" id="panel-natura">
+      <div class="painting-grid">
+        <div class="gi" data-img="assets/fiore1.jpg" data-caption="Bouquet, olio su tela">
+          <img src="assets/fiore1.jpg" alt="Bouquet, olio su tela" loading="lazy" /><span class="gi-label">Bouquet</span>
+        </div>
+        <div class="gi" data-img="assets/NM1.jpg" data-caption="Natura morta con fiori, olio su tela">
+          <img src="assets/NM1.jpg" alt="Natura morta con fiori, olio su tela" loading="lazy" /><span class="gi-label">Natura morta</span>
+        </div>
+        <div class="gi" data-img="assets/PAPER1.jpg" data-caption="Natura morta con frutta, olio su tela">
+          <img src="assets/PAPER1.jpg" alt="Natura morta con frutta, olio su tela" loading="lazy" /><span class="gi-label">Frutta e
+            coppa</span>
+        </div>
+        <div class="gi" data-img="assets/PAPER6.jpg" data-caption="Composizione rosa, acquerello">
+          <img src="assets/PAPER6.jpg" alt="Composizione rosa, acquerello" loading="lazy" /><span class="gi-label">Composizione
+            rosa</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paesaggi & Architetture -->
+    <div class="pittura-panel" id="panel-paesaggi">
+      <div class="painting-grid">
+        <div class="gi" data-img="assets/t4111.jpg" data-caption="Paesaggio notturno, olio su tela, 1956">
+          <img src="assets/t4111.jpg" alt="Paesaggio notturno, 1956" loading="lazy" /><span class="gi-label">Paesaggio
+            notturno, 1956</span>
+        </div>
+        <div class="gi" data-img="assets/torre.jpg" data-caption="Torre con birilli, olio su tela">
+          <img src="assets/torre.jpg" alt="Torre con birilli, olio su tela" loading="lazy" /><span class="gi-label">Torre con birilli</span>
+        </div>
+        <div class="gi" data-img="assets/t3983.jpg" data-caption="Case bianche, olio su tela">
+          <img src="assets/t3983.jpg" alt="Case bianche, olio su tela" loading="lazy" /><span class="gi-label">Case bianche</span>
+        </div>
+        <div class="gi" data-img="assets/t4180.jpg" data-caption="Cavalli, olio su tela">
+          <img src="assets/t4180.jpg" alt="Cavalli, olio su tela" loading="lazy" /><span class="gi-label">Cavalli</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Astratto & Collage -->
+    <div class="pittura-panel" id="panel-astratto">
+      <div class="painting-grid">
+        <div class="gi" data-img="assets/astratto1.jpg" data-caption="Composizione astratta, tecnica mista">
+          <img src="assets/astratto1.jpg" alt="Composizione astratta, tecnica mista" loading="lazy" /><span class="gi-label">Composizione
+            astratta</span>
+        </div>
+        <div class="gi" data-img="assets/t3979.jpg" data-caption="Griglia colorata, olio su tela">
+          <img src="assets/t3979.jpg" alt="Griglia colorata, olio su tela" loading="lazy" /><span class="gi-label">Griglia
+            colorata</span>
+        </div>
+        <div class="gi" data-img="assets/PAPER3.jpg" data-caption="Volto tra le foglie, inchiostro">
+          <img src="assets/PAPER3.jpg" alt="Volto tra le foglie, inchiostro" loading="lazy" /><span class="gi-label">Volto tra le
+            foglie</span>
+        </div>
+        <div class="gi" data-img="assets/astratto2.jpg" data-caption="Collage su cartone, tecnica mista">
+          <img src="assets/astratto2.jpg" alt="Collage su cartone, tecnica mista" loading="lazy" /><span class="gi-label">Collage su
+            cartone</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOTOGRAFIA -->
+  <section id="fotografia" aria-label="Fotografia">
+    <div data-anim="fade">
+      <div class="section-label">Fotografia</div>
+      <h2 class="section-title">Lo <em>sguardo</em></h2>
+      <p class="section-desc">Prima ancora della pittura, la fotografia: un linguaggio coltivato fin dagli anni
+        Cinquanta in mostre e concorsi. Ritratti, studi sul movimento, esercizi tonali "dal bianco al nero",
+        solarizzazioni e doppie esposizioni: la camera oscura come laboratorio di astrazione.</p>
+    </div>
+    <div class="photo-tabs" data-anim="fade">
+      <button class="photo-tab active" data-panel="realismo">Realismo</button>
+      <button class="photo-tab" data-panel="astratta">Fotografia Astratta</button>
+    </div>
+
+    <div class="photo-panel active" id="panel-realismo">
+      <div class="photo-grid">
+        <div class="photo-item" data-img="assets/hero-portrait.jpg" data-caption="Ritratto, stampa ai sali d'argento">
+          <img src="assets/hero-portrait.jpg" alt="Ritratto, stampa ai sali d'argento" loading="lazy" />
+          <div class="photo-caption">Ritratto</div>
+        </div>
+        <div class="photo-item" data-img="assets/foto-finestra.jpg" data-caption="Luce di finestra">
+          <img src="assets/foto-finestra.jpg" alt="Figura con luce di finestra" loading="lazy" />
+          <div class="photo-caption">Luce di finestra</div>
+        </div>
+        <div class="photo-item" data-img="assets/foto-ragnatela.jpg" data-caption="Ragnatela">
+          <img src="assets/foto-ragnatela.jpg" alt="Volto nella ragnatela" loading="lazy" />
+          <div class="photo-caption">Ragnatela</div>
+        </div>
+        <div class="photo-item" data-img="assets/foto10.jpg" data-caption="Colonnato">
+          <img src="assets/foto10.jpg" alt="Colonnato" loading="lazy" />
+          <div class="photo-caption">Colonnato</div>
+        </div>
+        <div class="photo-item" data-img="assets/foto11.jpg" data-caption="Panchine nella neve">
+          <img src="assets/foto11.jpg" alt="Panchine nella neve" loading="lazy" />
+          <div class="photo-caption">Panchine nella neve</div>
+        </div>
+        <div class="photo-item" data-img="assets/foto1.jpg" data-caption="Pescatore">
+          <img src="assets/foto1.jpg" alt="Pescatore" loading="lazy" />
+          <div class="photo-caption">Pescatore</div>
+        </div>
+        <div class="photo-item" data-img="assets/foto2.jpg" data-caption="Giostra">
+          <img src="assets/foto2.jpg" alt="Giostra" loading="lazy" />
+          <div class="photo-caption">Giostra</div>
+        </div>
+        <div class="photo-item" data-img="assets/foto3.jpg" data-caption="Oblò">
+          <img src="assets/foto3.jpg" alt="Oblò" loading="lazy" />
+          <div class="photo-caption">Oblò</div>
+        </div>
+        <div class="photo-item" data-img="assets/foto6.jpg" data-caption="Rete da pesca">
+          <img src="assets/foto6.jpg" alt="Rete da pesca" loading="lazy" />
+          <div class="photo-caption">Rete da pesca</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="photo-panel" id="panel-astratta">
+      <div class="photo-grid">
+        <div class="photo-item" data-img="assets/dsc-1.jpg" data-caption="Composizione astratta">
+          <img src="assets/dsc-1.jpg" alt="Composizione astratta" loading="lazy" />
+          <div class="photo-caption">Composizione I</div>
+        </div>
+        <div class="photo-item" data-img="assets/dsc-2.jpg" data-caption="Scultura di carta">
+          <img src="assets/dsc-2.jpg" alt="Scultura di carta" loading="lazy" />
+          <div class="photo-caption">Scultura di carta</div>
+        </div>
+        <div class="photo-item" data-img="assets/dsc-3.jpg" data-caption="Geometrie">
+          <img src="assets/dsc-3.jpg" alt="Geometrie" loading="lazy" />
+          <div class="photo-caption">Geometrie</div>
+        </div>
+        <div class="photo-item" data-img="assets/dsc-4.jpg" data-caption="Luce e ombra">
+          <img src="assets/dsc-4.jpg" alt="Luce e ombra" loading="lazy" />
+          <div class="photo-caption">Luce e ombra</div>
+        </div>
+        <div class="photo-item" data-img="assets/dsc-5.jpg" data-caption="Solarizzazione">
+          <img src="assets/dsc-5.jpg" alt="Solarizzazione" loading="lazy" />
+          <div class="photo-caption">Solarizzazione</div>
+        </div>
+        <div class="photo-item" data-img="assets/dsc-6.jpg" data-caption="Riflessi">
+          <img src="assets/dsc-6.jpg" alt="Riflessi" loading="lazy" />
+          <div class="photo-caption">Riflessi</div>
+        </div>
+        <div class="photo-item" data-img="assets/dsc-7.jpg" data-caption="Doppia esposizione">
+          <img src="assets/dsc-7.jpg" alt="Doppia esposizione" loading="lazy" />
+          <div class="photo-caption">Doppia esposizione</div>
+        </div>
+        <div class="photo-item" data-img="assets/dsc-8.jpg" data-caption="Cosmogonia">
+          <img src="assets/dsc-8.jpg" alt="Cosmogonia" loading="lazy" />
+          <div class="photo-caption">Cosmogonia</div>
+        </div>
+        <div class="photo-item" data-img="assets/dsc-9.jpg" data-caption="Spirale">
+          <img src="assets/dsc-9.jpg" alt="Spirale" loading="lazy" />
+          <div class="photo-caption">Spirale</div>
+        </div>
+        <div class="photo-item" data-img="assets/dsc-10.jpg" data-caption="Movimento">
+          <img src="assets/dsc-10.jpg" alt="Movimento" loading="lazy" />
+          <div class="photo-caption">Movimento</div>
+        </div>
+        <div class="photo-item" data-img="assets/dsc-11.jpg" data-caption="Vortice">
+          <img src="assets/dsc-11.jpg" alt="Vortice" loading="lazy" />
+          <div class="photo-caption">Vortice</div>
+        </div>
+        <div class="photo-item" data-img="assets/foto12.jpg" data-caption="Graffiti urbani">
+          <img src="assets/foto12.jpg" alt="Graffiti urbani" loading="lazy" />
+          <div class="photo-caption">Graffiti</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIOGRAFIA -->
+  <section id="biografia" aria-label="Biografia">
+    <div class="section-label" data-anim="fade">Biografia</div>
+    <h2 class="section-title" data-anim="fade" data-anim-delay="1">La <em>vita</em></h2>
+    <div class="bio-grid">
+      <div class="bio-portrait" data-anim="fade">
+        <img src="assets/bio-mostra.jpg" alt="Carolus in mostra" />
+        <p class="bio-portrait-caption">Carlo Chiavegato · Padova, 1923–2015</p>
+      </div>
+      <div class="bio-content" data-anim="fade" data-anim-delay="1">
+        <p>Carlo Chiavegato, in arte <em>Carolus</em>, nasce il 10 dicembre 1923 a Padova, in una famiglia che
+          gestisce la storica osteria "La Chiesetta", ai piedi del cavalcavia dell'Arcella. Frequenta tre anni di scuola
+          commerciale, quattro anni all'Istituto d'Arte Pietro Selvatico e, fra il 1941 e il 1948, l'Accademia di Belle
+          Arti di Venezia, dove studia con lo scultore <em>Arturo Martini</em> e stringe un sodalizio con il padovano
+          Nerino Negri.</p>
+        <p>Il percorso è interrotto dalla guerra: disegnatore militare a Montagnana, dopo l'armistizio del '43 viene
+          perseguitato dai tedeschi per le sue idee socialiste e si nasconde per due anni nella campagna estense. In
+          quel periodo vince un importante concorso di disegno a Roma e prende i diplomi di dattilografia e stenografia.
+        </p>
+        <p>Dal 1944 sviluppa uno stile inconfondibile: volti idealizzati dal mento ampio e appuntito, bocca piccola e
+          raffinata, naso grecizzato, occhi leggermente allungati. I suoi temi attraversano la donna e la maternità, le
+          nature morte, le scene circensi, i richiami alla Commedia dell'Arte veneziana, la realtà sociale, il paesaggio
+          metafisico.</p>
+        <p>Si afferma prima nella fotografia, partecipando a concorsi e collettive negli anni Cinquanta, poi nella
+          pittura: prima personale alla <em>Scuola Grande di San Rocco</em> di Venezia nel 1957, e ancora nel 1975 e
+          1976 in occasione della Mostra Nazionale di Pittura Sacra. Espone in Veneto e a Roma (galleria "La
+          Marguttiana", "Valle Giulia"), sostenuto dalla critica di <em>Paolo Rizzi</em> e <em>Massimo Carrà</em>. Il
+          mercante d'arte Armido Magagnin distribuisce le sue opere a Londra, New York, Los Angeles, Roma, Milano,
+          Torino, Firenze.</p>
+        <p>L'opera attraversa fasi precise: la definizione dello stile negli anni Cinquanta, la classicità degli anni
+          Sessanta, l'apertura agli astratti e ai collage di critica sociale negli anni Settanta, l'introspezione
+          drammatica degli anni Ottanta, la quiete monumentale degli anni Novanta, e l'arte grafica nei primi anni
+          Duemila. Si spegne a Padova nel 2015.</p>
+        <div class="bio-years">
+          <div class="bio-year-item">
+            <span class="bio-year-num">1923</span>
+            <span class="bio-year-label">Nato a Padova</span>
+          </div>
+          <div class="bio-year-item">
+            <span class="bio-year-num">70+</span>
+            <span class="bio-year-label">Anni di pratica</span>
+          </div>
+          <div class="bio-year-item">
+            <span class="bio-year-num">2015</span>
+            <span class="bio-year-label">Scomparso a Padova</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOCI DELLA CRITICA -->
+  <section id="critica" aria-label="Voci della critica">
+    <div data-anim="fade">
+      <div class="section-label">Voci della critica</div>
+      <h2 class="section-title">Hanno <em>scritto</em></h2>
+      <p class="section-desc">Estratti dalla critica che ha accompagnato l'opera di Carolus tra gli anni Settanta e
+        Ottanta: Paolo Rizzi, Massimo Carrà, e le testate venete.</p>
+    </div>
+    <div class="critica-grid">
+      <figure class="critica-quote" data-anim="fade">
+        <blockquote>Suggestioni culturali utili al suo discorso pittorico misurato: una luce velata, irreale, che eleva
+          le immagini oltre la banalità.</blockquote>
+        <figcaption>
+          <div class="critica-attr">Paolo Rizzi</div>
+          <div class="critica-source">Critico d'arte, 1975</div>
+        </figcaption>
+      </figure>
+      <figure class="critica-quote" data-anim="fade" data-anim-delay="1">
+        <blockquote>Forma, equilibrio e misura come strumenti di contemplazione poetica, non come omaggio passivo alla
+          cultura figurativa italiana fra le due guerre.</blockquote>
+        <figcaption>
+          <div class="critica-attr">Massimo Carrà</div>
+          <div class="critica-source">Critico d'arte</div>
+        </figcaption>
+      </figure>
+      <figure class="critica-quote" data-anim="fade" data-anim-delay="2">
+        <blockquote>Castità e dignità nel trattare l'esistenza umana: sicura conoscenza della forma e capacità di
+          disporre le figure in equilibrio e cadenze ritmiche.</blockquote>
+        <figcaption>
+          <div class="critica-attr">Corriere Veneto</div>
+          <div class="critica-source">18 novembre 1975</div>
+        </figcaption>
+      </figure>
+      <figure class="critica-quote" data-anim="fade" data-anim-delay="3">
+        <blockquote>Eleganze floreali, il nudo, riferimenti cubisti, collages, entro un solido impianto novecentesco.
+        </blockquote>
+        <figcaption>
+          <div class="critica-attr">Maurizio Conconi</div>
+          <div class="critica-source">Il Mattino di Padova, 27 dicembre 1978</div>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- CONTATTI -->
+  <section id="contatti" aria-label="Contatti">
+    <div class="section-label" data-anim="fade">Contatti</div>
+    <div class="contact-grid">
+      <div class="contact-info" data-anim="fade">
+        <h2 class="section-title">Scri<em>vi</em></h2>
+        <p>L'archivio è curato dalla famiglia di Carolus, con l'obiettivo di valorizzare l'opera dell'artista a dieci
+          anni dalla sua scomparsa. Per informazioni sulle opere, prestiti per esposizioni, richieste di archivio o
+          collaborazioni, scrivi tramite il modulo o direttamente.</p>
+        <div class="contact-detail">
+          <span class="contact-detail-label">Email</span>
+          <span class="contact-detail-value">camilla.brunazzochiavegato@gmail.com</span>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-detail-label">Archivio</span>
+          <span class="contact-detail-value">Padova, Italia</span>
+        </div>
+      </div>
+      <div data-anim="fade" data-anim-delay="1">
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="form-field required" id="field-nome">
+            <label class="form-label" for="nome">Nome</label>
+            <input class="form-input" type="text" id="nome" name="nome" placeholder="Il tuo nome"
+              autocomplete="given-name" />
+            <span class="form-error" id="err-nome">Per favore inserisci il tuo nome.</span>
+          </div>
+          <div class="form-field required" id="field-email">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="nome@email.it"
+              autocomplete="email" />
+            <span class="form-error" id="err-email">Inserisci un indirizzo email valido.</span>
+          </div>
+          <div class="form-field" id="field-oggetto">
+            <label class="form-label" for="oggetto">Oggetto</label>
+            <input class="form-input" type="text" id="oggetto" name="oggetto" placeholder="Richiesta, acquisto…" />
+          </div>
+          <div class="form-field required" id="field-messaggio">
+            <label class="form-label" for="messaggio">Messaggio</label>
+            <textarea class="form-textarea" id="messaggio" name="messaggio"
+              placeholder="Scrivi qui il tuo messaggio…"></textarea>
+            <span class="form-error" id="err-messaggio">Per favore scrivi un messaggio.</span>
+          </div>
+          <button class="btn-submit" type="submit">Invia messaggio</button>
+        </form>
+        <div class="form-success" id="form-success">
+          <p>Grazie per il tuo messaggio.<br />Ti risponderò al più presto.</p>
+          <button type="button" class="form-reset" id="form-reset">Invia un altro messaggio</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a class="footer-logo" href="#home" aria-label="Carolus, torna in alto">
+      <img class="logo-white" src="assets/logo-white.png" alt="Carolus" />
+      <img class="logo-dark" src="assets/logo-dark.png" alt="" />
+    </a>
+    <ul class="footer-nav" aria-label="Navigazione secondaria">
+      <li><a href="#pittura">Pittura</a></li>
+      <li><a href="#fotografia">Fotografia</a></li>
+      <li><a href="#biografia">Biografia</a></li>
+      <li><a href="#critica">Critica</a></li>
+      <li><a href="#contatti">Contatti</a></li>
+    </ul>
+    <div class="footer-meta">
+      <a class="footer-email"
+        href="mailto:camilla.brunazzochiavegato@gmail.com">camilla.brunazzochiavegato@gmail.com</a>
+      <span class="footer-note">© 2026 · Carlo Chiavegato · Archivio della famiglia</span>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <!-- TWEAKS -->
+  <div id="tweaks-root"></div>
+  <div id="fx-root" hidden></div>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <button class="lightbox-close" id="lb-close" aria-label="Chiudi">&#x2715;</button>
+    <p class="lightbox-count" id="lb-count" aria-hidden="true"></p>
+    <button class="lightbox-nav lb-prev" id="lb-prev" aria-label="Opera precedente">&#x2039;</button>
+    <img id="lb-img" alt="" />
+    <button class="lightbox-nav lb-next" id="lb-next" aria-label="Opera successiva">&#x203A;</button>
+    <p class="lightbox-caption" id="lb-caption"></p>
+  </div>
+
+  <script>
+    // ─── PRELOADER ───
+    // Fallback se il modulo React/CDN non parte: sblocca comunque la pagina
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (window.__carolusFX) return;
+        document.getElementById('preloader')?.classList.add('hidden');
+        document.body.classList.add('hero-ready');
+      }, 2500);
+    });
+
+    // ─── TEMA CHIARO / SCURO (React + Framer Motion) ───
+
+    // ─── NAV TOGGLE (mobile) ───
+    const navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', () => {
+        const open = document.body.classList.toggle('nav-open');
+        navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        navToggle.setAttribute('aria-label', open ? 'Chiudi menu' : 'Apri menu');
+      });
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          document.body.classList.remove('nav-open');
+          navToggle.setAttribute('aria-expanded', 'false');
+          navToggle.setAttribute('aria-label', 'Apri menu');
+        });
+      });
+    }
+
+    // ─── TAB SYSTEM (Pittura + Fotografia) con ARIA + arrow keys ───
+    function initTabs(tabSelector, panelSelector, listSelector, sectionId) {
+      const tabs = Array.from(document.querySelectorAll(tabSelector));
+      const panels = Array.from(document.querySelectorAll(panelSelector));
+      const list = document.querySelector(listSelector);
+      if (!tabs.length || !list) return;
+
+      list.setAttribute('role', 'tablist');
+      tabs.forEach((tab, i) => {
+        const panelId = 'panel-' + tab.dataset.panel;
+        const panel = document.getElementById(panelId);
+        const tabId = `${sectionId}-tab-${tab.dataset.panel}`;
+        tab.id = tabId;
+        tab.setAttribute('role', 'tab');
+        tab.setAttribute('aria-controls', panelId);
+        tab.setAttribute('aria-selected', tab.classList.contains('active') ? 'true' : 'false');
+        tab.setAttribute('tabindex', tab.classList.contains('active') ? '0' : '-1');
+        if (panel) {
+          panel.setAttribute('role', 'tabpanel');
+          panel.setAttribute('aria-labelledby', tabId);
+          panel.setAttribute('tabindex', '0');
+        }
+      });
+
+      function activate(idx, focus = true) {
+        tabs.forEach((t, i) => {
+          const on = i === idx;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+          t.setAttribute('tabindex', on ? '0' : '-1');
+        });
+        panels.forEach(p => p.classList.remove('active'));
+        const target = document.getElementById('panel-' + tabs[idx].dataset.panel);
+        if (target) {
+          target.classList.add('active');
+          // Il controller React rivela i nuovi item subito, senza stagger
+          document.dispatchEvent(new CustomEvent('carolus:panel-shown', { detail: target }));
+        }
+        if (focus) tabs[idx].focus();
+        // C6 — riallinea la sezione in alto
+        const section = document.getElementById(sectionId);
+        if (section) {
+          const navH = 72;
+          const top = section.getBoundingClientRect().top + window.scrollY - navH - 24;
+          if (window.scrollY > top + 40) window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }
+
+      tabs.forEach((tab, i) => {
+        tab.addEventListener('click', () => activate(i, false));
+        tab.addEventListener('keydown', e => {
+          let target = null;
+          if (e.key === 'ArrowRight') target = (i + 1) % tabs.length;
+          else if (e.key === 'ArrowLeft') target = (i - 1 + tabs.length) % tabs.length;
+          else if (e.key === 'Home') target = 0;
+          else if (e.key === 'End') target = tabs.length - 1;
+          if (target !== null) { e.preventDefault(); activate(target); }
+        });
+      });
+    }
+    initTabs('.pittura-tab', '.pittura-panel', '.pittura-tabs', 'pittura');
+    initTabs('.photo-tab', '.photo-panel', '.photo-tabs', 'fotografia');
+
+    // ─── NAV SCROLL ───
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ─── SCROLL ANIMATIONS (data-anim) ───
+    const animObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('anim-done');
+          animObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('[data-anim]').forEach(el => animObserver.observe(el));
+
+    // ─── GALLERY REVEAL (soft) ───
+    (function initSoftGalleryReveal() {
+      const reduceMq = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      function revealItem(item, delay = 0) {
+        item.style.transitionDelay = delay + 'ms';
+        item.classList.add('in-view');
+      }
+
+      function revealPanelInstantly(panel) {
+        panel.querySelectorAll('.gi, .photo-item').forEach(item => revealItem(item, 0));
+      }
+
+      const items = Array.from(document.querySelectorAll('.gi, .photo-item'));
+      if (reduceMq.matches) {
+        items.forEach(item => revealItem(item, 0));
+      } else {
+        const galleryObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const item = entry.target;
+            const grid = item.closest('.painting-grid, .photo-grid');
+            const siblings = grid ? Array.from(grid.querySelectorAll('.gi, .photo-item')) : items;
+            const index = Math.max(0, siblings.indexOf(item));
+            revealItem(item, Math.min(index, 8) * 45);
+            galleryObserver.unobserve(item);
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+        items.forEach(item => galleryObserver.observe(item));
+      }
+
+      document.addEventListener('carolus:panel-shown', e => revealPanelInstantly(e.detail));
+    })();
+
+    // ─── LIGHTBOX ───
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbCaption = document.getElementById('lb-caption');
+    const lbClose = document.getElementById('lb-close');
+    const lbPrev = document.getElementById('lb-prev');
+    const lbNext = document.getElementById('lb-next');
+    const lbCount = document.getElementById('lb-count');
+
+    function openLightbox(src, caption, alt) {
+      lbImg.classList.remove('loaded', 'errored');
+      lightbox.classList.remove('lb-ready');
+      lbImg.alt = alt || '';
+      lbCaption.textContent = caption || '';
+      lbImg.src = src;
+      // Cached images may not refire 'load'
+      if (lbImg.complete && lbImg.naturalWidth > 0) {
+        lbImg.classList.add('loaded');
+        lightbox.classList.add('lb-ready');
+      }
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    lbImg.addEventListener('load', () => {
+      lbImg.classList.add('loaded');
+      lightbox.classList.add('lb-ready');
+    });
+    lbImg.addEventListener('error', () => {
+      lbImg.classList.add('errored');
+      lightbox.classList.add('lb-ready');
+      lbCaption.textContent = 'Immagine non disponibile.';
+    });
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Costruisco una lista navigabile globale (rispetta l'ordine DOM = ordine di lettura)
+    const lbItems = [];
+    let lbIndex = -1;
+
+    function openByIndex(i) {
+      if (i < 0 || i >= lbItems.length) return;
+      lbIndex = i;
+      const el = lbItems[i];
+      openLightbox(el.dataset.img, el.dataset.caption, el.querySelector('img')?.alt);
+      lbCount.textContent = (i + 1) + ' / ' + lbItems.length;
+    }
+
+    function lbStep(dir) {
+      if (!lbItems.length) return;
+      openByIndex((lbIndex + dir + lbItems.length) % lbItems.length);
+    }
+
+    document.querySelectorAll('[data-img]').forEach((el, i) => {
+      const caption = el.dataset.caption || el.querySelector('img')?.alt || 'Apri opera';
+      el.setAttribute('role', 'button');
+      el.setAttribute('tabindex', '0');
+      el.setAttribute('aria-label', `Apri ingrandimento: ${caption}`);
+      lbItems.push(el);
+      el.addEventListener('click', () => openByIndex(lbItems.indexOf(el)));
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openByIndex(lbItems.indexOf(el));
+        }
+      });
+    });
+    lbClose.addEventListener('click', closeLightbox);
+    lbPrev.addEventListener('click', () => lbStep(-1));
+    lbNext.addEventListener('click', () => lbStep(1));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      else if (e.key === 'ArrowRight') lbStep(1);
+      else if (e.key === 'ArrowLeft') lbStep(-1);
+    });
+
+    // Swipe navigation su touch
+    let lbTouchX = null;
+    lightbox.addEventListener('touchstart', e => {
+      lbTouchX = e.changedTouches[0].clientX;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', e => {
+      if (lbTouchX === null) return;
+      const dx = e.changedTouches[0].clientX - lbTouchX;
+      if (Math.abs(dx) > 45) lbStep(dx < 0 ? 1 : -1);
+      lbTouchX = null;
+    }, { passive: true });
+
+    // ─── CONTACT FORM ───
+    const form = document.getElementById('contact-form');
+    const success = document.getElementById('form-success');
+
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const fieldIds = ['nome', 'email', 'messaggio'];
+
+    function validateField(inp) {
+      const err = document.getElementById('err-' + inp.id);
+      const bad = inp.id === 'email'
+        ? !emailRe.test(inp.value.trim())
+        : !inp.value.trim();
+      inp.classList.toggle('error', bad);
+      if (err) err.classList.toggle('visible', bad);
+      return !bad;
+    }
+
+    function validate() {
+      return fieldIds
+        .map(id => validateField(document.getElementById(id)))
+        .every(Boolean);
+    }
+
+    // Validazione al blur: anticipa l'errore senza infastidire i campi intatti
+    fieldIds.forEach(id => {
+      const inp = document.getElementById(id);
+      inp.addEventListener('blur', () => {
+        if (inp.value.trim() || inp.classList.contains('error')) validateField(inp);
+      });
+    });
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      if (validate()) {
+        form.style.display = 'none';
+        success.classList.add('visible');
+      }
+    });
+
+    document.getElementById('form-reset').addEventListener('click', () => {
+      form.reset();
+      fieldIds.forEach(id => {
+        const inp = document.getElementById(id);
+        inp.classList.remove('error');
+        document.getElementById('err-' + inp.id)?.classList.remove('visible');
+      });
+      success.classList.remove('visible');
+      form.style.display = '';
+    });
+  </script>
+
+  <!-- ─── THEME TOGGLE: React + Framer Motion (ESM) ─── -->
+  <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@18.3.1",
+        "react/jsx-runtime": "https://esm.sh/react@18.3.1/jsx-runtime",
+        "react-dom": "https://esm.sh/react-dom@18.3.1",
+        "react-dom/client": "https://esm.sh/react-dom@18.3.1/client?deps=react@18.3.1",
+        "framer-motion": "https://esm.sh/framer-motion@11.18.2?deps=react@18.3.1,react-dom@18.3.1"
+      }
+    }
+  </script>
+  <script type="module">
+    import React, { useState, useEffect, useCallback } from 'react';
+    import { createRoot } from 'react-dom/client';
+    import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+
+    const KEY = 'carolus-theme';
+    const COLORS = { dark: '#1f1c18', light: '#f4efe6' };
+    const root = document.documentElement;
+    const meta = document.querySelector('meta[name="theme-color"]');
+
+    function applySide(theme, animate) {
+      if (animate) {
+        root.classList.add('theme-anim');
+        setTimeout(() => root.classList.remove('theme-anim'), 450);
+      }
+      root.setAttribute('data-theme', theme);
+      if (meta) meta.setAttribute('content', COLORS[theme]);
+    }
+
+    const SunIcon = () => React.createElement('svg', {
+      viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor',
+      strokeWidth: 1.6, strokeLinecap: 'round', 'aria-hidden': 'true',
+      width: 20, height: 20,
+    },
+      React.createElement('circle', { cx: 12, cy: 12, r: 4.2 }),
+      React.createElement('path', { d: 'M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5 5l2.1 2.1M16.9 16.9 19 19M19 5l-2.1 2.1M7.1 16.9 5 19' })
+    );
+
+    const MoonIcon = () => React.createElement('svg', {
+      viewBox: '0 0 24 24', fill: 'currentColor', 'aria-hidden': 'true',
+      width: 20, height: 20,
+    },
+      React.createElement('path', { d: 'M20 14.5A8.2 8.2 0 0 1 9.5 4a8.2 8.2 0 1 0 10.5 10.5Z' })
+    );
+
+    function ThemeToggle() {
+      const initial = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      const [theme, setTheme] = useState(initial);
+      const reduce = useReducedMotion();
+
+      useEffect(() => { applySide(theme, false); }, []);
+
+      useEffect(() => {
+        const mq = window.matchMedia('(prefers-color-scheme: light)');
+        const onChange = e => {
+          let stored = null;
+          try { stored = localStorage.getItem(KEY); } catch (err) {}
+          if (!stored) setTheme(prev => {
+            const next = e.matches ? 'light' : 'dark';
+            applySide(next, true);
+            return next;
+          });
+        };
+        mq.addEventListener('change', onChange);
+        return () => mq.removeEventListener('change', onChange);
+      }, []);
+
+      const onClick = useCallback(() => {
+        setTheme(prev => {
+          const next = prev === 'light' ? 'dark' : 'light';
+          try { localStorage.setItem(KEY, next); } catch (e) {}
+          applySide(next, true);
+          return next;
+        });
+      }, []);
+
+      const variants = {
+        initial: { rotate: -90, scale: 0, opacity: 0 },
+        animate: { rotate: 0, scale: 1, opacity: 1 },
+        exit: { rotate: 90, scale: 0, opacity: 0 },
+      };
+      const transition = reduce
+        ? { duration: 0 }
+        : { type: 'spring', stiffness: 260, damping: 20 };
+
+      return React.createElement('button', {
+        className: 'theme-toggle',
+        id: 'theme-toggle',
+        type: 'button',
+        onClick,
+        'aria-label': theme === 'light' ? 'Passa alla modalità scura' : 'Passa alla modalità chiara',
+      },
+        React.createElement('span', { className: 'icon-wrap' },
+          React.createElement(AnimatePresence, { mode: 'wait', initial: false },
+            React.createElement(motion.span, {
+              key: theme,
+              style: { display: 'grid', placeItems: 'center', lineHeight: 0 },
+              variants,
+              initial: 'initial',
+              animate: 'animate',
+              exit: 'exit',
+              transition,
+            }, theme === 'light' ? React.createElement(MoonIcon) : React.createElement(SunIcon))
+          )
+        )
+      );
+    }
+
+    const mount = document.getElementById('theme-toggle-root');
+    if (mount) createRoot(mount).render(React.createElement(ThemeToggle));
+  </script>
+
+  <!-- ─── PREMIUM FX: preloader con barra + tende e reveal gallerie (React + Framer Motion) ─── -->
+  <script type="module">
+    import React, { useState, useEffect } from 'react';
+    import { createRoot } from 'react-dom/client';
+    import { createPortal } from 'react-dom';
+    import { motion, useReducedMotion } from 'framer-motion';
+
+    const h = React.createElement;
+
+    // Il watchdog vanilla cede il controllo al modulo React
+    window.__carolusFX = true;
+
+    const EASE_CURTAIN = [0.76, 0, 0.24, 1];
+
+    function PreloaderFX() {
+      const reduce = useReducedMotion();
+      const [pct, setPct] = useState(0);
+      const [phase, setPhase] = useState('load'); // load -> reveal -> done
+      const pre = document.getElementById('preloader');
+      const portalTarget = document.getElementById('preloader-react');
+
+      useEffect(() => {
+        if (!pre) return;
+        if (reduce) {
+          pre.classList.add('hidden');
+          pre.style.display = 'none';
+          document.body.classList.add('hero-ready');
+          setPhase('done');
+          return;
+        }
+        pre.classList.add('fx');
+      }, []);
+
+      // Barra: sale verso 90 simulato, chiude quando la pagina ha caricato
+      useEffect(() => {
+        if (reduce || phase !== 'load') return;
+        let raf;
+        let loaded = document.readyState === 'complete';
+        const onLoad = () => { loaded = true; };
+        window.addEventListener('load', onLoad, { once: true });
+        const start = performance.now();
+        let value = 0;
+        const tick = (now) => {
+          const t = (now - start) / 1400;
+          const target = loaded ? 100 : Math.min(90, t * 90);
+          value += (target - value) * (loaded ? 0.18 : 0.12);
+          if (loaded && value > 99.2) value = 100;
+          setPct(Math.round(value));
+          if (value >= 100) {
+            setTimeout(() => setPhase('reveal'), 350);
+            return;
+          }
+          raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
+        return () => {
+          cancelAnimationFrame(raf);
+          window.removeEventListener('load', onLoad);
+        };
+      }, [phase, reduce]);
+
+      // La cascata hero parte mentre le tende si alzano
+      useEffect(() => {
+        if (phase !== 'reveal') return;
+        const t = setTimeout(() => document.body.classList.add('hero-ready'), 450);
+        return () => clearTimeout(t);
+      }, [phase]);
+
+      if (reduce || phase === 'done' || !pre || !portalTarget) return null;
+
+      const hiding = phase === 'reveal';
+
+      const panels = [0, 1, 2, 3].map(i =>
+        h(motion.div, {
+          key: i,
+          className: 'curtain-panel',
+          initial: { y: 0 },
+          animate: hiding ? { y: '-101%' } : { y: 0 },
+          transition: { duration: 0.9, ease: EASE_CURTAIN, delay: hiding ? 0.35 + 0.08 * i : 0 },
+          onAnimationComplete: () => {
+            if (hiding && i === 3) {
+              pre.classList.add('hidden');
+              pre.style.display = 'none';
+              setPhase('done');
+            }
+          },
+        })
+      );
+
+      const content = h(React.Fragment, null,
+        h('div', { className: 'preloader-curtains' }, panels),
+        h(motion.div, {
+          style: { position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18 },
+          initial: { opacity: 1 },
+          animate: hiding ? { opacity: 0, y: -14 } : { opacity: 1, y: 0 },
+          transition: { duration: 0.35, ease: 'easeOut' },
+        },
+          h('img', { className: 'preloader-fx-mark logo-white', src: 'assets/logo-white.png', alt: '' }),
+          h('img', { className: 'preloader-fx-mark logo-dark', src: 'assets/logo-dark.png', alt: '' }),
+          h('div', { className: 'preloader-progress-wrap' },
+            h('div', { className: 'preloader-progress-track' },
+              h(motion.div, {
+                className: 'preloader-progress-fill',
+                animate: { scaleX: pct / 100 },
+                transition: { duration: 0.22, ease: 'easeOut' },
+              })
+            )
+          ),
+          h('div', { className: 'preloader-tagline' }, 'Caricamento')
+        )
+      );
+
+      return createPortal(content, portalTarget);
+    }
+
+    function App() {
+      return h(React.Fragment, null, h(PreloaderFX));
+    }
+
+    const fxRoot = document.getElementById('fx-root');
+    if (fxRoot) createRoot(fxRoot).render(h(App));
+  </script>
+
+  <script>
+    // Tweaks panel: caricato solo in modalità sviluppo (?dev=1)
+    if (new URLSearchParams(location.search).get('dev') === '1') {
+      const scripts = [
+        ['https://unpkg.com/react@18.3.1/umd/react.development.js', 'sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L'],
+        ['https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js', 'sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm'],
+        ['https://unpkg.com/@babel/standalone@7.29.0/babel.min.js', 'sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y'],
+      ];
+      let chain = Promise.resolve();
+      scripts.forEach(([src, integrity]) => {
+        chain = chain.then(() => new Promise(res => {
+          const s = document.createElement('script');
+          s.src = src; s.integrity = integrity; s.crossOrigin = 'anonymous';
+          s.onload = res;
+          document.head.appendChild(s);
+        }));
+      });
+      chain.then(() => {
+        const jsx = document.createElement('script');
+        jsx.type = 'text/babel'; jsx.src = 'tweaks-panel.jsx';
+        document.head.appendChild(jsx);
+        // riattiva il blocco babel inline
+        document.querySelectorAll('script[type="text/babel-deferred"]').forEach(s => {
+          const ns = document.createElement('script');
+          ns.type = 'text/babel';
+          ns.textContent = s.textContent;
+          document.head.appendChild(ns);
+        });
+      });
+    } else {
+      // produzione: rimuovi il root del pannello
+      document.getElementById('tweaks-root')?.remove();
+    }
+  </script>
+  <script type="text/babel-deferred">
+    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "fontDisplay": "Cormorant Garamond",
+      "fontBody": "Josefin Sans",
+      "accentColor": "oklch(82% 0.04 240)",
+      "bgColor": "#1f1c18",
+      "inkColor": "#f4f1ea",
+      "heroImage": "spirale",
+      "sectionSpacing": 130,
+      "animStyle": "Morbido"
+    }/*EDITMODE-END*/;
+
+    const DISPLAY_FONTS = ["Cormorant Garamond","Playfair Display","EB Garamond","Libre Baskerville","Cinzel","Italiana"];
+    const BODY_FONTS    = ["DM Sans","Inter","Source Sans 3","Raleway","Josefin Sans","Nunito"];
+
+    const ACCENT_PRESETS = [
+      { label: "Terracotta",   value: "#b5835a" },
+      { label: "Indigo",       value: "#5b5ea6" },
+      { label: "Salvia",       value: "#6b8c72" },
+      { label: "Rosa antico",  value: "#c49a8a" },
+      { label: "Oro",          value: "#b8973a" },
+    ];
+
+    const BG_PRESETS = [
+      { label: "Pergamena",    value: "#f7f4f0" },
+      { label: "Bianco",       value: "#fefefe" },
+      { label: "Avorio",       value: "#f5f0e8" },
+      { label: "Grigio freddo",value: "#f2f3f5" },
+    ];
+
+    const INK_PRESETS = [
+      { label: "Grafite",      value: "#1a1713" },
+      { label: "Nero",         value: "#090909" },
+      { label: "Marrone",      value: "#2a1f15" },
+      { label: "Blu notte",    value: "#111827" },
+    ];
+
+    function loadGoogleFont(family) {
+      const id = "gf-" + family.replace(/\s/g,"_");
+      if (document.getElementById(id)) return;
+      const link = document.createElement("link");
+      link.id = id;
+      link.rel = "stylesheet";
+      link.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(family)}:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap`;
+      document.head.appendChild(link);
+    }
+
+    function applyTweaks(t) {
+      const r = document.documentElement.style;
+      loadGoogleFont(t.fontDisplay);
+      loadGoogleFont(t.fontBody);
+      r.setProperty("--f-display", `'${t.fontDisplay}', Georgia, serif`);
+      r.setProperty("--f-body",    `'${t.fontBody}', system-ui, sans-serif`);
+      r.setProperty("--terra",     t.accentColor);
+      r.setProperty("--bg",        t.bgColor);
+      r.setProperty("--ink",       t.inkColor);
+
+      const isOklch = /^oklch\(/i.test(t.inkColor);
+      r.setProperty("--ink2",      isOklch ? t.inkColor : t.inkColor + "f2");
+      r.setProperty("--ink3",      isOklch ? t.inkColor : t.inkColor + "d4");
+
+      // section spacing
+      document.querySelectorAll("section:not(.hero)").forEach(s => {
+        s.style.paddingTop    = t.sectionSpacing + "px";
+        s.style.paddingBottom = t.sectionSpacing + "px";
+      });
+
+      // anim style
+      const dur = t.animStyle === 'Dinamico' ? '0.55s' : t.animStyle === 'Statico' ? '0s' : '1.2s';
+      const ease = t.animStyle === 'Dinamico' ? 'cubic-bezier(0.22, 1, 0.36, 1)' : 'cubic-bezier(0.16, 1, 0.3, 1)';
+      document.documentElement.style.setProperty('--anim-dur', dur);
+      document.documentElement.style.setProperty('--anim-ease', ease);
+      document.querySelectorAll('[data-anim]').forEach(el => {
+        el.style.transitionDuration = dur;
+        el.style.transitionTimingFunction = ease;
+      });
+      document.body.classList.toggle('anim-off', t.animStyle === 'Statico');
+      if (t.animStyle === 'Statico') {
+        document.querySelectorAll('[data-anim]').forEach(el => el.classList.add('anim-done'));
+      }
+
+      // hero image swap
+      const heroImg = document.querySelector(".hero-bg img");
+      if (heroImg) {
+        const map = {
+          portrait:   "assets/hero-portrait.jpg",
+          finestra:   "assets/foto-finestra.jpg",
+          colonnato:  "assets/foto10.jpg",
+          vortice:    "assets/dsc-11.jpg",
+          spirale:    "assets/dsc-9.jpg",
+          donna:      "assets/PAPER5.jpg",
+        };
+        if (map[t.heroImage]) heroImg.src = map[t.heroImage];
+      }
+    }
+
+    function CarolusApp() {
+      const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
+      React.useEffect(() => { applyTweaks(tweaks); }, [tweaks]);
+
+      return (
+        <TweaksPanel title="Tweaks">
+          <TweakSection label="Tipografia">
+            <TweakSelect
+              label="Titoli & Display"
+              value={tweaks.fontDisplay}
+              options={DISPLAY_FONTS}
+              onChange={v => setTweak("fontDisplay", v)}
+            />
+            <TweakSelect
+              label="Corpo testo"
+              value={tweaks.fontBody}
+              options={BODY_FONTS}
+              onChange={v => setTweak("fontBody", v)}
+            />
+          </TweakSection>
+
+          <TweakSection label="Colori">
+            <div style={{marginBottom:12}}>
+              <div style={{fontSize:"0.65rem",letterSpacing:"0.1em",textTransform:"uppercase",color:"#888",marginBottom:8}}>Accento</div>
+              <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+                {ACCENT_PRESETS.map(p => (
+                  <button
+                    key={p.value}
+                    title={p.label}
+                    onClick={() => setTweak("accentColor", p.value)}
+                    style={{
+                      width:28,height:28,borderRadius:4,
+                      background:p.value,border:"none",cursor:"pointer",
+                      outline: tweaks.accentColor===p.value ? "2px solid #333" : "none",
+                      outlineOffset:2
+                    }}
+                  />
+                ))}
+              </div>
+              <TweakColor label="" value={tweaks.accentColor} onChange={v => setTweak("accentColor", v)} />
+            </div>
+
+            <div style={{marginBottom:12}}>
+              <div style={{fontSize:"0.65rem",letterSpacing:"0.1em",textTransform:"uppercase",color:"#888",marginBottom:8}}>Sfondo</div>
+              <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+                {BG_PRESETS.map(p => (
+                  <button
+                    key={p.value}
+                    title={p.label}
+                    onClick={() => setTweak("bgColor", p.value)}
+                    style={{
+                      width:28,height:28,borderRadius:4,
+                      background:p.value,border:"1px solid #ddd",cursor:"pointer",
+                      outline: tweaks.bgColor===p.value ? "2px solid #333" : "none",
+                      outlineOffset:2
+                    }}
+                  />
+                ))}
+              </div>
+              <TweakColor label="" value={tweaks.bgColor} onChange={v => setTweak("bgColor", v)} />
+            </div>
+
+            <div style={{marginBottom:4}}>
+              <div style={{fontSize:"0.65rem",letterSpacing:"0.1em",textTransform:"uppercase",color:"#888",marginBottom:8}}>Testo</div>
+              <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:6}}>
+                {INK_PRESETS.map(p => (
+                  <button
+                    key={p.value}
+                    title={p.label}
+                    onClick={() => setTweak("inkColor", p.value)}
+                    style={{
+                      width:28,height:28,borderRadius:4,
+                      background:p.value,border:"none",cursor:"pointer",
+                      outline: tweaks.inkColor===p.value ? "2px solid #aaa" : "none",
+                      outlineOffset:2
+                    }}
+                  />
+                ))}
+              </div>
+              <TweakColor label="" value={tweaks.inkColor} onChange={v => setTweak("inkColor", v)} />
+            </div>
+          </TweakSection>
+
+          <TweakSection label="Animazioni">
+            <TweakRadio
+              label="Stile animazione scroll"
+              value={tweaks.animStyle}
+              options={["Morbido","Dinamico","Statico"]}
+              onChange={v => setTweak("animStyle", v)}
+            />
+          </TweakSection>
+
+          <TweakSection label="Hero">
+            <TweakSelect
+              label="Immagine hero"
+              value={tweaks.heroImage}
+              options={["portrait","finestra","colonnato","vortice","spirale","donna"]}
+              onChange={v => setTweak("heroImage", v)}
+            />
+          </TweakSection>
+
+          <TweakSection label="Layout">
+            <TweakSlider
+              label="Spaziatura sezioni"
+              value={tweaks.sectionSpacing}
+              min={60} max={200} step={10}
+              onChange={v => setTweak("sectionSpacing", v)}
+            />
+          </TweakSection>
+        </TweaksPanel>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("tweaks-root")).render(<CarolusApp />);
+  </script>
+</body>
+</html>
