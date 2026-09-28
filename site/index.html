@@ -1344,6 +1344,17 @@
       display: block;
     }
 
+    .form-send-error {
+      display: none;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: oklch(55% 0.15 25);
+    }
+
+    .form-send-error.visible {
+      display: block;
+    }
+
     .form-reset {
       display: inline-block;
       margin-top: 22px;
@@ -1425,6 +1436,7 @@
     .footer-nav a:hover {
       color: var(--terra);
     }
+
 
     .footer-meta {
       display: flex;
@@ -2346,7 +2358,12 @@
               placeholder="Scrivi qui il tuo messaggio…"></textarea>
             <span class="form-error" id="err-messaggio">Per favore scrivi un messaggio.</span>
           </div>
+          <!-- Honeypot antispam: invisibile agli umani, riempito dai bot -->
+          <input type="checkbox" name="botcheck" id="botcheck" tabindex="-1" autocomplete="off"
+            style="display:none" aria-hidden="true" />
           <button class="btn-submit" type="submit">Invia messaggio</button>
+          <p class="form-send-error" id="form-send-error" role="alert">Invio non riuscito. Riprova, oppure
+            scrivici direttamente via email.</p>
         </form>
         <div class="form-success" id="form-success">
           <p>Grazie per il tuo messaggio.<br />Ti risponderò al più presto.</p>
@@ -2656,11 +2673,67 @@
       });
     });
 
-    form.addEventListener('submit', e => {
+    // ─── Web3Forms: doppio invio ai due destinatari ───
+    // Ottieni una access key gratuita su https://web3forms.com (una per ogni
+    // indirizzo email di destinazione) e incollala qui sotto. Lascia la stringa
+    // vuota per disattivare un destinatario. Con entrambe vuote, il form mostra
+    // solo il messaggio di conferma senza inviare nulla.
+    const WEB3FORMS_KEYS = [
+      '', // access key per gabriele.brunazzo@unipd.it
+      ''  // access key per camilla.brunazzochiavegato@gmail.com
+    ];
+
+    const submitBtn = form.querySelector('.btn-submit');
+    const sendError = document.getElementById('form-send-error');
+
+    form.addEventListener('submit', async e => {
       e.preventDefault();
-      if (validate()) {
+      if (!validate()) return;
+      sendError?.classList.remove('visible');
+
+      const keys = WEB3FORMS_KEYS.filter(k => k && k.trim());
+
+      // Nessuna chiave configurata: conferma locale, nessun invio.
+      if (!keys.length) {
         form.style.display = 'none';
         success.classList.add('visible');
+        return;
+      }
+
+      const oggetto = document.getElementById('oggetto').value.trim();
+      const payload = {
+        name: document.getElementById('nome').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        oggetto: oggetto || '(nessun oggetto)',
+        message: document.getElementById('messaggio').value.trim(),
+        subject: 'Sito Carolus: ' + (oggetto || 'nuovo messaggio'),
+        from_name: 'Sito Carolus',
+        replyto: document.getElementById('email').value.trim(),
+        botcheck: document.getElementById('botcheck').checked
+      };
+
+      const originalLabel = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Invio…';
+
+      try {
+        const results = await Promise.all(keys.map(access_key =>
+          fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify(Object.assign({ access_key }, payload))
+          }).then(r => r.json()).catch(() => ({ success: false })))
+        );
+        if (results.some(r => r && r.success)) {
+          form.style.display = 'none';
+          success.classList.add('visible');
+        } else {
+          throw new Error('web3forms');
+        }
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+        sendError?.classList.add('visible');
       }
     });
 
