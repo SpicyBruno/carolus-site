@@ -803,7 +803,8 @@
     /* Painting grid — "parete di galleria": righe giustificate, ogni opera
        nel suo formato reale (--ar = larghezza/altezza, scritto nel markup),
        nessun ritaglio, targhetta museale sotto. */
-    .painting-grid {
+    .painting-grid,
+    .photo-grid {
       --row-h: 330px;
       display: flex;
       flex-wrap: wrap;
@@ -812,24 +813,30 @@
     }
 
     /* Evita che l'ultima riga si allarghi a dismisura */
-    .painting-grid::after {
+    .painting-grid::after,
+    .photo-grid::after {
       content: '';
       flex: 999 1 0;
     }
 
-    .painting-grid .gi {
+    .painting-grid .gi,
+    .photo-grid .photo-item {
       --ar: 0.8;
+      cursor: pointer;
+      position: relative;
       flex: calc(var(--ar) * 100) 1 calc(var(--ar) * var(--row-h));
       min-width: 0;
       overflow: visible;
       background: none;
     }
 
-    .painting-grid .gi::after {
+    .painting-grid .gi::after,
+    .photo-grid .photo-item::after {
       content: none;
     }
 
-    .painting-grid .gi:focus-visible {
+    .painting-grid .gi:focus-visible,
+    .photo-grid .photo-item:focus-visible {
       outline-offset: 6px;
     }
 
@@ -843,17 +850,22 @@
       transition: box-shadow 0.6s var(--ease), translate 0.6s var(--ease);
     }
 
-    .painting-grid .gi img {
+    .gi-frame img {
+      width: 100%;
+      height: 100%;
+      display: block;
       object-fit: cover;
       filter: none;
     }
 
-    .painting-grid .gi:hover img {
+    .painting-grid .gi:hover img,
+    .photo-grid .photo-item:hover img {
       scale: 1.025;
       filter: none;
     }
 
-    .painting-grid .gi:hover .gi-frame {
+    .painting-grid .gi:hover .gi-frame,
+    .photo-grid .photo-item:hover .gi-frame {
       translate: 0 -3px;
       box-shadow: 0 2px 4px oklch(20% 0.01 60 / 0.1), 0 22px 44px -18px oklch(20% 0.01 60 / 0.45);
     }
@@ -877,7 +889,9 @@
     }
 
     .gi:hover .gi-title,
-    .gi:focus-visible .gi-title {
+    .gi:focus-visible .gi-title,
+    .photo-item:hover .gi-title,
+    .photo-item:focus-visible .gi-title {
       color: var(--terra);
     }
 
@@ -892,7 +906,9 @@
     @media (prefers-reduced-motion: reduce) {
 
       .painting-grid .gi:hover img,
-      .painting-grid .gi:hover .gi-frame {
+      .painting-grid .gi:hover .gi-frame,
+      .photo-grid .photo-item:hover img,
+      .photo-grid .photo-item:hover .gi-frame {
         scale: none;
         translate: none;
       }
@@ -1039,60 +1055,14 @@
       animation: panel-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-    }
-
-    .photo-item {
-      overflow: hidden;
-      cursor: pointer;
-      position: relative;
-      aspect-ratio: 3/4;
-    }
-
-    .photo-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    /* Foto: stessa parete della pittura, stampe in bianco e nero */
+    .photo-grid .gi-frame img {
       filter: grayscale(1) contrast(1.06);
       transition: scale 0.6s var(--ease), filter 0.4s;
     }
 
-    .photo-item:hover img {
-      scale: 1.03;
+    .photo-grid .photo-item:hover .gi-frame img {
       filter: grayscale(0.7) contrast(1.1);
-    }
-
-    .photo-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 48px 20px 18px;
-      background: linear-gradient(to top, oklch(5% 0 0 / 0.75), transparent);
-      font-family: var(--f-display);
-      font-size: 0.9rem;
-      font-style: italic;
-      color: var(--white);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .photo-item:hover .photo-caption,
-    .photo-item:focus-visible .photo-caption {
-      opacity: 1;
-    }
-
-    /* Touch devices have no hover: keep captions permanently visible */
-    @media (hover: none) {
-
-      .photo-caption {
-        opacity: 1;
-        transform: none;
-      }
     }
 
     /* ─── BIOGRAFIA ─── */
@@ -1860,11 +1830,8 @@
         aspect-ratio: 1;
       }
 
+      .painting-grid,
       .photo-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .painting-grid {
         --row-h: 250px;
         gap: 36px 16px;
       }
@@ -1962,11 +1929,8 @@
         gap: 24px;
       }
 
+      .painting-grid,
       .photo-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .painting-grid {
         --row-h: 150px;
         gap: 28px 12px;
       }
@@ -2200,94 +2164,94 @@
 
     <div class="photo-panel active" id="panel-realismo">
       <div class="photo-grid">
-        <div class="photo-item" data-img="assets/hero-portrait.jpg" data-caption="Ritratto, stampa ai sali d'argento">
-          <img src="assets/hero-portrait.jpg" alt="Ritratto, stampa ai sali d'argento" loading="lazy" />
-          <div class="photo-caption">Ritratto</div>
+        <div class="photo-item" data-img="assets/hero-portrait.jpg" data-caption="Ritratto, stampa ai sali d'argento" style="--ar: 0.737">
+          <span class="gi-frame"><img src="assets/hero-portrait.jpg" alt="Ritratto, stampa ai sali d'argento" width="953" height="1293" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Ritratto</span><span class="gi-meta">stampa ai sali d&#x27;argento</span></span>
         </div>
-        <div class="photo-item" data-img="assets/foto-finestra.jpg" data-caption="Luce di finestra">
-          <img src="assets/foto-finestra.jpg" alt="Figura con luce di finestra" loading="lazy" />
-          <div class="photo-caption">Luce di finestra</div>
+        <div class="photo-item" data-img="assets/foto-finestra.jpg" data-caption="Luce di finestra" style="--ar: 1.2843">
+          <span class="gi-frame"><img src="assets/foto-finestra.jpg" alt="Figura con luce di finestra" width="1283" height="999" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Luce di finestra</span></span>
         </div>
-        <div class="photo-item" data-img="assets/foto-ragnatela.jpg" data-caption="Ragnatela">
-          <img src="assets/foto-ragnatela.jpg" alt="Volto nella ragnatela" loading="lazy" />
-          <div class="photo-caption">Ragnatela</div>
+        <div class="photo-item" data-img="assets/foto-ragnatela.jpg" data-caption="Ragnatela" style="--ar: 1.3025">
+          <span class="gi-frame"><img src="assets/foto-ragnatela.jpg" alt="Volto nella ragnatela" width="1352" height="1038" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Ragnatela</span></span>
         </div>
-        <div class="photo-item" data-img="assets/foto10.jpg" data-caption="Colonnato">
-          <img src="assets/foto10.jpg" alt="Colonnato" loading="lazy" />
-          <div class="photo-caption">Colonnato</div>
+        <div class="photo-item" data-img="assets/foto10.jpg" data-caption="Colonnato" style="--ar: 0.7456">
+          <span class="gi-frame"><img src="assets/foto10.jpg" alt="Colonnato" width="721" height="967" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Colonnato</span></span>
         </div>
-        <div class="photo-item" data-img="assets/foto11.jpg" data-caption="Panchine nella neve">
-          <img src="assets/foto11.jpg" alt="Panchine nella neve" loading="lazy" />
-          <div class="photo-caption">Panchine nella neve</div>
+        <div class="photo-item" data-img="assets/foto11.jpg" data-caption="Panchine nella neve" style="--ar: 1.0">
+          <span class="gi-frame"><img src="assets/foto11.jpg" alt="Panchine nella neve" width="1029" height="1029" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Panchine nella neve</span></span>
         </div>
-        <div class="photo-item" data-img="assets/foto1.jpg" data-caption="Pescatore">
-          <img src="assets/foto1.jpg" alt="Pescatore" loading="lazy" />
-          <div class="photo-caption">Pescatore</div>
+        <div class="photo-item" data-img="assets/foto1.jpg" data-caption="Pescatore" style="--ar: 0.7518">
+          <span class="gi-frame"><img src="assets/foto1.jpg" alt="Pescatore" width="1048" height="1394" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Pescatore</span></span>
         </div>
-        <div class="photo-item" data-img="assets/foto2.jpg" data-caption="Giostra">
-          <img src="assets/foto2.jpg" alt="Giostra" loading="lazy" />
-          <div class="photo-caption">Giostra</div>
+        <div class="photo-item" data-img="assets/foto2.jpg" data-caption="Giostra" style="--ar: 0.7193">
+          <span class="gi-frame"><img src="assets/foto2.jpg" alt="Giostra" width="1084" height="1507" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Giostra</span></span>
         </div>
-        <div class="photo-item" data-img="assets/foto3.jpg" data-caption="Oblò">
-          <img src="assets/foto3.jpg" alt="Oblò" loading="lazy" />
-          <div class="photo-caption">Oblò</div>
+        <div class="photo-item" data-img="assets/foto3.jpg" data-caption="Oblò" style="--ar: 0.724">
+          <span class="gi-frame"><img src="assets/foto3.jpg" alt="Oblò" width="1280" height="1768" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Oblò</span></span>
         </div>
-        <div class="photo-item" data-img="assets/foto6.jpg" data-caption="Rete da pesca">
-          <img src="assets/foto6.jpg" alt="Rete da pesca" loading="lazy" />
-          <div class="photo-caption">Rete da pesca</div>
+        <div class="photo-item" data-img="assets/foto6.jpg" data-caption="Rete da pesca" style="--ar: 0.7228">
+          <span class="gi-frame"><img src="assets/foto6.jpg" alt="Rete da pesca" width="1051" height="1454" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Rete da pesca</span></span>
         </div>
       </div>
     </div>
 
     <div class="photo-panel" id="panel-astratta">
       <div class="photo-grid">
-        <div class="photo-item" data-img="assets/dsc-1.jpg" data-caption="Composizione astratta">
-          <img src="assets/dsc-1.jpg" alt="Composizione astratta" loading="lazy" />
-          <div class="photo-caption">Composizione I</div>
+        <div class="photo-item" data-img="assets/dsc-1.jpg" data-caption="Composizione astratta" style="--ar: 0.9744">
+          <span class="gi-frame"><img src="assets/dsc-1.jpg" alt="Composizione astratta" width="2473" height="2538" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Composizione I</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-2.jpg" data-caption="Scultura di carta">
-          <img src="assets/dsc-2.jpg" alt="Scultura di carta" loading="lazy" />
-          <div class="photo-caption">Scultura di carta</div>
+        <div class="photo-item" data-img="assets/dsc-2.jpg" data-caption="Scultura di carta" style="--ar: 0.7893">
+          <span class="gi-frame"><img src="assets/dsc-2.jpg" alt="Scultura di carta" width="1682" height="2131" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Scultura di carta</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-3.jpg" data-caption="Geometrie">
-          <img src="assets/dsc-3.jpg" alt="Geometrie" loading="lazy" />
-          <div class="photo-caption">Geometrie</div>
+        <div class="photo-item" data-img="assets/dsc-3.jpg" data-caption="Geometrie" style="--ar: 0.7454">
+          <span class="gi-frame"><img src="assets/dsc-3.jpg" alt="Geometrie" width="1675" height="2247" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Geometrie</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-4.jpg" data-caption="Luce e ombra">
-          <img src="assets/dsc-4.jpg" alt="Luce e ombra" loading="lazy" />
-          <div class="photo-caption">Luce e ombra</div>
+        <div class="photo-item" data-img="assets/dsc-4.jpg" data-caption="Luce e ombra" style="--ar: 1.3288">
+          <span class="gi-frame"><img src="assets/dsc-4.jpg" alt="Luce e ombra" width="2227" height="1676" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Luce e ombra</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-5.jpg" data-caption="Solarizzazione">
-          <img src="assets/dsc-5.jpg" alt="Solarizzazione" loading="lazy" />
-          <div class="photo-caption">Solarizzazione</div>
+        <div class="photo-item" data-img="assets/dsc-5.jpg" data-caption="Solarizzazione" style="--ar: 1.328">
+          <span class="gi-frame"><img src="assets/dsc-5.jpg" alt="Solarizzazione" width="3061" height="2305" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Solarizzazione</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-6.jpg" data-caption="Riflessi">
-          <img src="assets/dsc-6.jpg" alt="Riflessi" loading="lazy" />
-          <div class="photo-caption">Riflessi</div>
+        <div class="photo-item" data-img="assets/dsc-6.jpg" data-caption="Riflessi" style="--ar: 0.7785">
+          <span class="gi-frame"><img src="assets/dsc-6.jpg" alt="Riflessi" width="2018" height="2592" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Riflessi</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-7.jpg" data-caption="Doppia esposizione">
-          <img src="assets/dsc-7.jpg" alt="Doppia esposizione" loading="lazy" />
-          <div class="photo-caption">Doppia esposizione</div>
+        <div class="photo-item" data-img="assets/dsc-7.jpg" data-caption="Doppia esposizione" style="--ar: 0.7498">
+          <span class="gi-frame"><img src="assets/dsc-7.jpg" alt="Doppia esposizione" width="1939" height="2586" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Doppia esposizione</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-8.jpg" data-caption="Cosmogonia">
-          <img src="assets/dsc-8.jpg" alt="Cosmogonia" loading="lazy" />
-          <div class="photo-caption">Cosmogonia</div>
+        <div class="photo-item" data-img="assets/dsc-8.jpg" data-caption="Cosmogonia" style="--ar: 0.7364">
+          <span class="gi-frame"><img src="assets/dsc-8.jpg" alt="Cosmogonia" width="1511" height="2052" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Cosmogonia</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-9.jpg" data-caption="Spirale">
-          <img src="assets/dsc-9.jpg" alt="Spirale" loading="lazy" />
-          <div class="photo-caption">Spirale</div>
+        <div class="photo-item" data-img="assets/dsc-9.jpg" data-caption="Spirale" style="--ar: 1.3079">
+          <span class="gi-frame"><img src="assets/dsc-9.jpg" alt="Spirale" width="1958" height="1497" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Spirale</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-10.jpg" data-caption="Movimento">
-          <img src="assets/dsc-10.jpg" alt="Movimento" loading="lazy" />
-          <div class="photo-caption">Movimento</div>
+        <div class="photo-item" data-img="assets/dsc-10.jpg" data-caption="Movimento" style="--ar: 1.2982">
+          <span class="gi-frame"><img src="assets/dsc-10.jpg" alt="Movimento" width="2059" height="1586" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Movimento</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-11.jpg" data-caption="Vortice">
-          <img src="assets/dsc-11.jpg" alt="Vortice" loading="lazy" />
-          <div class="photo-caption">Vortice</div>
+        <div class="photo-item" data-img="assets/dsc-11.jpg" data-caption="Vortice" style="--ar: 0.7539">
+          <span class="gi-frame"><img src="assets/dsc-11.jpg" alt="Vortice" width="1544" height="2048" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Vortice</span></span>
         </div>
-        <div class="photo-item" data-img="assets/foto12.jpg" data-caption="Graffiti urbani">
-          <img src="assets/foto12.jpg" alt="Graffiti urbani" loading="lazy" />
-          <div class="photo-caption">Graffiti</div>
+        <div class="photo-item" data-img="assets/foto12.jpg" data-caption="Graffiti urbani" style="--ar: 1.2711">
+          <span class="gi-frame"><img src="assets/foto12.jpg" alt="Graffiti urbani" width="1280" height="1007" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Graffiti</span></span>
         </div>
       </div>
     </div>
