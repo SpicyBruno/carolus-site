@@ -1498,25 +1498,73 @@
     }
 
     /* ─── LIGHTBOX ─── */
+    /* Il fondo scuro vive su ::before, così l'opera in volo (FLIP dalla
+       parete) resta piena mentre la stanza si oscura intorno a lei. */
     .lightbox {
       position: fixed;
       inset: 0;
       z-index: 200;
-      background: oklch(5% 0 0 / 0.94);
       display: flex;
       align-items: center;
       justify-content: center;
-      opacity: 0;
+      visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.35s;
+      transition: visibility 0s linear 0.5s;
+    }
+
+    .lightbox::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: oklch(5% 0 0 / 0.94);
+      opacity: 0;
+      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .lightbox.open,
+    .lightbox.lb-closing {
+      visibility: visible;
+      transition-delay: 0s;
     }
 
     .lightbox.open {
-      opacity: 1;
       pointer-events: all;
     }
 
+    .lightbox.open::before {
+      opacity: 1;
+      transition-duration: 0.55s;
+    }
+
+    .lightbox-close,
+    .lightbox-nav,
+    .lightbox-count {
+      opacity: 0;
+    }
+
+    .lightbox.open .lightbox-close,
+    .lightbox.open .lightbox-nav,
+    .lightbox.open .lightbox-count {
+      opacity: 1;
+      transition: opacity 0.4s ease 0.3s, color 0.2s, background 0.25s;
+    }
+
+    /* Durante il volo le transizioni CSS dell'immagine tacciono: guida WAAPI */
+    .lightbox.lb-flip img,
+    .lightbox.lb-closing img {
+      transition: none;
+      transform: none;
+      opacity: 1;
+      filter: none;
+    }
+
+    /* La cornice sulla parete resta vuota mentre l'opera è "in mano" */
+    .lb-lifted .gi-frame {
+      opacity: 0;
+    }
+
     .lightbox img {
+      position: relative;
       max-width: 88vw;
       max-height: 90vh;
       object-fit: contain;
@@ -2619,26 +2667,125 @@
       lightbox.classList.add('lb-ready');
       lbCaption.textContent = 'Immagine non disponibile.';
     });
+    // ─── "Staccare l'opera dal muro" ───
+    // FLIP: l'immagine del lightbox parte esattamente dalla cornice sulla
+    // parete e si posa al centro; alla chiusura torna nella sua cornice.
+    const lbMotionMq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const LB_EASE_IN = 'cubic-bezier(0.16, 1, 0.3, 1)';
+    const LB_EASE_OUT = 'cubic-bezier(0.5, 0, 0.2, 1)';
+    let lbLifted = null;
+    let lbOpener = null;
+
+    function frameOf(el) {
+      return el ? (el.querySelector('.gi-frame') || el.querySelector('img')) : null;
+    }
+
+    function frameOnScreen(frame) {
+      if (!frame || !frame.offsetParent) return null;
+      const r = frame.getBoundingClientRect();
+      if (!r.width || r.bottom < 0 || r.top > innerHeight) return null;
+      return r;
+    }
+
+    function flightTransform(from, to) {
+      return `translate(${from.left - to.left}px, ${from.top - to.top}px) ` +
+        `scale(${from.width / to.width}, ${from.height / to.height})`;
+    }
+
+    function setLifted(el) {
+      lbLifted?.classList.remove('lb-lifted');
+      lbLifted = el;
+      el?.classList.add('lb-lifted');
+    }
+
+    function flyFromWall(el) {
+      if (lbMotionMq.matches || !lbImg.classList.contains('loaded')) return;
+      const from = frameOnScreen(frameOf(el));
+      if (!from) return;
+      lightbox.classList.add('lb-flip');
+      const to = lbImg.getBoundingClientRect();
+      if (!to.width) { lightbox.classList.remove('lb-flip'); return; }
+      setLifted(el);
+      lbImg.style.transformOrigin = '0 0';
+      // Le foto sulla parete sono in scala di grigi: la stampa prende i suoi toni in volo
+      const tone = el.classList.contains('photo-item') ? 'grayscale(1) contrast(1.06)' : 'none';
+      lbImg.animate([
+        { transform: flightTransform(from, to), boxShadow: '0 10px 28px -14px oklch(0% 0 0 / 0.35)', filter: tone },
+        { transform: 'none', boxShadow: '0 32px 80px oklch(0% 0 0 / 0.5)', filter: 'none' }
+      ], { duration: 680, easing: LB_EASE_IN }).finished
+        .then(() => {
+          lightbox.classList.remove('lb-flip');
+          lbImg.style.transformOrigin = '';
+        }, () => {});
+    }
+
     function closeLightbox() {
-      lightbox.classList.remove('open');
+      if (!lightbox.classList.contains('open')) return;
+      lbImg.getAnimations().forEach(a => a.cancel());
       document.body.style.overflow = '';
+      const el = lbItems[lbIndex];
+      const to = !lbMotionMq.matches && lbImg.classList.contains('loaded')
+        ? frameOnScreen(frameOf(el)) : null;
+      const done = () => {
+        // Nasconde l'immagine prima di togliere lb-closing: niente fantasma al centro
+        lbImg.style.visibility = 'hidden';
+        lbImg.style.transformOrigin = '';
+        lightbox.classList.remove('lb-closing', 'lb-flip');
+        setLifted(null);
+      };
+      if (to) {
+        const from = lbImg.getBoundingClientRect();
+        setLifted(el);
+        lightbox.classList.add('lb-closing');
+        lightbox.classList.remove('open');
+        lbImg.style.transformOrigin = '0 0';
+        const tone = el.classList.contains('photo-item') ? 'grayscale(1) contrast(1.06)' : 'none';
+        lbImg.animate([
+          { transform: 'none', boxShadow: '0 32px 80px oklch(0% 0 0 / 0.5)', filter: 'none' },
+          { transform: flightTransform(to, from), boxShadow: '0 10px 28px -14px oklch(0% 0 0 / 0.35)', filter: tone }
+        ], { duration: 460, easing: LB_EASE_OUT, fill: 'forwards' }).finished
+          .then(a => { done(); a.cancel?.(); }, done);
+      } else {
+        lightbox.classList.remove('open');
+        done();
+      }
+      (el?.offsetParent ? el : lbOpener)?.focus({ preventScroll: true });
     }
 
     // Costruisco una lista navigabile globale (rispetta l'ordine DOM = ordine di lettura)
     const lbItems = [];
     let lbIndex = -1;
 
-    function openByIndex(i) {
+    function openByIndex(i, dir = 0) {
       if (i < 0 || i >= lbItems.length) return;
+      const wasOpen = lightbox.classList.contains('open');
+      lbImg.getAnimations().forEach(a => a.cancel());
+      lightbox.classList.remove('lb-flip', 'lb-closing');
+      lbImg.style.visibility = '';
+      lbImg.style.transformOrigin = '';
       lbIndex = i;
       const el = lbItems[i];
+      if (!wasOpen) lbOpener = document.activeElement;
       openLightbox(el.dataset.img, el.dataset.caption, el.querySelector('img')?.alt);
       lbCount.textContent = (i + 1) + ' / ' + lbItems.length;
+      if (!wasOpen) {
+        flyFromWall(el);
+        lbClose.focus({ preventScroll: true });
+      } else {
+        // L'opera scelta lascia la sua cornice; le altre tornano al loro posto
+        setLifted(el);
+        if (dir && !lbMotionMq.matches && lbImg.classList.contains('loaded')) {
+          lbImg.animate([
+            { opacity: 0, transform: `translateX(${dir * 48}px)`, filter: 'blur(6px)' },
+            { opacity: 1, transform: 'none', filter: 'blur(0)' }
+          ], { duration: 420, easing: LB_EASE_IN });
+        }
+      }
     }
 
     function lbStep(dir) {
       if (!lbItems.length) return;
-      openByIndex((lbIndex + dir + lbItems.length) % lbItems.length);
+      openByIndex((lbIndex + dir + lbItems.length) % lbItems.length, dir);
     }
 
     document.querySelectorAll('[data-img]').forEach((el, i) => {
