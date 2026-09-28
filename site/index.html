@@ -800,27 +800,102 @@
 
     /* ─── PITTURA ─── */
 
-    /* Painting grid — uguale alla photo-grid, ma con opere intere centrate */
+    /* Painting grid — "parete di galleria": righe giustificate, ogni opera
+       nel suo formato reale (--ar = larghezza/altezza, scritto nel markup),
+       nessun ritaglio, targhetta museale sotto. */
     .painting-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
+      --row-h: 330px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 44px 22px;
+    }
+
+    /* Evita che l'ultima riga si allarghi a dismisura */
+    .painting-grid::after {
+      content: '';
+      flex: 999 1 0;
     }
 
     .painting-grid .gi {
-      aspect-ratio: 3/4;
+      --ar: 0.8;
+      flex: calc(var(--ar) * 100) 1 calc(var(--ar) * var(--row-h));
+      min-width: 0;
+      overflow: visible;
+      background: none;
+    }
+
+    .painting-grid .gi::after {
+      content: none;
+    }
+
+    .painting-grid .gi:focus-visible {
+      outline-offset: 6px;
+    }
+
+    .gi-frame {
+      position: relative;
+      display: block;
+      aspect-ratio: var(--ar);
+      overflow: hidden;
       background: var(--bg2);
+      box-shadow: 0 1px 2px oklch(20% 0.01 60 / 0.08), 0 10px 28px -14px oklch(20% 0.01 60 / 0.35);
+      transition: box-shadow 0.6s var(--ease), translate 0.6s var(--ease);
     }
 
     .painting-grid .gi img {
-      object-fit: contain;
-      object-position: center center;
-      padding: 14px;
+      object-fit: cover;
       filter: none;
     }
 
     .painting-grid .gi:hover img {
+      scale: 1.025;
       filter: none;
+    }
+
+    .painting-grid .gi:hover .gi-frame {
+      translate: 0 -3px;
+      box-shadow: 0 2px 4px oklch(20% 0.01 60 / 0.1), 0 22px 44px -18px oklch(20% 0.01 60 / 0.45);
+    }
+
+    .gi-plate {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding-top: 14px;
+      max-width: 32ch;
+    }
+
+    .gi-title {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 1.12rem;
+      line-height: 1.25;
+      color: var(--ink);
+      text-wrap: balance;
+      transition: color 0.3s;
+    }
+
+    .gi:hover .gi-title,
+    .gi:focus-visible .gi-title {
+      color: var(--terra);
+    }
+
+    .gi-meta {
+      font-family: var(--f-body);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink3);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .painting-grid .gi:hover img,
+      .painting-grid .gi:hover .gi-frame {
+        scale: none;
+        translate: none;
+      }
     }
 
     /* Gallery item shared */
@@ -857,25 +932,6 @@
       background: oklch(14% 0 0 / 0.15);
     }
 
-    .gi-label {
-      position: absolute;
-      bottom: 16px;
-      left: 20px;
-      z-index: 2;
-      font-family: var(--f-display);
-      font-size: 0.9rem;
-      font-style: italic;
-      color: var(--white);
-      opacity: 0;
-      transform: translateY(6px);
-      transition: opacity 0.3s, transform 0.3s;
-      text-shadow: 0 1px 4px oklch(0% 0 0 / 0.5);
-    }
-
-    .gi:hover .gi-label {
-      opacity: 1;
-      transform: translateY(0);
-    }
 
     /* ─── SCROLL ANIMATIONS ─── */
     [data-anim] {
@@ -1025,14 +1081,14 @@
       transition: opacity 0.3s;
     }
 
-    .photo-item:hover .photo-caption {
+    .photo-item:hover .photo-caption,
+    .photo-item:focus-visible .photo-caption {
       opacity: 1;
     }
 
     /* Touch devices have no hover: keep captions permanently visible */
     @media (hover: none) {
 
-      .gi-label,
       .photo-caption {
         opacity: 1;
         transform: none;
@@ -1809,7 +1865,8 @@
       }
 
       .painting-grid {
-        grid-template-columns: repeat(2, 1fr);
+        --row-h: 250px;
+        gap: 36px 16px;
       }
 
       .bio-grid {
@@ -1910,11 +1967,17 @@
       }
 
       .painting-grid {
-        grid-template-columns: 1fr 1fr;
+        --row-h: 150px;
+        gap: 28px 12px;
       }
 
-      .painting-grid .gi img {
-        padding: 8px;
+      .gi-title {
+        font-size: 1rem;
+      }
+
+      .gi-meta {
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
       }
 
       .photo-tabs {
@@ -2011,41 +2074,45 @@
     <!-- Figure & Ritratti -->
     <div class="pittura-panel active" id="panel-figure">
       <div class="painting-grid">
-        <div class="gi" data-img="assets/autoritratto.jpg" data-caption="Autoritratto, olio su tela">
-          <img src="assets/autoritratto.jpg" alt="Autoritratto, olio su tela" loading="lazy" /><span
-            class="gi-label">Autoritratto</span>
+        <div class="gi" data-img="assets/autoritratto.jpg" data-caption="Autoritratto, olio su tela" style="--ar: 0.8643">
+          <span class="gi-frame"><img src="assets/autoritratto.jpg" alt="Autoritratto, olio su tela" width="1280" height="1481" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Autoritratto</span><span class="gi-meta">olio su tela</span></span>
         </div>
-        <div class="gi" data-img="assets/maternita.jpg" data-caption="Maternità, olio su tela">
-          <img src="assets/maternita.jpg" alt="Maternità, olio su tela" loading="lazy" /><span class="gi-label">Maternità</span>
+        <div class="gi" data-img="assets/maternita.jpg" data-caption="Maternità, olio su tela" style="--ar: 0.7455">
+          <span class="gi-frame"><img src="assets/maternita.jpg" alt="Maternità, olio su tela" width="1280" height="1717" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Maternità</span><span class="gi-meta">olio su tela</span></span>
         </div>
-        <div class="gi" data-img="assets/t3977.jpg" data-caption="Coppia con fiore, olio su tela">
-          <img src="assets/t3977.jpg" alt="Coppia con fiore, olio su tela" loading="lazy" /><span class="gi-label">Coppia con
-            fiore</span>
+        <div class="gi" data-img="assets/t3977.jpg" data-caption="Coppia con fiore, olio su tela" style="--ar: 1.3333">
+          <span class="gi-frame"><img src="assets/t3977.jpg" alt="Coppia con fiore, olio su tela" width="1024" height="768" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Coppia con fiore</span><span class="gi-meta">olio su tela</span></span>
         </div>
-        <div class="gi" data-img="assets/t3943.jpg" data-caption="Anziano con carrozza, 1960">
-          <img src="assets/t3943.jpg" alt="Anziano con carrozza, 1960" loading="lazy" /><span class="gi-label">Anziano con
-            carrozza, 1960</span>
+        <div class="gi" data-img="assets/t3943.jpg" data-caption="Anziano con carrozza, 1960" style="--ar: 1.3333">
+          <span class="gi-frame"><img src="assets/t3943.jpg" alt="Anziano con carrozza, 1960" width="1024" height="768" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Anziano con carrozza</span><span class="gi-meta">1960</span></span>
         </div>
-        <div class="gi" data-img="assets/t3952.jpg" data-caption="Tre uomini al tavolo, 1960">
-          <img src="assets/t3952.jpg" alt="Tre uomini al tavolo, 1960" loading="lazy" /><span class="gi-label">Tre uomini al
-            tavolo</span>
+        <div class="gi" data-img="assets/t3952.jpg" data-caption="Tre uomini al tavolo, 1960" style="--ar: 1.3333">
+          <span class="gi-frame"><img src="assets/t3952.jpg" alt="Tre uomini al tavolo, 1960" width="1024" height="768" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Tre uomini al tavolo</span><span class="gi-meta">1960</span></span>
         </div>
-        <div class="gi" data-img="assets/t3968.jpg" data-caption="Ufficio, olio su tela, 1960">
-          <img src="assets/t3968.jpg" alt="Ufficio, 1960" loading="lazy" /><span class="gi-label">Ufficio, 1960</span>
+        <div class="gi" data-img="assets/t3968.jpg" data-caption="Ufficio, olio su tela, 1960" style="--ar: 0.75">
+          <span class="gi-frame"><img src="assets/t3968.jpg" alt="Ufficio, 1960" width="768" height="1024" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Ufficio</span><span class="gi-meta">olio su tela · 1960</span></span>
         </div>
-        <div class="gi" data-img="assets/t3976.jpg" data-caption="Lavoratori, olio su tela">
-          <img src="assets/t3976.jpg" alt="Lavoratori, olio su tela" loading="lazy" /><span class="gi-label">Lavoratori</span>
+        <div class="gi" data-img="assets/t3976.jpg" data-caption="Lavoratori, olio su tela" style="--ar: 1.3333">
+          <span class="gi-frame"><img src="assets/t3976.jpg" alt="Lavoratori, olio su tela" width="1024" height="768" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Lavoratori</span><span class="gi-meta">olio su tela</span></span>
         </div>
-        <div class="gi" data-img="assets/PAPER2.jpg" data-caption="Due figure con pianta, inchiostro, 1986">
-          <img src="assets/PAPER2.jpg" alt="Due figure con pianta, inchiostro, 1986" loading="lazy" /><span class="gi-label">Due figure, 1986</span>
+        <div class="gi" data-img="assets/PAPER2.jpg" data-caption="Due figure con pianta, inchiostro, 1986" style="--ar: 0.6656">
+          <span class="gi-frame"><img src="assets/PAPER2.jpg" alt="Due figure con pianta, inchiostro, 1986" width="1280" height="1923" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Due figure con pianta</span><span class="gi-meta">inchiostro · 1986</span></span>
         </div>
-        <div class="gi" data-img="assets/PAPER4.jpg" data-caption="Donna con cesta, acquerello, 1981">
-          <img src="assets/PAPER4.jpg" alt="Donna con cesta, acquerello, 1981" loading="lazy" /><span class="gi-label">Donna con cesta,
-            1981</span>
+        <div class="gi" data-img="assets/PAPER4.jpg" data-caption="Donna con cesta, acquerello, 1981" style="--ar: 1.0">
+          <span class="gi-frame"><img src="assets/PAPER4.jpg" alt="Donna con cesta, acquerello, 1981" width="1280" height="1280" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Donna con cesta</span><span class="gi-meta">acquerello · 1981</span></span>
         </div>
-        <div class="gi" data-img="assets/PAPER5.jpg" data-caption="Donna con cappello, acquerello">
-          <img src="assets/PAPER5.jpg" alt="Donna con cappello, acquerello" loading="lazy" /><span class="gi-label">Donna con
-            cappello</span>
+        <div class="gi" data-img="assets/PAPER5.jpg" data-caption="Donna con cappello, acquerello" style="--ar: 1.4286">
+          <span class="gi-frame"><img src="assets/PAPER5.jpg" alt="Donna con cappello, acquerello" width="1280" height="896" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Donna con cappello</span><span class="gi-meta">acquerello</span></span>
         </div>
       </div>
     </div>
@@ -2053,19 +2120,21 @@
     <!-- Natura Morta & Fiori -->
     <div class="pittura-panel" id="panel-natura">
       <div class="painting-grid">
-        <div class="gi" data-img="assets/fiore1.jpg" data-caption="Bouquet, olio su tela">
-          <img src="assets/fiore1.jpg" alt="Bouquet, olio su tela" loading="lazy" /><span class="gi-label">Bouquet</span>
+        <div class="gi" data-img="assets/fiore1.jpg" data-caption="Bouquet, olio su tela" style="--ar: 0.6631">
+          <span class="gi-frame"><img src="assets/fiore1.jpg" alt="Bouquet, olio su tela" width="856" height="1291" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Bouquet</span><span class="gi-meta">olio su tela</span></span>
         </div>
-        <div class="gi" data-img="assets/NM1.jpg" data-caption="Natura morta con fiori, olio su tela">
-          <img src="assets/NM1.jpg" alt="Natura morta con fiori, olio su tela" loading="lazy" /><span class="gi-label">Natura morta</span>
+        <div class="gi" data-img="assets/NM1.jpg" data-caption="Natura morta con fiori, olio su tela" style="--ar: 1.0">
+          <span class="gi-frame"><img src="assets/NM1.jpg" alt="Natura morta con fiori, olio su tela" width="1280" height="1280" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Natura morta con fiori</span><span class="gi-meta">olio su tela</span></span>
         </div>
-        <div class="gi" data-img="assets/PAPER1.jpg" data-caption="Natura morta con frutta, olio su tela">
-          <img src="assets/PAPER1.jpg" alt="Natura morta con frutta, olio su tela" loading="lazy" /><span class="gi-label">Frutta e
-            coppa</span>
+        <div class="gi" data-img="assets/PAPER1.jpg" data-caption="Natura morta con frutta, olio su tela" style="--ar: 1.5403">
+          <span class="gi-frame"><img src="assets/PAPER1.jpg" alt="Natura morta con frutta, olio su tela" width="1280" height="831" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Natura morta con frutta</span><span class="gi-meta">olio su tela</span></span>
         </div>
-        <div class="gi" data-img="assets/PAPER6.jpg" data-caption="Composizione rosa, acquerello">
-          <img src="assets/PAPER6.jpg" alt="Composizione rosa, acquerello" loading="lazy" /><span class="gi-label">Composizione
-            rosa</span>
+        <div class="gi" data-img="assets/PAPER6.jpg" data-caption="Composizione rosa, acquerello" style="--ar: 0.6953">
+          <span class="gi-frame"><img src="assets/PAPER6.jpg" alt="Composizione rosa, acquerello" width="1280" height="1841" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Composizione rosa</span><span class="gi-meta">acquerello</span></span>
         </div>
       </div>
     </div>
@@ -2073,18 +2142,21 @@
     <!-- Paesaggi & Architetture -->
     <div class="pittura-panel" id="panel-paesaggi">
       <div class="painting-grid">
-        <div class="gi" data-img="assets/t4111.jpg" data-caption="Paesaggio notturno, olio su tela, 1956">
-          <img src="assets/t4111.jpg" alt="Paesaggio notturno, 1956" loading="lazy" /><span class="gi-label">Paesaggio
-            notturno, 1956</span>
+        <div class="gi" data-img="assets/t4111.jpg" data-caption="Paesaggio notturno, olio su tela, 1956" style="--ar: 1.3333">
+          <span class="gi-frame"><img src="assets/t4111.jpg" alt="Paesaggio notturno, 1956" width="1024" height="768" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Paesaggio notturno</span><span class="gi-meta">olio su tela · 1956</span></span>
         </div>
-        <div class="gi" data-img="assets/torre.jpg" data-caption="Torre con birilli, olio su tela">
-          <img src="assets/torre.jpg" alt="Torre con birilli, olio su tela" loading="lazy" /><span class="gi-label">Torre con birilli</span>
+        <div class="gi" data-img="assets/torre.jpg" data-caption="Torre con birilli, olio su tela" style="--ar: 0.8608">
+          <span class="gi-frame"><img src="assets/torre.jpg" alt="Torre con birilli, olio su tela" width="1280" height="1487" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Torre con birilli</span><span class="gi-meta">olio su tela</span></span>
         </div>
-        <div class="gi" data-img="assets/t3983.jpg" data-caption="Case bianche, olio su tela">
-          <img src="assets/t3983.jpg" alt="Case bianche, olio su tela" loading="lazy" /><span class="gi-label">Case bianche</span>
+        <div class="gi" data-img="assets/t3983.jpg" data-caption="Case bianche, olio su tela" style="--ar: 0.75">
+          <span class="gi-frame"><img src="assets/t3983.jpg" alt="Case bianche, olio su tela" width="768" height="1024" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Case bianche</span><span class="gi-meta">olio su tela</span></span>
         </div>
-        <div class="gi" data-img="assets/t4180.jpg" data-caption="Cavalli, olio su tela">
-          <img src="assets/t4180.jpg" alt="Cavalli, olio su tela" loading="lazy" /><span class="gi-label">Cavalli</span>
+        <div class="gi" data-img="assets/t4180.jpg" data-caption="Cavalli, olio su tela" style="--ar: 1.3333">
+          <span class="gi-frame"><img src="assets/t4180.jpg" alt="Cavalli, olio su tela" width="1024" height="768" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Cavalli</span><span class="gi-meta">olio su tela</span></span>
         </div>
       </div>
     </div>
@@ -2092,21 +2164,21 @@
     <!-- Astratto & Collage -->
     <div class="pittura-panel" id="panel-astratto">
       <div class="painting-grid">
-        <div class="gi" data-img="assets/astratto1.jpg" data-caption="Composizione astratta, tecnica mista">
-          <img src="assets/astratto1.jpg" alt="Composizione astratta, tecnica mista" loading="lazy" /><span class="gi-label">Composizione
-            astratta</span>
+        <div class="gi" data-img="assets/astratto1.jpg" data-caption="Composizione astratta, tecnica mista" style="--ar: 1.17">
+          <span class="gi-frame"><img src="assets/astratto1.jpg" alt="Composizione astratta, tecnica mista" width="1280" height="1094" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Composizione astratta</span><span class="gi-meta">tecnica mista</span></span>
         </div>
-        <div class="gi" data-img="assets/t3979.jpg" data-caption="Griglia colorata, olio su tela">
-          <img src="assets/t3979.jpg" alt="Griglia colorata, olio su tela" loading="lazy" /><span class="gi-label">Griglia
-            colorata</span>
+        <div class="gi" data-img="assets/t3979.jpg" data-caption="Griglia colorata, olio su tela" style="--ar: 1.3333">
+          <span class="gi-frame"><img src="assets/t3979.jpg" alt="Griglia colorata, olio su tela" width="1024" height="768" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Griglia colorata</span><span class="gi-meta">olio su tela</span></span>
         </div>
-        <div class="gi" data-img="assets/PAPER3.jpg" data-caption="Volto tra le foglie, inchiostro">
-          <img src="assets/PAPER3.jpg" alt="Volto tra le foglie, inchiostro" loading="lazy" /><span class="gi-label">Volto tra le
-            foglie</span>
+        <div class="gi" data-img="assets/PAPER3.jpg" data-caption="Volto tra le foglie, inchiostro" style="--ar: 0.7175">
+          <span class="gi-frame"><img src="assets/PAPER3.jpg" alt="Volto tra le foglie, inchiostro" width="1280" height="1784" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Volto tra le foglie</span><span class="gi-meta">inchiostro</span></span>
         </div>
-        <div class="gi" data-img="assets/astratto2.jpg" data-caption="Collage su cartone, tecnica mista">
-          <img src="assets/astratto2.jpg" alt="Collage su cartone, tecnica mista" loading="lazy" /><span class="gi-label">Collage su
-            cartone</span>
+        <div class="gi" data-img="assets/astratto2.jpg" data-caption="Collage su cartone, tecnica mista" style="--ar: 1.0">
+          <span class="gi-frame"><img src="assets/astratto2.jpg" alt="Collage su cartone, tecnica mista" width="1280" height="1280" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Collage su cartone</span><span class="gi-meta">tecnica mista</span></span>
         </div>
       </div>
     </div>
