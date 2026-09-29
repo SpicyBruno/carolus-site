@@ -158,6 +158,10 @@
         filter: grayscale(0.15) contrast(1.05) !important;
       }
 
+      .hero-video {
+        display: none;
+      }
+
       .hero-bg::after {
         opacity: 1 !important;
       }
@@ -186,11 +190,7 @@
       .preloader-mark {
         animation: none !important;
         opacity: 1 !important;
-      }
-
-      .preloader-bar::after {
-        animation: none !important;
-        transform: scaleX(0.6) !important;
+        clip-path: none !important;
       }
 
       .hero-scroll::after {
@@ -451,6 +451,25 @@
     body.hero-ready .hero-bg img {
       opacity: 1;
       filter: grayscale(0.15) contrast(1.05) blur(0) brightness(1);
+    }
+
+    /* Loop video (motion/ → Remotion). Il poster <img> resta sotto e fa da
+       fallback: il video appare solo quando sta davvero riproducendo. */
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      filter: grayscale(0.15) contrast(1.05);
+      opacity: 0;
+      transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+    }
+
+    body.hero-ready .hero-video.is-playing {
+      opacity: 1;
     }
 
     @keyframes hero-ken-burns {
@@ -1751,7 +1770,20 @@
       width: clamp(140px, 22vw, 220px);
       height: auto;
       display: block;
-      animation: preloader-pulse 1.4s var(--ease) infinite;
+      /* La firma si traccia da sinistra a destra (come art-videos/carolus-firma.mp4),
+         poi respira finché la pagina non ha finito di caricare */
+      animation: signature-draw 2s cubic-bezier(0.65, 0, 0.35, 1) 0.3s both,
+        preloader-pulse 1.8s var(--ease) 2.6s infinite;
+    }
+
+    @keyframes signature-draw {
+      from {
+        clip-path: inset(0 100% 0 0);
+      }
+
+      to {
+        clip-path: inset(0 0 0 0);
+      }
     }
 
     .preloader-mark.logo-dark {
@@ -1766,23 +1798,6 @@
       display: block;
     }
 
-    .preloader-bar {
-      width: 160px;
-      height: 1px;
-      background: oklch(35% 0.005 60);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .preloader-bar::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--terra);
-      transform-origin: left;
-      animation: preloader-fill 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    }
-
     @keyframes preloader-pulse {
 
       0%,
@@ -1792,27 +1807,6 @@
 
       50% {
         opacity: 1;
-      }
-    }
-
-    @keyframes preloader-fill {
-      0% {
-        transform: scaleX(0);
-      }
-
-      50% {
-        transform: scaleX(1);
-        transform-origin: left;
-      }
-
-      51% {
-        transform: scaleX(1);
-        transform-origin: right;
-      }
-
-      100% {
-        transform: scaleX(0);
-        transform-origin: right;
       }
     }
 
@@ -2024,7 +2018,6 @@
     <div class="preloader-static">
       <img class="preloader-mark logo-white" src="assets/logo-white.png" alt="Carolus" />
       <img class="preloader-mark logo-dark" src="assets/logo-dark.png" alt="" />
-      <div class="preloader-bar"></div>
     </div>
   </div>
 
@@ -2052,8 +2045,10 @@
   <!-- HERO -->
   <section class="hero" id="home" aria-label="Introduzione">
     <div class="hero-bg">
-      <img src="assets/dsc-9.jpg" alt="Spirale, fotografia astratta di Carolus" width="1920" height="1280"
+      <img src="assets/hero-fotografie-poster.jpg" alt="Fotografia astratta di Carolus" width="1600" height="900"
         fetchpriority="high" decoding="async" />
+      <video class="hero-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"
+        data-src="assets/hero-fotografie.mp4"></video>
     </div>
     <div class="hero-content">
       <p class="hero-overline">Carlo Chiavegato · 1923–2015 · Padova</p>
@@ -2492,12 +2487,15 @@
 
   <script>
     // ─── PRELOADER ───
-    // Al load la pagina dissolve il preloader e avvia la cascata hero
+    // Al load (e a firma tracciata, ~2,3 s) la pagina dissolve il preloader
+    // e avvia la cascata hero
     window.addEventListener('load', () => {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const wait = reduce ? 400 : Math.max(400, 2700 - performance.now());
       setTimeout(() => {
         document.getElementById('preloader')?.classList.add('hidden');
         document.body.classList.add('hero-ready');
-      }, 400);
+      }, wait);
     });
 
     // ─── TEMA CHIARO / SCURO (React + Framer Motion) ───
@@ -2598,6 +2596,28 @@
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('[data-anim]').forEach(el => animObserver.observe(el));
+
+    // ─── HERO VIDEO LOOP ───
+    // Carica il video solo su schermi ampi, senza reduced-motion né save-data.
+    // Si mette in pausa quando la hero esce dallo schermo.
+    (function initHeroVideo() {
+      const video = document.querySelector('.hero-video');
+      if (!video) return;
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const saveData = navigator.connection && navigator.connection.saveData;
+      if (reduce || saveData || window.innerWidth < 700) return;
+
+      video.addEventListener('playing', () => video.classList.add('is-playing'), { once: true });
+      // Errore di decodifica o rete: resta il poster
+      video.addEventListener('error', () => video.classList.remove('is-playing'));
+      video.src = video.dataset.src;
+
+      const heroObserver = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      });
+      heroObserver.observe(document.querySelector('.hero'));
+    })();
 
     // ─── GALLERY REVEAL (soft) ───
     (function initSoftGalleryReveal() {
