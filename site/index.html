@@ -2598,14 +2598,14 @@
     document.querySelectorAll('[data-anim]').forEach(el => animObserver.observe(el));
 
     // ─── HERO VIDEO LOOP ───
-    // Carica il video solo su schermi ampi, senza reduced-motion né save-data.
+    // Carica il video solo senza reduced-motion né save-data.
     // Si mette in pausa quando la hero esce dallo schermo.
     (function initHeroVideo() {
       const video = document.querySelector('.hero-video');
       if (!video) return;
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const saveData = navigator.connection && navigator.connection.saveData;
-      if (reduce || saveData || window.innerWidth < 700) return;
+      if (reduce || saveData) return;
 
       video.addEventListener('playing', () => video.classList.add('is-playing'), { once: true });
       // Errore di decodifica o rete: resta il poster
