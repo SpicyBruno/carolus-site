@@ -48,6 +48,10 @@ The fixed `<nav id="main-nav">` toggles a `.scrolled` class past 60 px scroll.
 
 Click or Enter on any `.gi` / `.photo-item` opens `#lightbox` (`role="dialog"`, `aria-modal`). Arrow keys navigate; Esc closes. The list is built once from DOM order, so adding a new gallery item just requires `data-img` and `data-caption` attributes.
 
+Each item also carries the data for the lightbox work sheet (`#lb-sheet`, filled by `fillSheet()`): `data-title` (required for the sheet; without it the lightbox falls back to `data-caption`), plus optional `data-year`, `data-medium`, `data-size`, `data-signed="1"`, `data-show` (exhibition/prize), `data-motto` (competition motto), `data-collection`. Omit empty attributes; the sheet hides empty rows.
+
+The data comes from the family's Airtable inventory ("Inventory works ~ Carolus ~": tables Oil on Canvas, Works on Paper, Artistic Photos). Copy it in Italian (`1950s` → `anni '50`, `30 x 40 cm` → `30 × 40 cm`). **Privacy**: never publish "Place of Conservation" (it holds private owners' names and an address); any filled value becomes `Collezione privata`. "Conservative State" stays internal. The oil table has almost no metadata, so painting titles there are descriptive; photo titles come from the inventory.
+
 ## Conventions
 
 - **Filenames**: lowercase-hyphenated for new images. Some legacy uppercase names (`PAPER1.jpg`, `NM1.jpg`, `DSC-*.jpg`) exist — don't rename without updating references in `index.html`.

@@ -1725,6 +1725,114 @@
       color: oklch(60% 0 0);
     }
 
+    /* Scheda dell'opera: accanto all'immagine, tra le frecce di navigazione */
+    .lightbox.has-sheet {
+      gap: 52px;
+      padding: 80px 120px;
+    }
+
+    .lightbox.has-sheet img {
+      max-width: calc(100vw - 240px - 52px - 300px);
+      max-height: calc(100vh - 160px);
+    }
+
+    .lb-sheet {
+      position: relative;
+      display: none;
+      flex: none;
+      width: 300px;
+      max-height: calc(100vh - 160px);
+      overflow-y: auto;
+      opacity: 0;
+      translate: 12px 0;
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        translate 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .lightbox.has-sheet .lb-sheet {
+      display: block;
+    }
+
+    .lightbox.open.lb-ready .lb-sheet {
+      opacity: 1;
+      translate: 0 0;
+      transition-delay: 0.25s;
+    }
+
+    .lb-sheet-title {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.9rem;
+      line-height: 1.15;
+      color: var(--white);
+      text-wrap: balance;
+      padding-bottom: 18px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid oklch(100% 0 0 / 0.14);
+    }
+
+    .lb-sheet-list {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+    }
+
+    .lb-sheet-list dt {
+      font-family: var(--f-body);
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--terra);
+    }
+
+    .lb-sheet-list dd {
+      margin: 3px 0 0;
+      font-family: var(--f-body);
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: oklch(82% 0 0);
+    }
+
+    @media (max-width: 1000px) {
+      .lightbox.has-sheet {
+        flex-direction: column;
+        gap: 22px;
+        padding: 76px 20px 24px;
+      }
+
+      .lightbox.has-sheet img {
+        max-width: 100%;
+        max-height: 58vh;
+      }
+
+      .lb-sheet {
+        width: min(100%, 520px);
+        max-height: none;
+        flex: 0 1 auto;
+        min-height: 0;
+        translate: 0 10px;
+      }
+
+      .lb-sheet-title {
+        font-size: 1.5rem;
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+      }
+
+      .lb-sheet-list {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 12px 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .lb-sheet {
+        translate: none;
+        transition: opacity 0.2s linear;
+      }
+    }
+
     @media (max-width: 640px) {
       .lightbox-nav {
         width: 44px;
@@ -2081,47 +2189,47 @@
     <!-- Figure & Ritratti -->
     <div class="pittura-panel active" id="panel-figure">
       <div class="painting-grid">
-        <div class="gi" data-img="assets/autoritratto.jpg" data-caption="Autoritratto, olio su tela" style="--ar: 0.8643">
+        <div class="gi" data-img="assets/autoritratto.jpg" data-caption="Autoritratto, olio su tela" data-title="Autoritratto" data-medium="olio su tela" style="--ar: 0.8643">
           <span class="gi-frame"><img src="assets/autoritratto.jpg" alt="Autoritratto, olio su tela" width="1280" height="1481" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Autoritratto</span><span class="gi-meta">olio su tela</span></span>
         </div>
-        <div class="gi" data-img="assets/maternita.jpg" data-caption="Maternità, olio su tela" style="--ar: 0.7455">
+        <div class="gi" data-img="assets/maternita.jpg" data-caption="Maternità, olio su tela" data-title="Maternità" data-medium="olio su tela" style="--ar: 0.7455">
           <span class="gi-frame"><img src="assets/maternita.jpg" alt="Maternità, olio su tela" width="1280" height="1717" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Maternità</span><span class="gi-meta">olio su tela</span></span>
         </div>
-        <div class="gi" data-img="assets/t4180.jpg" data-caption="Coppia con fiore, olio su tela" style="--ar: 1.3333">
+        <div class="gi" data-img="assets/t4180.jpg" data-caption="Coppia con fiore, olio su tela" data-title="Coppia con fiore" data-medium="olio su tela" style="--ar: 1.3333">
           <span class="gi-frame"><img src="assets/t4180.jpg" alt="Coppia con fiore, olio su tela" width="1024" height="768" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Coppia con fiore</span><span class="gi-meta">olio su tela</span></span>
         </div>
-        <div class="gi" data-img="assets/t3968.jpg" data-caption="Anziano con carrozza, olio su tela, 1960" style="--ar: 0.75">
+        <div class="gi" data-img="assets/t3968.jpg" data-caption="Anziano con carrozza, olio su tela, 1960" data-title="Anziano con carrozza" data-year="1960" data-medium="olio su tela" style="--ar: 0.7500">
           <span class="gi-frame"><img src="assets/t3968.jpg" alt="Anziano con carrozza, olio su tela, 1960" width="768" height="1024" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Anziano con carrozza</span><span class="gi-meta">olio su tela · 1960</span></span>
         </div>
-        <div class="gi" data-img="assets/t3976.jpg" data-caption="Tre uomini al tavolo, olio su tela, 1960" style="--ar: 1.3333">
+        <div class="gi" data-img="assets/t3976.jpg" data-caption="Tre uomini al tavolo, olio su tela, 1960" data-title="Tre uomini al tavolo" data-year="1960" data-medium="olio su tela" style="--ar: 1.3333">
           <span class="gi-frame"><img src="assets/t3976.jpg" alt="Tre uomini al tavolo, olio su tela, 1960" width="1024" height="768" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Tre uomini al tavolo</span><span class="gi-meta">olio su tela · 1960</span></span>
         </div>
-        <div class="gi" data-img="assets/t3977.jpg" data-caption="Ufficio, olio su tela, 1960" style="--ar: 1.3333">
+        <div class="gi" data-img="assets/t3977.jpg" data-caption="Ufficio, olio su tela, 1960" data-title="Ufficio" data-year="1960" data-medium="olio su tela" style="--ar: 1.3333">
           <span class="gi-frame"><img src="assets/t3977.jpg" alt="Ufficio, olio su tela, 1960" width="1024" height="768" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Ufficio</span><span class="gi-meta">olio su tela · 1960</span></span>
         </div>
-        <div class="gi" data-img="assets/t3979.jpg" data-caption="Lavoratori, olio su tela" style="--ar: 1.3333">
+        <div class="gi" data-img="assets/t3979.jpg" data-caption="Lavoratori, olio su tela" data-title="Lavoratori" data-medium="olio su tela" style="--ar: 1.3333">
           <span class="gi-frame"><img src="assets/t3979.jpg" alt="Lavoratori, olio su tela" width="1024" height="768" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Lavoratori</span><span class="gi-meta">olio su tela</span></span>
         </div>
-        <div class="gi" data-img="assets/PAPER1.jpg" data-caption="Due figure con pianta, inchiostro, 1986" style="--ar: 1.5403">
+        <div class="gi" data-img="assets/PAPER1.jpg" data-caption="Due figure con pianta, inchiostro, 1986" data-title="Due figure con pianta" data-year="1986" data-medium="inchiostro" style="--ar: 1.5403">
           <span class="gi-frame"><img src="assets/PAPER1.jpg" alt="Due figure con pianta, inchiostro, 1986" width="1280" height="831" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Due figure con pianta</span><span class="gi-meta">inchiostro · 1986</span></span>
         </div>
-        <div class="gi" data-img="assets/PAPER6.jpg" data-caption="Donna con cesta, acquerello, 1981" style="--ar: 0.6953">
+        <div class="gi" data-img="assets/PAPER6.jpg" data-caption="Donna con cesta, acquerello, 1981" data-title="Donna con cesta" data-year="1981" data-medium="acquerello" style="--ar: 0.6953">
           <span class="gi-frame"><img src="assets/PAPER6.jpg" alt="Donna con cesta, acquerello, 1981" width="1280" height="1841" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Donna con cesta</span><span class="gi-meta">acquerello · 1981</span></span>
         </div>
-        <div class="gi" data-img="assets/PAPER2.jpg" data-caption="Donna con cappello, acquerello" style="--ar: 0.6656">
+        <div class="gi" data-img="assets/PAPER2.jpg" data-caption="Donna con cappello, acquerello" data-title="Donna con cappello" data-medium="acquerello" style="--ar: 0.6656">
           <span class="gi-frame"><img src="assets/PAPER2.jpg" alt="Donna con cappello, acquerello" width="1280" height="1923" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Donna con cappello</span><span class="gi-meta">acquerello</span></span>
         </div>
-        <div class="gi" data-img="assets/PAPER5.jpg" data-caption="Donne con anguria, acquerello e inchiostro, 1986" style="--ar: 1.4286">
+        <div class="gi" data-img="assets/PAPER5.jpg" data-caption="Donne con anguria, acquerello e inchiostro, 1986" data-title="Donne con anguria" data-year="1986" data-medium="acquerello e inchiostro" style="--ar: 1.4286">
           <span class="gi-frame"><img src="assets/PAPER5.jpg" alt="Donne con anguria, acquerello e inchiostro, 1986" width="1280" height="896" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Donne con anguria</span><span class="gi-meta">acquerello e inchiostro · 1986</span></span>
         </div>
@@ -2131,17 +2239,45 @@
     <!-- Natura Morta & Fiori -->
     <div class="pittura-panel" id="panel-natura">
       <div class="painting-grid">
-        <div class="gi" data-img="assets/fiore1.jpg" data-caption="Bouquet, olio su tela" style="--ar: 0.6631">
+        <div class="gi" data-img="assets/fiore1.jpg" data-caption="Bouquet, olio su tela" data-title="Bouquet" data-medium="olio su tela" style="--ar: 0.6631">
           <span class="gi-frame"><img src="assets/fiore1.jpg" alt="Bouquet, olio su tela" width="856" height="1291" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Bouquet</span><span class="gi-meta">olio su tela</span></span>
         </div>
-        <div class="gi" data-img="assets/NM1.jpg" data-caption="Natura morta con fiori, olio su tela" style="--ar: 1.0">
+        <div class="gi" data-img="assets/NM1.jpg" data-caption="Natura morta con fiori, olio su tela" data-title="Natura morta con fiori" data-medium="olio su tela" style="--ar: 1.0000">
           <span class="gi-frame"><img src="assets/NM1.jpg" alt="Natura morta con fiori, olio su tela" width="1280" height="1280" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Natura morta con fiori</span><span class="gi-meta">olio su tela</span></span>
         </div>
-        <div class="gi" data-img="assets/PAPER3.jpg" data-caption="Natura morta con frutta, acquerello" style="--ar: 0.7175">
+        <div class="gi" data-img="assets/PAPER3.jpg" data-caption="Natura morta con frutta, acquerello" data-title="Natura morta con frutta" data-medium="acquerello" style="--ar: 0.7175">
           <span class="gi-frame"><img src="assets/PAPER3.jpg" alt="Natura morta con frutta, acquerello" width="1280" height="1784" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Natura morta con frutta</span><span class="gi-meta">acquerello</span></span>
+        </div>
+        <div class="gi" data-img="assets/limoni-e-bottiglia.jpg" data-caption="Limoni e bottiglia, olio" data-title="Limoni e bottiglia" data-medium="olio" style="--ar: 1.3351">
+          <span class="gi-frame"><img src="assets/limoni-e-bottiglia.jpg" alt="Limoni e bottiglia, olio" width="1004" height="752" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Limoni e bottiglia</span><span class="gi-meta">olio</span></span>
+        </div>
+        <div class="gi" data-img="assets/fiori-e-frutta.jpg" data-caption="Fiori e frutta, olio" data-title="Fiori e frutta" data-medium="olio" style="--ar: 1.3333">
+          <span class="gi-frame"><img src="assets/fiori-e-frutta.jpg" alt="Fiori e frutta, olio" width="1024" height="768" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Fiori e frutta</span><span class="gi-meta">olio</span></span>
+        </div>
+        <div class="gi" data-img="assets/natura-morta-metafisica.jpg" data-caption="Natura morta metafisica, olio" data-title="Natura morta metafisica" data-medium="olio" style="--ar: 1.1852">
+          <span class="gi-frame"><img src="assets/natura-morta-metafisica.jpg" alt="Natura morta metafisica, olio" width="1600" height="1350" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Natura morta metafisica</span><span class="gi-meta">olio</span></span>
+        </div>
+        <div class="gi" data-img="assets/vaso-di-fiori.jpg" data-caption="Vaso di fiori" data-title="Vaso di fiori" style="--ar: 0.6895">
+          <span class="gi-frame"><img src="assets/vaso-di-fiori.jpg" alt="Vaso di fiori" width="433" height="628" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Vaso di fiori</span></span>
+        </div>
+        <div class="gi" data-img="assets/natura-morta.jpg" data-caption="Natura morta, acquerello su carta Fabriano, 2007" data-title="Natura morta" data-year="2007" data-medium="acquerello su carta Fabriano" data-size="29,7 × 42 cm (A3)" data-collection="Collezione privata" style="--ar: 0.7500">
+          <span class="gi-frame"><img src="assets/natura-morta.jpg" alt="Natura morta, acquerello su carta Fabriano, 2007" width="1200" height="1600" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Natura morta</span><span class="gi-meta">acquerello su carta Fabriano · 2007</span></span>
+        </div>
+        <div class="gi" data-img="assets/natura-morta-1975.jpg" data-caption="Natura morta, china su carta, 1975" data-title="Natura morta" data-year="1975" data-medium="china su carta" data-collection="Collezione privata" style="--ar: 1.4679">
+          <span class="gi-frame"><img src="assets/natura-morta-1975.jpg" alt="Natura morta, china su carta, 1975" width="1600" height="1090" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Natura morta</span><span class="gi-meta">china su carta · 1975</span></span>
+        </div>
+        <div class="gi" data-img="assets/natura-morta-con-bottiglie.jpg" data-caption="Natura morta con bottiglie, inchiostro su carta, ante 1962" data-title="Natura morta con bottiglie" data-year="ante 1962" data-medium="inchiostro su carta" data-collection="Collezione privata" style="--ar: 0.7850">
+          <span class="gi-frame"><img src="assets/natura-morta-con-bottiglie.jpg" alt="Natura morta con bottiglie, inchiostro su carta, ante 1962" width="1256" height="1600" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Natura morta con bottiglie</span><span class="gi-meta">inchiostro su carta · ante 1962</span></span>
         </div>
       </div>
     </div>
@@ -2149,21 +2285,69 @@
     <!-- Paesaggi & Architetture -->
     <div class="pittura-panel" id="panel-paesaggi">
       <div class="painting-grid">
-        <div class="gi" data-img="assets/t4111.jpg" data-caption="Paesaggio notturno, olio su tela, 1956" style="--ar: 1.3333">
-          <span class="gi-frame"><img src="assets/t4111.jpg" alt="Paesaggio notturno, 1956" width="1024" height="768" loading="lazy" decoding="async" /></span>
+        <div class="gi" data-img="assets/t4111.jpg" data-caption="Paesaggio notturno, olio su tela, 1956" data-title="Paesaggio notturno" data-year="1956" data-medium="olio su tela" style="--ar: 1.3333">
+          <span class="gi-frame"><img src="assets/t4111.jpg" alt="Paesaggio notturno, olio su tela, 1956" width="1024" height="768" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Paesaggio notturno</span><span class="gi-meta">olio su tela · 1956</span></span>
         </div>
-        <div class="gi" data-img="assets/torre.jpg" data-caption="Torre con birilli, olio su tela" style="--ar: 0.8608">
+        <div class="gi" data-img="assets/torre.jpg" data-caption="Torre con birilli, olio su tela" data-title="Torre con birilli" data-medium="olio su tela" style="--ar: 0.8608">
           <span class="gi-frame"><img src="assets/torre.jpg" alt="Torre con birilli, olio su tela" width="1280" height="1487" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Torre con birilli</span><span class="gi-meta">olio su tela</span></span>
         </div>
-        <div class="gi" data-img="assets/t3952.jpg" data-caption="Case bianche, olio su tela, 1956" style="--ar: 1.3333">
+        <div class="gi" data-img="assets/t3952.jpg" data-caption="Case bianche, olio su tela, 1956" data-title="Case bianche" data-year="1956" data-medium="olio su tela" style="--ar: 1.3333">
           <span class="gi-frame"><img src="assets/t3952.jpg" alt="Case bianche, olio su tela, 1956" width="1024" height="768" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Case bianche</span><span class="gi-meta">olio su tela · 1956</span></span>
         </div>
-        <div class="gi" data-img="assets/t3943.jpg" data-caption="Cavalli, olio su tela" style="--ar: 1.3333">
+        <div class="gi" data-img="assets/t3943.jpg" data-caption="Cavalli, olio su tela" data-title="Cavalli" data-medium="olio su tela" style="--ar: 1.3333">
           <span class="gi-frame"><img src="assets/t3943.jpg" alt="Cavalli, olio su tela" width="1024" height="768" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Cavalli</span><span class="gi-meta">olio su tela</span></span>
+        </div>
+        <div class="gi" data-img="assets/cascina-con-scala.jpg" data-caption="Cascina con scala, olio" data-title="Cascina con scala" data-medium="olio" style="--ar: 1.3333">
+          <span class="gi-frame"><img src="assets/cascina-con-scala.jpg" alt="Cascina con scala, olio" width="1024" height="768" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Cascina con scala</span><span class="gi-meta">olio</span></span>
+        </div>
+        <div class="gi" data-img="assets/piazza-con-birilli.jpg" data-caption="Piazza con birilli, olio" data-title="Piazza con birilli" data-medium="olio" style="--ar: 0.8488">
+          <span class="gi-frame"><img src="assets/piazza-con-birilli.jpg" alt="Piazza con birilli, olio" width="1358" height="1600" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Piazza con birilli</span><span class="gi-meta">olio</span></span>
+        </div>
+        <div class="gi" data-img="assets/torre-rossa-e-squadra.jpg" data-caption="Torre rossa e squadra, olio" data-title="Torre rossa e squadra" data-medium="olio" style="--ar: 1.1869">
+          <span class="gi-frame"><img src="assets/torre-rossa-e-squadra.jpg" alt="Torre rossa e squadra, olio" width="1600" height="1348" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Torre rossa e squadra</span><span class="gi-meta">olio</span></span>
+        </div>
+        <div class="gi" data-img="assets/muro-con-porta-rossa.jpg" data-caption="Muro con porta rossa, olio" data-title="Muro con porta rossa" data-medium="olio" style="--ar: 1.1869">
+          <span class="gi-frame"><img src="assets/muro-con-porta-rossa.jpg" alt="Muro con porta rossa, olio" width="1600" height="1348" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Muro con porta rossa</span><span class="gi-meta">olio</span></span>
+        </div>
+        <div class="gi" data-img="assets/tempietto-e-cupola.jpg" data-caption="Tempietto e cupola, olio" data-title="Tempietto e cupola" data-medium="olio" style="--ar: 1.1808">
+          <span class="gi-frame"><img src="assets/tempietto-e-cupola.jpg" alt="Tempietto e cupola, olio" width="1600" height="1355" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Tempietto e cupola</span><span class="gi-meta">olio</span></span>
+        </div>
+        <div class="gi" data-img="assets/colline-e-alberi-bianchi.jpg" data-caption="Colline e alberi bianchi, olio" data-title="Colline e alberi bianchi" data-medium="olio" style="--ar: 1.3819">
+          <span class="gi-frame"><img src="assets/colline-e-alberi-bianchi.jpg" alt="Colline e alberi bianchi, olio" width="1024" height="741" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Colline e alberi bianchi</span><span class="gi-meta">olio</span></span>
+        </div>
+        <div class="gi" data-img="assets/collina-azzurra.jpg" data-caption="Collina azzurra, olio" data-title="Collina azzurra" data-medium="olio" style="--ar: 1.4884">
+          <span class="gi-frame"><img src="assets/collina-azzurra.jpg" alt="Collina azzurra, olio" width="1024" height="688" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Collina azzurra</span><span class="gi-meta">olio</span></span>
+        </div>
+        <div class="gi" data-img="assets/giardino-azzurro.jpg" data-caption="Giardino azzurro, olio" data-title="Giardino azzurro" data-medium="olio" style="--ar: 1.3553">
+          <span class="gi-frame"><img src="assets/giardino-azzurro.jpg" alt="Giardino azzurro, olio" width="927" height="684" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Giardino azzurro</span><span class="gi-meta">olio</span></span>
+        </div>
+        <div class="gi" data-img="assets/bosco-al-sole.jpg" data-caption="Bosco al sole, olio" data-title="Bosco al sole" data-medium="olio" style="--ar: 1.3333">
+          <span class="gi-frame"><img src="assets/bosco-al-sole.jpg" alt="Bosco al sole, olio" width="1024" height="768" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Bosco al sole</span><span class="gi-meta">olio</span></span>
+        </div>
+        <div class="gi" data-img="assets/alberi-spogli-sul-campo.jpg" data-caption="Alberi spogli sul campo, olio" data-title="Alberi spogli sul campo" data-medium="olio" style="--ar: 1.3333">
+          <span class="gi-frame"><img src="assets/alberi-spogli-sul-campo.jpg" alt="Alberi spogli sul campo, olio" width="1024" height="768" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Alberi spogli sul campo</span><span class="gi-meta">olio</span></span>
+        </div>
+        <div class="gi" data-img="assets/alberi-nel-prato.jpg" data-caption="Alberi nel prato, olio" data-title="Alberi nel prato" data-medium="olio" style="--ar: 1.3333">
+          <span class="gi-frame"><img src="assets/alberi-nel-prato.jpg" alt="Alberi nel prato, olio" width="1024" height="768" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Alberi nel prato</span><span class="gi-meta">olio</span></span>
+        </div>
+        <div class="gi" data-img="assets/scoglio-velato.jpg" data-caption="Scoglio velato, olio" data-title="Scoglio velato" data-medium="olio" style="--ar: 1.1808">
+          <span class="gi-frame"><img src="assets/scoglio-velato.jpg" alt="Scoglio velato, olio" width="1600" height="1355" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Scoglio velato</span><span class="gi-meta">olio</span></span>
         </div>
       </div>
     </div>
@@ -2171,21 +2355,41 @@
     <!-- Astratto & Collage -->
     <div class="pittura-panel" id="panel-astratto">
       <div class="painting-grid">
-        <div class="gi" data-img="assets/astratto1.jpg" data-caption="Composizione astratta, tecnica mista" style="--ar: 1.17">
+        <div class="gi" data-img="assets/astratto1.jpg" data-caption="Composizione astratta, tecnica mista" data-title="Composizione astratta" data-medium="tecnica mista" style="--ar: 1.1700">
           <span class="gi-frame"><img src="assets/astratto1.jpg" alt="Composizione astratta, tecnica mista" width="1280" height="1094" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Composizione astratta</span><span class="gi-meta">tecnica mista</span></span>
         </div>
-        <div class="gi" data-img="assets/t3983.jpg" data-caption="Griglia colorata, olio su tela" style="--ar: 0.75">
+        <div class="gi" data-img="assets/t3983.jpg" data-caption="Griglia colorata, olio su tela" data-title="Griglia colorata" data-medium="olio su tela" style="--ar: 0.7500">
           <span class="gi-frame"><img src="assets/t3983.jpg" alt="Griglia colorata, olio su tela" width="768" height="1024" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Griglia colorata</span><span class="gi-meta">olio su tela</span></span>
         </div>
-        <div class="gi" data-img="assets/PAPER4.jpg" data-caption="Volto tra le foglie, inchiostro" style="--ar: 1.0">
+        <div class="gi" data-img="assets/PAPER4.jpg" data-caption="Volto tra le foglie, inchiostro" data-title="Volto tra le foglie" data-medium="inchiostro" style="--ar: 1.0000">
           <span class="gi-frame"><img src="assets/PAPER4.jpg" alt="Volto tra le foglie, inchiostro" width="1280" height="1280" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Volto tra le foglie</span><span class="gi-meta">inchiostro</span></span>
         </div>
-        <div class="gi" data-img="assets/astratto2.jpg" data-caption="Collage su cartone, tecnica mista" style="--ar: 1.0">
+        <div class="gi" data-img="assets/astratto2.jpg" data-caption="Collage su cartone, tecnica mista" data-title="Collage su cartone" data-medium="tecnica mista" style="--ar: 1.0000">
           <span class="gi-frame"><img src="assets/astratto2.jpg" alt="Collage su cartone, tecnica mista" width="1280" height="1280" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Collage su cartone</span><span class="gi-meta">tecnica mista</span></span>
+        </div>
+        <div class="gi" data-img="assets/bosco-in-frammenti.jpg" data-caption="Bosco in frammenti, olio" data-title="Bosco in frammenti" data-medium="olio" style="--ar: 1.3333">
+          <span class="gi-frame"><img src="assets/bosco-in-frammenti.jpg" alt="Bosco in frammenti, olio" width="1024" height="768" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Bosco in frammenti</span><span class="gi-meta">olio</span></span>
+        </div>
+        <div class="gi" data-img="assets/alberi-in-frammenti.jpg" data-caption="Alberi in frammenti" data-title="Alberi in frammenti" style="--ar: 1.7732">
+          <span class="gi-frame"><img src="assets/alberi-in-frammenti.jpg" alt="Alberi in frammenti" width="727" height="410" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Alberi in frammenti</span></span>
+        </div>
+        <div class="gi" data-img="assets/quadrati-azzurri.jpg" data-caption="Quadrati azzurri, olio" data-title="Quadrati azzurri" data-medium="olio" style="--ar: 0.7500">
+          <span class="gi-frame"><img src="assets/quadrati-azzurri.jpg" alt="Quadrati azzurri, olio" width="768" height="1024" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Quadrati azzurri</span><span class="gi-meta">olio</span></span>
+        </div>
+        <div class="gi" data-img="assets/geometrie-con-luna.jpg" data-caption="Geometrie con luna" data-title="Geometrie con luna" style="--ar: 0.5894">
+          <span class="gi-frame"><img src="assets/geometrie-con-luna.jpg" alt="Geometrie con luna" width="465" height="789" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Geometrie con luna</span></span>
+        </div>
+        <div class="gi" data-img="assets/profilo-di-donna-inscritta-in-una-foglia.jpg" data-caption="Profilo di donna inscritta in una foglia, acquerello su carta Fabriano, post 1970" data-title="Profilo di donna inscritta in una foglia" data-year="post 1970" data-medium="acquerello su carta Fabriano" data-size="29,7 × 42 cm (A3)" data-signed="1" data-collection="Collezione privata" style="--ar: 0.7144">
+          <span class="gi-frame"><img src="assets/profilo-di-donna-inscritta-in-una-foglia.jpg" alt="Profilo di donna inscritta in una foglia, acquerello su carta Fabriano, post 1970" width="1143" height="1600" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Profilo di donna inscritta in una foglia</span><span class="gi-meta">acquerello su carta Fabriano · post 1970</span></span>
         </div>
       </div>
     </div>
@@ -2207,94 +2411,202 @@
 
     <div class="photo-panel active" id="panel-realismo">
       <div class="photo-grid">
-        <div class="photo-item" data-img="assets/hero-portrait.jpg" data-caption="Ritratto, stampa ai sali d'argento" style="--ar: 0.737">
-          <span class="gi-frame"><img src="assets/hero-portrait.jpg" alt="Ritratto, stampa ai sali d'argento" width="953" height="1293" loading="lazy" decoding="async" /></span>
-          <span class="gi-plate"><span class="gi-title">Ritratto</span><span class="gi-meta">stampa ai sali d&#x27;argento</span></span>
+        <div class="photo-item" data-img="assets/hero-portrait.jpg" data-caption="Abitante della stazione, stampa ai sali d&#x27;argento" data-title="Abitante della stazione" data-medium="stampa ai sali d&#x27;argento" data-size="30 × 40 cm" data-collection="Collezione privata" style="--ar: 0.7370">
+          <span class="gi-frame"><img src="assets/hero-portrait.jpg" alt="Abitante della stazione, stampa ai sali d&#x27;argento" width="953" height="1293" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Abitante della stazione</span><span class="gi-meta">sali d&#x27;argento</span></span>
         </div>
-        <div class="photo-item" data-img="assets/foto-finestra.jpg" data-caption="Luce di finestra" style="--ar: 1.2843">
-          <span class="gi-frame"><img src="assets/foto-finestra.jpg" alt="Figura con luce di finestra" width="1283" height="999" loading="lazy" decoding="async" /></span>
-          <span class="gi-plate"><span class="gi-title">Luce di finestra</span></span>
+        <div class="photo-item" data-img="assets/foto-finestra.jpg" data-caption="Paura, stampa ai sali d&#x27;argento, anni &#x27;60" data-title="Paura" data-year="anni &#x27;60" data-medium="stampa ai sali d&#x27;argento" data-size="40 × 30 cm" data-signed="1" data-collection="Collezione privata" style="--ar: 1.2843">
+          <span class="gi-frame"><img src="assets/foto-finestra.jpg" alt="Paura, stampa ai sali d&#x27;argento, anni &#x27;60" width="1283" height="999" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Paura</span><span class="gi-meta">sali d&#x27;argento · anni &#x27;60</span></span>
         </div>
-        <div class="photo-item" data-img="assets/foto-ragnatela.jpg" data-caption="Ragnatela" style="--ar: 1.3025">
-          <span class="gi-frame"><img src="assets/foto-ragnatela.jpg" alt="Volto nella ragnatela" width="1352" height="1038" loading="lazy" decoding="async" /></span>
-          <span class="gi-plate"><span class="gi-title">Ragnatela</span></span>
+        <div class="photo-item" data-img="assets/foto-ragnatela.jpg" data-caption="Poggiolo, stampa ai sali d&#x27;argento, anni &#x27;50" data-title="Poggiolo" data-year="anni &#x27;50" data-medium="stampa ai sali d&#x27;argento" data-size="40 × 30 cm" data-signed="1" data-collection="Collezione privata" style="--ar: 1.3025">
+          <span class="gi-frame"><img src="assets/foto-ragnatela.jpg" alt="Poggiolo, stampa ai sali d&#x27;argento, anni &#x27;50" width="1352" height="1038" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Poggiolo</span><span class="gi-meta">sali d&#x27;argento · anni &#x27;50</span></span>
         </div>
-        <div class="photo-item" data-img="assets/foto10.jpg" data-caption="Colonnato" style="--ar: 0.7456">
-          <span class="gi-frame"><img src="assets/foto10.jpg" alt="Colonnato" width="721" height="967" loading="lazy" decoding="async" /></span>
-          <span class="gi-plate"><span class="gi-title">Colonnato</span></span>
+        <div class="photo-item" data-img="assets/foto10.jpg" data-caption="Sincronia di luci, stampa ai sali d&#x27;argento" data-title="Sincronia di luci" data-medium="stampa ai sali d&#x27;argento" data-motto="Alea jacta est" data-collection="Collezione privata" style="--ar: 0.7456">
+          <span class="gi-frame"><img src="assets/foto10.jpg" alt="Sincronia di luci, stampa ai sali d&#x27;argento" width="721" height="967" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Sincronia di luci</span><span class="gi-meta">sali d&#x27;argento</span></span>
         </div>
-        <div class="photo-item" data-img="assets/foto11.jpg" data-caption="Panchine nella neve" style="--ar: 1.0">
-          <span class="gi-frame"><img src="assets/foto11.jpg" alt="Panchine nella neve" width="1029" height="1029" loading="lazy" decoding="async" /></span>
-          <span class="gi-plate"><span class="gi-title">Panchine nella neve</span></span>
+        <div class="photo-item" data-img="assets/foto11.jpg" data-caption="Panchina innevata" data-title="Panchina innevata" style="--ar: 1.0000">
+          <span class="gi-frame"><img src="assets/foto11.jpg" alt="Panchina innevata" width="1029" height="1029" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Panchina innevata</span></span>
         </div>
-        <div class="photo-item" data-img="assets/foto1.jpg" data-caption="Pescatore" style="--ar: 0.7518">
-          <span class="gi-frame"><img src="assets/foto1.jpg" alt="Pescatore" width="1048" height="1394" loading="lazy" decoding="async" /></span>
-          <span class="gi-plate"><span class="gi-title">Pescatore</span></span>
+        <div class="photo-item" data-img="assets/foto1.jpg" data-caption="Sguardo alla nave, stampa fotografica, anni &#x27;50" data-title="Sguardo alla nave" data-year="anni &#x27;50" data-medium="stampa fotografica" data-size="30 × 40 cm" data-collection="Collezione privata" style="--ar: 0.7518">
+          <span class="gi-frame"><img src="assets/foto1.jpg" alt="Sguardo alla nave, stampa fotografica, anni &#x27;50" width="1048" height="1394" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Sguardo alla nave</span><span class="gi-meta">stampa fotografica · anni &#x27;50</span></span>
         </div>
-        <div class="photo-item" data-img="assets/foto2.jpg" data-caption="Giostra" style="--ar: 0.7193">
-          <span class="gi-frame"><img src="assets/foto2.jpg" alt="Giostra" width="1084" height="1507" loading="lazy" decoding="async" /></span>
-          <span class="gi-plate"><span class="gi-title">Giostra</span></span>
+        <div class="photo-item" data-img="assets/foto2.jpg" data-caption="David al Lido" data-title="David al Lido" style="--ar: 0.7193">
+          <span class="gi-frame"><img src="assets/foto2.jpg" alt="David al Lido" width="1084" height="1507" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">David al Lido</span></span>
         </div>
-        <div class="photo-item" data-img="assets/foto3.jpg" data-caption="Oblò" style="--ar: 0.724">
-          <span class="gi-frame"><img src="assets/foto3.jpg" alt="Oblò" width="1280" height="1768" loading="lazy" decoding="async" /></span>
-          <span class="gi-plate"><span class="gi-title">Oblò</span></span>
-        </div>
-        <div class="photo-item" data-img="assets/foto6.jpg" data-caption="Rete da pesca" style="--ar: 0.7228">
+        <div class="photo-item" data-img="assets/foto6.jpg" data-caption="Rete da pesca" data-title="Rete da pesca" style="--ar: 0.7228">
           <span class="gi-frame"><img src="assets/foto6.jpg" alt="Rete da pesca" width="1051" height="1454" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Rete da pesca</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-giochi-e-pubblicita.jpg" data-caption="Giochi e pubblicità, stampa ai sali d&#x27;argento, anni &#x27;50" data-title="Giochi e pubblicità" data-year="anni &#x27;50" data-medium="stampa ai sali d&#x27;argento" data-size="30 × 40 cm" data-signed="1" data-collection="Collezione privata" style="--ar: 0.7381">
+          <span class="gi-frame"><img src="assets/foto-giochi-e-pubblicita.jpg" alt="Giochi e pubblicità, stampa ai sali d&#x27;argento, anni &#x27;50" width="992" height="1344" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Giochi e pubblicità</span><span class="gi-meta">sali d&#x27;argento · anni &#x27;50</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-dolce-riposo.jpg" data-caption="Dolce riposo, stampa ai sali d&#x27;argento, anni &#x27;50" data-title="Dolce riposo" data-year="anni &#x27;50" data-medium="stampa ai sali d&#x27;argento" data-size="40 × 30 cm" data-signed="1" data-collection="Collezione privata" style="--ar: 1.5992">
+          <span class="gi-frame"><img src="assets/foto-dolce-riposo.jpg" alt="Dolce riposo, stampa ai sali d&#x27;argento, anni &#x27;50" width="1273" height="796" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Dolce riposo</span><span class="gi-meta">sali d&#x27;argento · anni &#x27;50</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-vetturino.jpg" data-caption="Vetturino, stampa fotografica, anni &#x27;50" data-title="Vetturino" data-year="anni &#x27;50" data-medium="stampa fotografica" data-size="40 × 30 cm" data-signed="1" data-collection="Collezione privata" style="--ar: 1.2935">
+          <span class="gi-frame"><img src="assets/foto-vetturino.jpg" alt="Vetturino, stampa fotografica, anni &#x27;50" width="1181" height="913" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Vetturino</span><span class="gi-meta">stampa fotografica · anni &#x27;50</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-sabbia-del-brenta.jpg" data-caption="Sabbia del Brenta, anni &#x27;50" data-title="Sabbia del Brenta" data-year="anni &#x27;50" data-signed="1" data-collection="Collezione privata" style="--ar: 1.1511">
+          <span class="gi-frame"><img src="assets/foto-sabbia-del-brenta.jpg" alt="Sabbia del Brenta, anni &#x27;50" width="960" height="834" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Sabbia del Brenta</span><span class="gi-meta">anni &#x27;50</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-la-scala.jpg" data-caption="La scala, anni &#x27;50" data-title="La scala" data-year="anni &#x27;50" data-signed="1" style="--ar: 0.8698">
+          <span class="gi-frame"><img src="assets/foto-la-scala.jpg" alt="La scala, anni &#x27;50" width="862" height="991" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">La scala</span><span class="gi-meta">anni &#x27;50</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-attraverso-la-persiana.jpg" data-caption="Attraverso la persiana, stampa ai sali d&#x27;argento, anni &#x27;50" data-title="Attraverso la persiana" data-year="anni &#x27;50" data-medium="stampa ai sali d&#x27;argento" data-size="30 × 40 cm" data-signed="1" data-motto="Dal bianco al nero" data-collection="Collezione privata" style="--ar: 0.8457">
+          <span class="gi-frame"><img src="assets/foto-attraverso-la-persiana.jpg" alt="Attraverso la persiana, stampa ai sali d&#x27;argento, anni &#x27;50" width="910" height="1076" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Attraverso la persiana</span><span class="gi-meta">sali d&#x27;argento · anni &#x27;50</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-maria-antonia.jpg" data-caption="Maria Antonia, stampa ai sali d&#x27;argento, anni &#x27;50" data-title="Maria Antonia" data-year="anni &#x27;50" data-medium="stampa ai sali d&#x27;argento" data-size="30 × 40 cm" data-motto="Pura serenità" data-collection="Collezione privata" style="--ar: 0.7456">
+          <span class="gi-frame"><img src="assets/foto-maria-antonia.jpg" alt="Maria Antonia, stampa ai sali d&#x27;argento, anni &#x27;50" width="979" height="1313" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Maria Antonia</span><span class="gi-meta">sali d&#x27;argento · anni &#x27;50</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-movimento.jpg" data-caption="Movimento, stampa ai sali d&#x27;argento" data-title="Movimento" data-medium="stampa ai sali d&#x27;argento" data-size="30 × 40 cm" data-signed="1" data-collection="Collezione privata" style="--ar: 0.7274">
+          <span class="gi-frame"><img src="assets/foto-movimento.jpg" alt="Movimento, stampa ai sali d&#x27;argento" width="1006" height="1383" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Movimento</span><span class="gi-meta">sali d&#x27;argento</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-sotto-l-ombrellone.jpg" data-caption="Sotto l&#x27;ombrellone, stampa ai sali d&#x27;argento" data-title="Sotto l&#x27;ombrellone" data-medium="stampa ai sali d&#x27;argento" data-size="30 × 40 cm" data-collection="Collezione privata" style="--ar: 0.7425">
+          <span class="gi-frame"><img src="assets/foto-sotto-l-ombrellone.jpg" alt="Sotto l&#x27;ombrellone, stampa ai sali d&#x27;argento" width="894" height="1204" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Sotto l&#x27;ombrellone</span><span class="gi-meta">sali d&#x27;argento</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-nebbia-tra-i-vigneti.jpg" data-caption="Nebbia tra i vigneti, stampa ai sali d&#x27;argento" data-title="Nebbia tra i vigneti" data-medium="stampa ai sali d&#x27;argento" data-size="36 × 30 cm" data-collection="Collezione privata" style="--ar: 1.2578">
+          <span class="gi-frame"><img src="assets/foto-nebbia-tra-i-vigneti.jpg" alt="Nebbia tra i vigneti, stampa ai sali d&#x27;argento" width="1249" height="993" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Nebbia tra i vigneti</span><span class="gi-meta">sali d&#x27;argento</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-finestra-di-arqua.jpg" data-caption="Finestra di Arquà, anni &#x27;50" data-title="Finestra di Arquà" data-year="anni &#x27;50" data-signed="1" style="--ar: 0.7489">
+          <span class="gi-frame"><img src="assets/foto-finestra-di-arqua.jpg" alt="Finestra di Arquà, anni &#x27;50" width="829" height="1107" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Finestra di Arquà</span><span class="gi-meta">anni &#x27;50</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-controluce-alla-finestra.jpg" data-caption="Controluce alla finestra" data-title="Controluce alla finestra" style="--ar: 0.8177">
+          <span class="gi-frame"><img src="assets/foto-controluce-alla-finestra.jpg" alt="Controluce alla finestra" width="1018" height="1245" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Controluce alla finestra</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-alla-ringhiera.jpg" data-caption="Alla ringhiera" data-title="Alla ringhiera" style="--ar: 0.7540">
+          <span class="gi-frame"><img src="assets/foto-alla-ringhiera.jpg" alt="Alla ringhiera" width="1030" height="1366" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Alla ringhiera</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-spiaggia-dall-alto.jpg" data-caption="Spiaggia dall&#x27;alto" data-title="Spiaggia dall&#x27;alto" style="--ar: 1.3261">
+          <span class="gi-frame"><img src="assets/foto-spiaggia-dall-alto.jpg" alt="Spiaggia dall&#x27;alto" width="1472" height="1110" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Spiaggia dall&#x27;alto</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-primi-accordi.jpg" data-caption="Primi accordi" data-title="Primi accordi" data-motto="Pura serenità" style="--ar: 0.7538">
+          <span class="gi-frame"><img src="assets/foto-primi-accordi.jpg" alt="Primi accordi" width="1206" height="1600" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Primi accordi</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-madre-dell-artista-angela-franco.jpg" data-caption="Madre dell&#x27;artista, Angela Franco, stampa fotografica, ante 1955" data-title="Madre dell&#x27;artista, Angela Franco" data-year="ante 1955" data-medium="stampa fotografica" data-size="30 × 40 cm" data-collection="Collezione privata" style="--ar: 0.8581">
+          <span class="gi-frame"><img src="assets/foto-madre-dell-artista-angela-franco.jpg" alt="Madre dell&#x27;artista, Angela Franco, stampa fotografica, ante 1955" width="1373" height="1600" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Madre dell&#x27;artista, Angela Franco</span><span class="gi-meta">stampa fotografica · ante 1955</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-granchi.jpg" data-caption="Granchi, stampa ai sali d&#x27;argento, anni &#x27;50" data-title="Granchi" data-year="anni &#x27;50" data-medium="stampa ai sali d&#x27;argento" data-size="40 × 30 cm" data-signed="1" data-collection="Collezione privata" style="--ar: 1.4684">
+          <span class="gi-frame"><img src="assets/foto-granchi.jpg" alt="Granchi, stampa ai sali d&#x27;argento, anni &#x27;50" width="1138" height="775" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Granchi</span><span class="gi-meta">sali d&#x27;argento · anni &#x27;50</span></span>
         </div>
       </div>
     </div>
 
     <div class="photo-panel" id="panel-astratta">
       <div class="photo-grid">
-        <div class="photo-item" data-img="assets/dsc-1.jpg" data-caption="Composizione astratta" style="--ar: 0.9744">
-          <span class="gi-frame"><img src="assets/dsc-1.jpg" alt="Composizione astratta" width="2473" height="2538" loading="lazy" decoding="async" /></span>
-          <span class="gi-plate"><span class="gi-title">Composizione I</span></span>
+        <div class="photo-item" data-img="assets/dsc-1.jpg" data-caption="Ritmi d&#x27;ombre, anni &#x27;50" data-title="Ritmi d&#x27;ombre" data-year="anni &#x27;50" style="--ar: 0.9744">
+          <span class="gi-frame"><img src="assets/dsc-1.jpg" alt="Ritmi d&#x27;ombre, anni &#x27;50" width="2473" height="2538" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Ritmi d&#x27;ombre</span><span class="gi-meta">anni &#x27;50</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-2.jpg" data-caption="Scultura di carta" style="--ar: 0.7893">
-          <span class="gi-frame"><img src="assets/dsc-2.jpg" alt="Scultura di carta" width="1682" height="2131" loading="lazy" decoding="async" /></span>
-          <span class="gi-plate"><span class="gi-title">Scultura di carta</span></span>
+        <div class="photo-item" data-img="assets/dsc-2.jpg" data-caption="Il peperone" data-title="Il peperone" style="--ar: 0.7893">
+          <span class="gi-frame"><img src="assets/dsc-2.jpg" alt="Il peperone" width="1682" height="2131" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Il peperone</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-3.jpg" data-caption="Geometrie" style="--ar: 0.7454">
+        <div class="photo-item" data-img="assets/dsc-3.jpg" data-caption="Geometrie" data-title="Geometrie" style="--ar: 0.7454">
           <span class="gi-frame"><img src="assets/dsc-3.jpg" alt="Geometrie" width="1675" height="2247" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Geometrie</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-4.jpg" data-caption="Luce e ombra" style="--ar: 1.3288">
-          <span class="gi-frame"><img src="assets/dsc-4.jpg" alt="Luce e ombra" width="2227" height="1676" loading="lazy" decoding="async" /></span>
-          <span class="gi-plate"><span class="gi-title">Luce e ombra</span></span>
+        <div class="photo-item" data-img="assets/dsc-4.jpg" data-caption="Fragilità, anni &#x27;50" data-title="Fragilità" data-year="anni &#x27;50" style="--ar: 1.3288">
+          <span class="gi-frame"><img src="assets/dsc-4.jpg" alt="Fragilità, anni &#x27;50" width="2227" height="1676" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Fragilità</span><span class="gi-meta">anni &#x27;50</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-5.jpg" data-caption="Solarizzazione" style="--ar: 1.328">
-          <span class="gi-frame"><img src="assets/dsc-5.jpg" alt="Solarizzazione" width="3061" height="2305" loading="lazy" decoding="async" /></span>
-          <span class="gi-plate"><span class="gi-title">Solarizzazione</span></span>
+        <div class="photo-item" data-img="assets/dsc-5.jpg" data-caption="Fluidità musicale, fine anni &#x27;50" data-title="Fluidità musicale" data-year="fine anni &#x27;50" style="--ar: 1.3280">
+          <span class="gi-frame"><img src="assets/dsc-5.jpg" alt="Fluidità musicale, fine anni &#x27;50" width="3061" height="2305" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Fluidità musicale</span><span class="gi-meta">fine anni &#x27;50</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-6.jpg" data-caption="Riflessi" style="--ar: 0.7785">
-          <span class="gi-frame"><img src="assets/dsc-6.jpg" alt="Riflessi" width="2018" height="2592" loading="lazy" decoding="async" /></span>
-          <span class="gi-plate"><span class="gi-title">Riflessi</span></span>
+        <div class="photo-item" data-img="assets/dsc-6.jpg" data-caption="Composizione n. 8, anni &#x27;50" data-title="Composizione n. 8" data-year="anni &#x27;50" style="--ar: 0.7785">
+          <span class="gi-frame"><img src="assets/dsc-6.jpg" alt="Composizione n. 8, anni &#x27;50" width="2018" height="2592" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Composizione n. 8</span><span class="gi-meta">anni &#x27;50</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-7.jpg" data-caption="Doppia esposizione" style="--ar: 0.7498">
+        <div class="photo-item" data-img="assets/dsc-7.jpg" data-caption="Doppia esposizione" data-title="Doppia esposizione" style="--ar: 0.7498">
           <span class="gi-frame"><img src="assets/dsc-7.jpg" alt="Doppia esposizione" width="1939" height="2586" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Doppia esposizione</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-8.jpg" data-caption="Cosmogonia" style="--ar: 0.7364">
+        <div class="photo-item" data-img="assets/dsc-8.jpg" data-caption="Cosmogonia" data-title="Cosmogonia" style="--ar: 0.7364">
           <span class="gi-frame"><img src="assets/dsc-8.jpg" alt="Cosmogonia" width="1511" height="2052" loading="lazy" decoding="async" /></span>
           <span class="gi-plate"><span class="gi-title">Cosmogonia</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-9.jpg" data-caption="Spirale" style="--ar: 1.3079">
-          <span class="gi-frame"><img src="assets/dsc-9.jpg" alt="Spirale" width="1958" height="1497" loading="lazy" decoding="async" /></span>
-          <span class="gi-plate"><span class="gi-title">Spirale</span></span>
+        <div class="photo-item" data-img="assets/dsc-9.jpg" data-caption="Abisso, fine anni &#x27;50" data-title="Abisso" data-year="fine anni &#x27;50" style="--ar: 1.3079">
+          <span class="gi-frame"><img src="assets/dsc-9.jpg" alt="Abisso, fine anni &#x27;50" width="1958" height="1497" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Abisso</span><span class="gi-meta">fine anni &#x27;50</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-10.jpg" data-caption="Movimento" style="--ar: 1.2982">
-          <span class="gi-frame"><img src="assets/dsc-10.jpg" alt="Movimento" width="2059" height="1586" loading="lazy" decoding="async" /></span>
-          <span class="gi-plate"><span class="gi-title">Movimento</span></span>
+        <div class="photo-item" data-img="assets/dsc-10.jpg" data-caption="Un muro nel cielo, 1956" data-title="Un muro nel cielo" data-year="1956" data-show="2ª Mostra nazionale di fotografia, Premio Città di Padova, 1956" style="--ar: 1.2982">
+          <span class="gi-frame"><img src="assets/dsc-10.jpg" alt="Un muro nel cielo, 1956" width="2059" height="1586" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Un muro nel cielo</span><span class="gi-meta">1956</span></span>
         </div>
-        <div class="photo-item" data-img="assets/dsc-11.jpg" data-caption="Vortice" style="--ar: 0.7539">
-          <span class="gi-frame"><img src="assets/dsc-11.jpg" alt="Vortice" width="1544" height="2048" loading="lazy" decoding="async" /></span>
-          <span class="gi-plate"><span class="gi-title">Vortice</span></span>
+        <div class="photo-item" data-img="assets/dsc-11.jpg" data-caption="Il concetto, anni &#x27;50" data-title="Il concetto" data-year="anni &#x27;50" data-show="Circolo fotografico padovano" style="--ar: 0.7539">
+          <span class="gi-frame"><img src="assets/dsc-11.jpg" alt="Il concetto, anni &#x27;50" width="1544" height="2048" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Il concetto</span><span class="gi-meta">anni &#x27;50</span></span>
         </div>
-        <div class="photo-item" data-img="assets/foto12.jpg" data-caption="Graffiti urbani" style="--ar: 1.2711">
-          <span class="gi-frame"><img src="assets/foto12.jpg" alt="Graffiti urbani" width="1280" height="1007" loading="lazy" decoding="async" /></span>
-          <span class="gi-plate"><span class="gi-title">Graffiti</span></span>
+        <div class="photo-item" data-img="assets/foto12.jpg" data-caption="Giostra, stampa ai sali d&#x27;argento" data-title="Giostra" data-medium="stampa ai sali d&#x27;argento" data-size="40 × 30 cm" data-collection="Collezione privata" style="--ar: 1.2711">
+          <span class="gi-frame"><img src="assets/foto12.jpg" alt="Giostra, stampa ai sali d&#x27;argento" width="1280" height="1007" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Giostra</span><span class="gi-meta">sali d&#x27;argento</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-averno.jpg" data-caption="Averno, 1955" data-title="Averno" data-year="1955" data-show="1ª Mostra nazionale di fotografia, Premio Città di Padova, 1955" style="--ar: 0.7338">
+          <span class="gi-frame"><img src="assets/foto-averno.jpg" alt="Averno, 1955" width="1174" height="1600" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Averno</span><span class="gi-meta">1955</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-parabole.jpg" data-caption="Parabole, 1956" data-title="Parabole" data-year="1956" data-show="2ª Mostra nazionale di fotografia, Premio Città di Padova, 1956" style="--ar: 0.7325">
+          <span class="gi-frame"><img src="assets/foto-parabole.jpg" alt="Parabole, 1956" width="1172" height="1600" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Parabole</span><span class="gi-meta">1956</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-notturno.jpg" data-caption="Notturno, anni &#x27;50" data-title="Notturno" data-year="anni &#x27;50" data-show="Circolo fotografico padovano" style="--ar: 1.2810">
+          <span class="gi-frame"><img src="assets/foto-notturno.jpg" alt="Notturno, anni &#x27;50" width="1600" height="1249" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Notturno</span><span class="gi-meta">anni &#x27;50</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-nudo.jpg" data-caption="Nudo, anni &#x27;50" data-title="Nudo" data-year="anni &#x27;50" data-show="Circolo fotografico padovano" style="--ar: 0.7469">
+          <span class="gi-frame"><img src="assets/foto-nudo.jpg" alt="Nudo, anni &#x27;50" width="1195" height="1600" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Nudo</span><span class="gi-meta">anni &#x27;50</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-un-idea.jpg" data-caption="Un&#x27;idea, fine anni &#x27;50" data-title="Un&#x27;idea" data-year="fine anni &#x27;50" style="--ar: 0.7475">
+          <span class="gi-frame"><img src="assets/foto-un-idea.jpg" alt="Un&#x27;idea, fine anni &#x27;50" width="1196" height="1600" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Un&#x27;idea</span><span class="gi-meta">fine anni &#x27;50</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-composizione-n-3.jpg" data-caption="Composizione n. 3, anni &#x27;50" data-title="Composizione n. 3" data-year="anni &#x27;50" data-motto="Pura serenità" style="--ar: 1.3333">
+          <span class="gi-frame"><img src="assets/foto-composizione-n-3.jpg" alt="Composizione n. 3, anni &#x27;50" width="1600" height="1200" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Composizione n. 3</span><span class="gi-meta">anni &#x27;50</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-oggetti-nello-spazio.jpg" data-caption="Oggetti nello spazio, fine anni &#x27;50" data-title="Oggetti nello spazio" data-year="fine anni &#x27;50" style="--ar: 0.7312">
+          <span class="gi-frame"><img src="assets/foto-oggetti-nello-spazio.jpg" alt="Oggetti nello spazio, fine anni &#x27;50" width="1170" height="1600" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Oggetti nello spazio</span><span class="gi-meta">fine anni &#x27;50</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-astrattismo.jpg" data-caption="Astrattismo, anni &#x27;50" data-title="Astrattismo" data-year="anni &#x27;50" style="--ar: 0.7600">
+          <span class="gi-frame"><img src="assets/foto-astrattismo.jpg" alt="Astrattismo, anni &#x27;50" width="1216" height="1600" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Astrattismo</span><span class="gi-meta">anni &#x27;50</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-il-fondo.jpg" data-caption="Il fondo, anni &#x27;50" data-title="Il fondo" data-year="anni &#x27;50" style="--ar: 0.7100">
+          <span class="gi-frame"><img src="assets/foto-il-fondo.jpg" alt="Il fondo, anni &#x27;50" width="1136" height="1600" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Il fondo</span><span class="gi-meta">anni &#x27;50</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-composizione-metafisica.jpg" data-caption="Composizione metafisica, stampa ai sali d&#x27;argento" data-title="Composizione metafisica" data-medium="stampa ai sali d&#x27;argento" data-size="30 × 40 cm" data-collection="Collezione privata" style="--ar: 0.7678">
+          <span class="gi-frame"><img src="assets/foto-composizione-metafisica.jpg" alt="Composizione metafisica, stampa ai sali d&#x27;argento" width="969" height="1262" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Composizione metafisica</span><span class="gi-meta">sali d&#x27;argento</span></span>
+        </div>
+        <div class="photo-item" data-img="assets/foto-sogno.jpg" data-caption="Sogno, stampa ai sali d&#x27;argento, anni &#x27;60" data-title="Sogno" data-year="anni &#x27;60" data-medium="stampa ai sali d&#x27;argento" data-size="40 × 30 cm" data-signed="1" data-collection="Collezione privata" style="--ar: 1.3843">
+          <span class="gi-frame"><img src="assets/foto-sogno.jpg" alt="Sogno, stampa ai sali d&#x27;argento, anni &#x27;60" width="1232" height="890" loading="lazy" decoding="async" /></span>
+          <span class="gi-plate"><span class="gi-title">Sogno</span><span class="gi-meta">sali d&#x27;argento · anni &#x27;60</span></span>
         </div>
       </div>
     </div>
@@ -2476,11 +2788,15 @@
   <!-- TWEAKS -->
   <div id="tweaks-root"></div>
 
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lb-title">
     <button class="lightbox-close" id="lb-close" aria-label="Chiudi">&#x2715;</button>
     <p class="lightbox-count" id="lb-count" aria-hidden="true"></p>
     <button class="lightbox-nav lb-prev" id="lb-prev" aria-label="Opera precedente">&#x2039;</button>
     <img id="lb-img" alt="" />
+    <aside class="lb-sheet" id="lb-sheet" aria-live="polite">
+      <h2 class="lb-sheet-title" id="lb-title"></h2>
+      <dl class="lb-sheet-list" id="lb-list"></dl>
+    </aside>
     <button class="lightbox-nav lb-next" id="lb-next" aria-label="Opera successiva">&#x203A;</button>
     <p class="lightbox-caption" id="lb-caption"></p>
   </div>
@@ -2772,6 +3088,36 @@
       (el?.offsetParent ? el : lbOpener)?.focus({ preventScroll: true });
     }
 
+    // ─── Scheda dell'opera (dati dall'inventario, attributi data-* sulla parete) ───
+    const lbTitle = document.getElementById('lb-title');
+    const lbList = document.getElementById('lb-list');
+    const SHEET_ROWS = [
+      ['year', 'Anno'],
+      ['medium', 'Tecnica'],
+      ['size', 'Misure'],
+      ['signed', 'Firma'],
+      ['show', 'Esposizione'],
+      ['motto', 'Motto di concorso'],
+      ['collection', 'Collocazione']
+    ];
+
+    function fillSheet(el) {
+      const ds = el.dataset;
+      lightbox.classList.toggle('has-sheet', !!ds.title);
+      if (!ds.title) return false;
+      lbTitle.textContent = ds.title;
+      lbList.replaceChildren(...SHEET_ROWS.filter(([k]) => ds[k]).map(([k, label]) => {
+        const row = document.createElement('div');
+        const dt = document.createElement('dt');
+        const dd = document.createElement('dd');
+        dt.textContent = label;
+        dd.textContent = k === 'signed' ? 'presente' : ds[k];
+        row.append(dt, dd);
+        return row;
+      }));
+      return true;
+    }
+
     // Costruisco una lista navigabile globale (rispetta l'ordine DOM = ordine di lettura)
     const lbItems = [];
     let lbIndex = -1;
@@ -2786,7 +3132,8 @@
       lbIndex = i;
       const el = lbItems[i];
       if (!wasOpen) lbOpener = document.activeElement;
-      openLightbox(el.dataset.img, el.dataset.caption, el.querySelector('img')?.alt);
+      const hasSheet = fillSheet(el);
+      openLightbox(el.dataset.img, hasSheet ? '' : el.dataset.caption, el.querySelector('img')?.alt);
       lbCount.textContent = (i + 1) + ' / ' + lbItems.length;
       if (!wasOpen) {
         flyFromWall(el);
